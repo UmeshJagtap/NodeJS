@@ -1,0 +1,7 @@
+https://codedamn.com/news/nodejs/cannot-use-import-statement-outside-a-module
+
+// Commands:
+// run `node index.js` in the terminal
+// npm install
+// npm i chalk@2.4.1 or npm i chalk
+// node index.js

@@ -34,7 +34,7 @@
 // // -------------------------------------- Adding title ---(*)
 
 // const command = process.argv[2];
-// // console.log(process.argv);
+// console.log(process.argv);
 
 // if (command === 'add') {
 //   console.log('Adding note!');
@@ -51,47 +51,6 @@
 // // ]
 // // Adding note!
 
-// ----------------------- Argument Parsing with Yargs ---(*)
-// const yargs = require('yargs');
-
-// var argv = require('yargs/yargs')(process.argv.slice(2)).parse();
-// if (argv.ships > 3 && argv.distance < 53.5) {
-//   console.log('Plunder more riffiwobbles!');
-// } else {
-//   console.log('Retreat from the xupptumblers!');
-// }
-
-import yargs from 'yargs'; // const yargs = require('yargs/yargs');
-
-import { getNotes } from './notes.js'; // const getNotes = require('./notes');
-
-const msg = getNotes();
-console.log(msg);
-
-// // Customize yargs version
-// yargs.version('12.0.1');
-// console.log(yargs.argv);
-
-// Create add command
-yargs({
-  command: 'add',
-  describe: 'Add a new note',
-  handler: function () {
-    console.log('Adding a new note!');
-  },
-});
-
-// Create remove command
-yargs.command({
-  command: 'remove',
-  describe: 'Remove a note',
-  handler: function () {
-    console.log('Removing the note');
-  },
-});
-
-yargs.parse();
-
 // // ES6 yargs   --------- ( + )
 // import Yargs from 'yargs';
 // const args = Yargs(process.argv.slice(2)).argv;
@@ -99,3 +58,24 @@ yargs.parse();
 
 // // Command -
 // // node script.js --arg1=xyz
+
+// // Customize yargs version -------- ( + )
+// yargs.version('12.0.1');
+// console.log(yargs.argv);
+
+// ----------------------- Argument Parsing with Yargs ---(*)
+// const yargs = require('yargs');
+
+// import yargs from 'yargs'; // const yargs = require('yargs/yargs');
+
+// import { getNotes } from './notes.js'; // const getNotes = require('./notes');
+
+// const msg = getNotes();
+// console.log(msg);
+
+var argv = require('yargs/yargs')(process.argv.slice(2)).parse();
+if (argv.ships > 3 && argv.distance < 53.5) {
+  console.log('Plunder more riffiwobbles!');
+} else {
+  console.log('Retreat from the xupptumblers!');
+}

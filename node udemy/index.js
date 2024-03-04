@@ -61,39 +61,41 @@
 //   console.log('Retreat from the xupptumblers!');
 // }
 
-// import yargs from 'yargs'; // const yargs = require('yargs/yargs');
+import yargs from 'yargs'; // const yargs = require('yargs/yargs');
 
-// import { getNotes } from './notes.js'; // const getNotes = require('./notes');
+import { getNotes } from './notes.js'; // const getNotes = require('./notes');
 
-// const msg = getNotes();
-// console.log(msg);
+const msg = getNotes();
+console.log(msg);
 
-// // // Customize yargs version
-// // yargs.version('12.0.1');
-// // console.log(yargs.argv);
+// // Customize yargs version
+// yargs.version('12.0.1');
+// console.log(yargs.argv);
 
-// // Create add command
-// yargs.command({
-//   command: 'add',
-//   describe: 'Add a new note',
-//   handler: function () {
-//     console.log('Adding a new note!');
-//   },
-// });
+// Create add command
+yargs({
+  command: 'add',
+  describe: 'Add a new note',
+  handler: function () {
+    console.log('Adding a new note!');
+  },
+});
 
-// // Create remove command
-// yargs.command({
-//   command: 'remove',
-//   describe: 'Remove a note',
-//   handler: function () {
-//     console.log('Removing the note');
-//   },
-// });
+// Create remove command
+yargs.command({
+  command: 'remove',
+  describe: 'Remove a note',
+  handler: function () {
+    console.log('Removing the note');
+  },
+});
 
-// ES6 yargs
-import Yargs from 'yargs';
-const args = Yargs(process.argv.slice(2)).argv;
-console.log(args.arg1);
+yargs.parse();
+
+// // ES6 yargs   --------- ( + )
+// import Yargs from 'yargs';
+// const args = Yargs(process.argv.slice(2)).argv;
+// console.log(args.arg1);
 
 // // Command -
 // // node script.js --arg1=xyz

@@ -33,3 +33,5 @@ console.log('Stopping..');
 // https://darksky.net/forecast/40.727    --taken over by apple
 // https://weatherstack.com  >> SignUp for Free tier >> API Key
 // BASE URL --> https://api.weatherstack.com
+// BASE URL --> https://api.weatherstack.com/current?key=value&name=andrew
+// BASE URL --> https://api.weatherstack.com/current?access_key=value&query=37.8267,122.4233

@@ -3,3 +3,6 @@ Asynchronous ~ Non blocking
 
 Async method can help in Database related requests,
 where we can request 60 or multiple DB req.. still doing other things
+
+npm init -y --->> creates package.json
+npm

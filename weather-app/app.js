@@ -130,6 +130,7 @@
 // // HTTP request Challenge                          ---------------------------(*)
 // Geocoding
 // Address -> Lat/Long -> Weather
+
 // mapbox.com
 // https://docs.mapbox.com/api/search
 // https://api.mapbox.com/geocoding/v5/{endpoint}/{search_text}.json
@@ -170,5 +171,68 @@
 //   console.log(latitude, longitude);
 // });
 
+// const request = require('request');
+// const geocodeURL =
+//   'https://api.mapbox.com/geocoding/v5/{endpoint}/{search_text}.json?access_token=pk.eyJ1joI.....&limit=1';
+// // ('https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1joI.....&limit=1');
+// request({ url: geocodeURL, json: true }, (error, response) => {
+//   const latitude = response.body.features[0].center[1];
+//   const longitude = response.body.features[0].center[0];
+//   console.log(latitude, longitude);
+// });
+
 // // Handling Errors                                ---------------------------(*)
 // Suppose if we are not connected to Internet
+
+// ** weatherstack_API **
+
+// const request = require('request');
+// const url =
+//   'https://api.weatherstack.com/current?access_key=8cf78b463a4dccfca6ef49cda44bf3a0&query=37.8267,122.4233&units=f';
+// const brokenurl =
+//   'https://api.weatherstack.com/current?access_key=8cf78b463a4dccfca6ef49cda44bf3a0&query=&units=f';
+// request({ url: brokenurl, json: true }, (error, response) => {
+//   if (error) {
+//     console.log('Unable to connect to weather service!');
+//   } else if (response.body.error) {
+//     console.log('Unable to find location');
+//   } else {
+//     console.log(
+//       response.body.current.weather_descriptions[0] +
+//         '. It is currently ' +
+//         response.body.current.temperature +
+//         ' degrees out. It feels like ' +
+//         response.body.current.feelslike +
+//         ' degrees out'
+//     );
+//   }
+// });
+
+// To break out weatherstack api, we have to remove both longitude and latitude.
+
+//
+// Goal: Handle errors for geocoding request    -------------(*)
+//
+// 1. Setup an error handler for low-level errors
+// 2. Test by disabling network request and running the app
+// 3. Setup error handling for no matching results
+// 4. Test by altering the search term and running the app
+
+// ** geoCode_API **
+
+const request = require('request');
+const geocodeURL =
+  'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1joI.....&limit=1';
+request({ url: geocodeURL, json: true }, (error, response) => {
+  if (error) {
+    console.log('Unable to connect to geolocation service!');
+  } else if (response.body.features.length === 0) {
+    console.log('Unable to find location. Try another search.');
+  } else {
+    const latitude = response.body.features[0].center[1];
+    const longitude = response.body.features[0].center[0];
+    console.log(latitude, longitude);
+  }
+});
+
+// The Callback Function

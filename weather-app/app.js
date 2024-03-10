@@ -210,29 +210,170 @@
 
 // To break out weatherstack api, we have to remove both longitude and latitude.
 
-//
-// Goal: Handle errors for geocoding request    -------------(*)
-//
-// 1. Setup an error handler for low-level errors
-// 2. Test by disabling network request and running the app
-// 3. Setup error handling for no matching results
-// 4. Test by altering the search term and running the app
-
 // ** geoCode_API **
 
-const request = require('request');
-const geocodeURL =
-  'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1joI.....&limit=1';
-request({ url: geocodeURL, json: true }, (error, response) => {
-  if (error) {
-    console.log('Unable to connect to geolocation service!');
-  } else if (response.body.features.length === 0) {
-    console.log('Unable to find location. Try another search.');
-  } else {
-    const latitude = response.body.features[0].center[1];
-    const longitude = response.body.features[0].center[0];
-    console.log(latitude, longitude);
-  }
-});
+// const request = require('request');
+// const geocodeURL =
+//   'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1joI.....&limit=1';
+// request({ url: geocodeURL, json: true }, (error, response) => {
+//   if (error) {
+//     console.log('Unable to connect to geolocation service!');
+//   } else if (response.body.features.length === 0) {
+//     console.log('Unable to find location. Try another search.');
+//   } else {
+//     const latitude = response.body.features[0].center[1];
+//     const longitude = response.body.features[0].center[0];
+//     console.log(latitude, longitude);
+//   }
+// });
 
-// The Callback Function
+// The Callback Function  // Callback Abstraction       ---------------------------(*)
+
+// geocode.js
+// const geocode = (address, callback) => {
+//   // const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?access_token=pk.eyJ1joI.....&limit=1';
+//   const url =
+//     'https://api.mapbox.com/geocoding/v5/mapbox.places/' +
+//     encodeURIComponent(address) +
+//     '.json?access_token=pk.eyJ1joI.....&limit=1'; // ? becomes %3F
+
+//   request({ url: url, json: true }, (error, response) => {
+//     if (error) {
+//       callback('Unable to connect to location services!', undefined);
+//     } else if (response.body.features.length === 0) {
+//       callback('Unable to find location. Try another search.', undefined);
+//     } else {
+//       callback(undefined, {
+//         latitude: response.body.features[0].center[1],
+//         longitude: response.body.features[0].center[0],
+//         location: response.body.features[0].place_name,
+//       });
+//     }
+//   });
+// };
+
+// geocode('Philadelphia New York', (error, data) => {
+//   console.log('Error', error);
+//   console.log('Data', data);
+// });
+
+// Callback Abstraction
+// app.js
+// const geocode = require('./utils/geocode');
+// geocode('Boston', (error, data) => {
+//   console.log('Error', error);
+//   console.log('Data', data);
+// });
+
+// The Callback Function  // Callback Abstraction     ---------------------------(*)
+
+// forecast.js
+// const request = require('request');
+
+// const forecast = (longitude, latitude, callback) => {
+//   const url =
+//     'https://api.weatherstack.com/current?access_key=8cf78b463a4dccfca6ef49cda44bf3a0&query=' +
+//     longitude +
+//     ',' +
+//     latitude +
+//     '&units=f';
+
+//   request({ url: url, json: true }, (error, response) => {
+//     if (error) {
+//       callback('Unable to connect to weather service!', undefined);
+//     } else if (response.body.error) {
+//       callback('Unable to find location', undefined);
+//     } else {
+//       callback(
+//         undefined,
+//         'It is currently ' +
+//           response.body.current.temperature +
+//           ' degrees out. It feels like ' +
+//           response.body.current.feelslike +
+//           ' degrees out'
+//       );
+//     }
+//   });
+// };
+
+// module.exports = forecast;
+
+// // Callback Abstraction    ---------------------------(*)v(*)
+// // app.js
+// const forecast = require('./utils/forecast');
+// forecast(-75.7088, 44.1545, (error, data) => {
+//   console.log('Error', error);
+//   console.log('Data', data);
+// });
+
+// // Callback Chaining      ----------------------------(*)v(*)
+// // app.js;
+// const geocode = require('./utils/geocode');
+// const forecast = require('./utils/forecast');
+
+// geocode('Boston', (error, data) => {
+//   if (error) {
+//     return console.log(error);
+//   }
+//   forecast(data.latitude, data.longitude, (error, forecastData) => {
+//     if (error) {
+//       return console.log(error);
+//     }
+//     console.log(data.location);
+//     console.log(forecastData);
+//   });
+// });
+
+//
+// Goal: Accept location via command line argument
+//
+// 1. Access the command line argument without yargs
+// 2. Use the string value as the input for gecode
+// 3. Only geocode if a location was provided
+// 4. Test your work with a couple locations
+
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
+
+const address = process.argv[2];
+
+// console.log(process.argv);
+
+if (!address) {
+  console.log('Please provide an address');
+} else {
+  // geocode('Boston', (error, data) => {
+  geocode(address, (error, data) => {
+    // Calling geocode API
+    if (error) {
+      return console.log(error);
+    }
+    forecast(data.latitude, data.longitude, (error, forecastData) => {
+      // Calling forecast API
+      if (error) {
+        return console.log(error);
+      }
+      console.log(data.location);
+      console.log(forecastData);
+    });
+  });
+}
+
+//
+// Goal: Use both destructuring and property shorthand in weather app
+//
+// 1. Use destructuring in app.js, forecast.js, and geocode.js
+// 2. Use property shorthand in forecast.s and geocode.js
+// 3. Test your work and ensure app still works
+
+// https://api.openweathermap.org/data/2.5/weather?units=metric&q=bangalore&appid=863242cfb2b1d357e6093d9a4df19a4b
+
+const apiKey = '863242cfb2b1d357e6093d9a4df19a4b';
+const apiUrl =
+  'https://api.openweathermap.org/data/2.5/weather?units=metric&q=bangalore';
+
+async function checkWeather() {
+  const response = await fetch(apiUrl + `&appid=${apiKey}`);
+  var data = await response.json();
+}
+checkWeather();

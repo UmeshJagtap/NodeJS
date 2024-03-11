@@ -324,13 +324,47 @@
 //   });
 // });
 
+// //
+// // Goal: Accept location via command line argument
+// //
+// // 1. Access the command line argument without yargs
+// // 2. Use the string value as the input for gecode
+// // 3. Only geocode if a location was provided
+// // 4. Test your work with a couple locations
+
+// const geocode = require('./utils/geocode');
+// const forecast = require('./utils/forecast');
+
+// const address = process.argv[2];
+
+// // console.log(process.argv);
+
+// if (!address) {
+//   console.log('Please provide an address');
+// } else {
+//   // geocode('Boston', (error, data) => {
+//   geocode(address, (error, data) => {
+//     // Calling geocode API
+//     if (error) {
+//       return console.log(error);
+//     }
+//     forecast(data.latitude, data.longitude, (error, forecastData) => {
+//       // Calling forecast API
+//       if (error) {
+//         return console.log(error);
+//       }
+//       console.log(data.location);
+//       console.log(forecastData);
+//     });
+//   });
+// }
+
 //
-// Goal: Accept location via command line argument
+// Goal: Use both destructuring and property shorthand in weather app
 //
-// 1. Access the command line argument without yargs
-// 2. Use the string value as the input for gecode
-// 3. Only geocode if a location was provided
-// 4. Test your work with a couple locations
+// 1. Use destructuring in app.js, forecast.js, and geocode.js
+// 2. Use property shorthand in forecast.s and geocode.js
+// 3. Test your work and ensure app still works
 
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
@@ -343,37 +377,21 @@ if (!address) {
   console.log('Please provide an address');
 } else {
   // geocode('Boston', (error, data) => {
-  geocode(address, (error, data) => {
+  // geocode(address, (error, data) => {
+  geocode(address, (error, { latitude, longitude, location }) => {
+    // OR
+    // geocode(address, (error, { latitude, longitude, location } = {} ) => {
     // Calling geocode API
     if (error) {
       return console.log(error);
     }
-    forecast(data.latitude, data.longitude, (error, forecastData) => {
+    forecast(latitude, longitude, (error, forecastData) => {
       // Calling forecast API
       if (error) {
         return console.log(error);
       }
-      console.log(data.location);
+      console.log(location);
       console.log(forecastData);
     });
   });
 }
-
-//
-// Goal: Use both destructuring and property shorthand in weather app
-//
-// 1. Use destructuring in app.js, forecast.js, and geocode.js
-// 2. Use property shorthand in forecast.s and geocode.js
-// 3. Test your work and ensure app still works
-
-// https://api.openweathermap.org/data/2.5/weather?units=metric&q=bangalore&appid=863242cfb2b1d357e6093d9a4df19a4b
-
-const apiKey = '863242cfb2b1d357e6093d9a4df19a4b';
-const apiUrl =
-  'https://api.openweathermap.org/data/2.5/weather?units=metric&q=bangalore';
-
-async function checkWeather() {
-  const response = await fetch(apiUrl + `&appid=${apiKey}`);
-  var data = await response.json();
-}
-checkWeather();

@@ -93,14 +93,20 @@
 //   console.log('Server is up on port 3000.');
 // });
 
-// Simple Express Server    -----------------------------(*)
+// Serving up static Assets    -----------------------------(*)
 
+const path = require('path');
 const express = require('express');
 
 console.log(__dirname);
 console.log(__filename);
+// console.log(path.join(__dirname, '..'));
+// console.log(path.join(__dirname, '../..'));
+console.log(path.join(__dirname, '../public'));
 
 const app = express();
+
+app.use(express.static);
 
 app.get('', (req, res) => {
   res.send('<h1>Weather</h1>');

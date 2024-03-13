@@ -1,3 +1,9 @@
+// React
+// https://github.com/academind/react-complete-guide-course-resources/tree/main/attachments
+
+// Aceternity UI
+// https://ui.aceternity.com/components/meteors
+
 // Hello Express
 // https://expressjs.com/
 
@@ -139,10 +145,7 @@
 </html> */
 }
 
-// React
-// https://github.com/academind/react-complete-guide-course-resources/tree/main/attachments
-
-// // // Customizing the views directory    -----------------------------(*)
+// // Customizing the views directory    -----------------------------(*)
 
 // const path = require('path');
 // const express = require('express');

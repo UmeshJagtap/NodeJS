@@ -9,15 +9,15 @@ MongoClient.connect(
   { useNewUrlParser: true },
   (error, client) => {
     if (error) {
-      console.log('Unable to connect to database!');
+      return console.log('Unable to connect to database!');
     }
 
-    // console.log('Connected correctly');
+    console.log('Connected correctly');
 
-    const db = client.db(databaseName); // creates a new db connection to specific database
-    db.collection('users').insertOne({
-      name: 'Andrew',
-      age: 27,
-    });
+    // const db = client.db(databaseName); // creates a new db connection to specific database
+    // db.collection('users').insertOne({
+    //   name: 'Andrew',
+    //   age: 27,
+    // });
   }
 );

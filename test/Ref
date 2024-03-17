@@ -1,0 +1,12 @@
+Terminal :-
+ - ( https://learn.mongodb.com/learn/course/connecting-to-mongodb-in-nodejs/lesson-2-connecting-to-an-atlas-cluster-in-nodejs-applications/learn )
+ 
+mkdir test
+cd test
+npm init -y
+
+npm install mongodb
+
+mongodb+srv://umeshjagtap7866:<password>@cluster0.anqg4ks.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+node app.js

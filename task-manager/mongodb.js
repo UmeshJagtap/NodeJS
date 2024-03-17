@@ -537,4 +537,5 @@ const Cat = mongoose.model('Cat', { name: String });
 const kitty = new Cat({ name: 'Zildjian' });
 kitty.save().then(() => console.log('meow'));
 
-// ODM
+// What is Mongoose?
+// Mongoose is an elegant Object Data Modeling (ODM) library built for MongoDB and JavaScript.

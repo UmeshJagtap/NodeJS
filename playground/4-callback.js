@@ -59,3 +59,8 @@ const add = (a, b, callback) => {
 add(1, 5, (sum) => {
   console.log(sum);
 });
+
+// OUTPUT
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/playground (main)
+// $ node 4-callback.js
+// 6

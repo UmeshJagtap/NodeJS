@@ -26,3 +26,11 @@ const tasks = {
 };
 
 console.log(tasks.getTasksToDo());
+
+// OUTPUT
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/playground (main)
+// $ node 3-arrow-challenge.js
+// [
+//   { text: 'Clean yard', completed: false },
+//   { text: 'Film course', completed: false }
+// ]

@@ -21,3 +21,15 @@ request.on('error', (error) => {
 request.end();
 
 // Ref :- https://nodejs.org/docs/latest/api/http.html#httprequestoptions-callback
+
+// OUTPUT
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/playground (main)
+// $ node 6-raw-http.js
+// {
+//   success: false,
+//   error: {
+//     code: 101,
+//     type: 'invalid_access_key',
+//     info: 'You have not supplied a valid API Access Key. [Technical Support: support@apilayer.com]'
+//   }
+// }

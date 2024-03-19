@@ -1,6 +1,8 @@
 // Mongoose
 // https://mongoosejs.com/
 
+// Let's face it, writing MongoDB validation, casting and business logic boilerplate is a drag. That's why we wrote Mongoose.
+
 // const mongoose = require('mongoose');
 // mongoose.connect('mongodb://127.0.0.1:27017/test');
 
@@ -9,10 +11,16 @@
 // const kitty = new Cat({ name: 'Zildjian' });
 // kitty.save().then(() => console.log('meow'));
 
+// Mongoose provides a straight-forward, schema-based solution to model your application data.
+// It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
+
 // What is Mongoose?  --------------------(*)
 // Mongoose is an elegant Object Data Modeling (ODM) library built for MongoDB and JavaScript.
 
 // Setting up Mongoose
+
+// Install
+// task-manager$ npm i mongoose@5.3.10
 
 // const mongoose = require('mongoose');
 
@@ -471,3 +479,225 @@
 // Resource Creation Endpoints: Part I --------------------(*)
 // task-manager$ npm i nodemon@1.18.9 --save-dev
 // task-manager$ npm i express@4.16.4
+
+// // src > db > index.js
+// const express = require('express');
+
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
+
+// // In package.json
+// delete line { test: 'echo "Error: no test specified" && exit 1' };
+// add "scripts": {
+//   "start": "node src/index.js",
+//   "dev": "nodemon src/index.js"
+// },
+
+// // Terminal
+// /task-manager$ npm run dev
+// [nodemon] starting `node src/index.js`
+// Server is up on port 3000
+
+// // src > db > index.js
+// const express = require('express');
+
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// app.post('/users', (req, res) => {
+//   res.send('testing!');
+// });
+
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
+
+// POSTMAN >> Collections > []+ New Collection
+// >> Name ( Task App ) >> Description ( ) >> Create
+
+// Task App >> ... >> Add Request >> Request name >> Create user
+// POST v | localhost:3000/users
+// testing!
+
+// How do we provide data necessary (email, name, password and other attrib..)
+// >> Body >> raw >> Text to JSON (application/json)
+// {
+//   "name": "Andrew Mead",
+//   "email": "andrew@example.com",
+//   "password": "Red12315"
+// }
+// Status: 200 OK
+
+// To automatically parse JSON for us accessible as object for use
+// src > index.js
+const express = require('express');
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(express.json()); // automatically parse incoming json to an object
+app.post('/users', (req, res) => {
+  console.log(req.body);
+  res.send('testing!');
+});
+
+app.listen(port, () => {
+  console.log('Server is up on port ' + port);
+});
+
+// Save, nodemon will run automatically in terminal
+
+// POSTMAN
+// POST v | localhost:3000/users   >>   [ Send ]
+// >> Body >> raw >> Text to JSON (application/json)
+// {
+//   "name": "Andrew Mead",
+//   "email": "andrew@example.com",
+//   "password": "Red12315"
+// }
+
+// Terminal
+// Server in up on port 3000
+// { name: 'Andrew Mead',
+//   email: 'andrew@example.com',
+//   password: 'Red12315' }
+
+// Now we know how to grab, incoming body data and we can actually use it to create new user,
+// to get that done we have to make sure mongoose connects to database and we need to get access to our user model from inside of this file
+
+// ----------------------------------------------- +++
+// Create new Folder : src >> models >> user.js
+
+const mongoose = require('mongoose');
+const validator = require('validator');
+
+const User = mongoose.model('User', {
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error('Email is invalid');
+      }
+    },
+  },
+  passowrd: {
+    type: String,
+    required: true,
+    minlength: 7,
+    trim: true,
+    validate(value) {
+      if (value.toLowerCase().includes('password')) {
+        throw new Error('Passowrd cannot contain "password"');
+      }
+    },
+  },
+  age: {
+    type: Number,
+    default: 0,
+    validate(value) {
+      if (value < 0) {
+        throw new Error('Age must be a positive number');
+      }
+    },
+  },
+});
+
+module.exports = User;
+
+// ----------------------------------------------- +++
+// src >> db >> mongoose.js
+
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
+  useNewParser: true,
+  useCreateIndex: true,
+});
+
+const me = new User({
+  name: '    Andrew   ',
+  email: 'MYEMAIL@MEAD.IO    ',
+  // passowrd: '    re32   ',
+  // passowrd: 'Password123',
+  passowrd: 'phone@98!',
+});
+
+me.save()
+  .then(() => {
+    console.log(me);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+// ----------------------------------------------- +++
+// src >> index.js
+const express = require('express');
+require('./db/mongoose');
+const User = require('./models/user');
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(express.json()); // automatically parse incoming json to an object
+app.post('/users', (req, res) => {
+  const user = new User(req.body);
+
+  user
+    .save()
+    .then(() => {
+      res.send(user);
+    })
+    .catch((e) => {
+      // res.status(400);
+      // res.send(e);
+      res.status(400).send(e);
+    });
+});
+
+app.listen(port, () => {
+  console.log('Server is up on port ' + port);
+});
+
+// Validating ...
+// POSTMAN
+// POST v | localhost:3000/users   >>   [ Send ]
+// >> Body >> raw >> Text to JSON (application/json)
+// {
+//   "name": "Andrew Mead",
+//   "email": "andrew@example.com",
+//   "password": "Red12315"
+// }
+
+// Body >> Pretty >> JSON
+// {
+//   "age": 0,
+//   "_id": "5c1a...f6bc",
+//   "name": "Andrew Mead",
+//   "email": "andrew@example.com",
+//   "passowrd": "Red123!$",
+//   "__v": 0
+// }
+
+// HTTP Status Codes
+// https://httpstatuses.com
+// https://www.webfx.com/web-development/glossary/http-status-codes/
+
+// ---- Re iterate the video -- verify the working -- (*v*)
+
+// https://knome.ultimatix.net/private/blogposts/1036671
+// - ( Wings1 May 2024 Assessment Registrations !! )
+
+// Resource Creation Endpoints: Part II --------------------(*)

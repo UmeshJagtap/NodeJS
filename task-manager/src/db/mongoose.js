@@ -418,3 +418,57 @@
 // Structuring a REST API --------------------(*)
 // THE REST API
 // Representational State Transfer -Application Programming Interface (REST API or RESTful API)
+
+// API provides tools and helps us to build software applications
+// REST API is stateless -each request contains everything needed
+// for server to process that request, includes operations we need to perform, data and authentication.
+
+// Client   --- GET /tasks/a7eaa -->   Server
+//             << 200 - JSON response
+
+// To post data ( I'm Andrew and I need to create a todo )
+// Client   --- POST /tasks - JSON request  --->  Server
+// Identity confirmed Task created
+//              << 201 - SON response
+// Time to render the data
+
+// THE TASK RESOURCE
+
+// Create POST /tasks
+
+// Read   GET /tasks
+// Read   GET /tasks/:id
+
+// Update   PATCH  /tasks/:id
+
+// Delete   DELETE /tasks/:id
+
+// Request
+// POST /tasks HTTP/1.1
+// Accept: application/json
+// Connection: Keep-Alive
+// Authorization: Bearer eyJhbG...QiOiI...
+// {"description": "Order new drill bits"}
+
+// Response
+// HTTP/1.1 201 Created
+// Date: Sun, 28 Jul 2019 15:37:37 GMT
+// Server: Express
+// Content-Type: application/json
+// {"_id": "5c13ec...e5b5", "description": "Order new drill bits", "completed": false}
+
+// Installing POSTMAN
+// https://www.postman.com/downloads/
+// https://web.postman.co/workspace/My-Workspace~4a5cdb5b-9b0a-459c-8d9d-546245b8e7c6/request/create?requestId=d3274914-3aba-4da7-b72d-2b3b4edd03da
+
+// GET v | https://mead-weather-application.herokuapp.com/weather?address=boston  ( There's nothing here, yet.)
+// {
+//     "forecast": "Mostly cloudy until afternoon. It is currently 28.66 degrees out. The hing today is 30.81 with low of 23.44, There is a 0% chance of rain.",
+//     "location": "Boston, Massachusetts, United States",
+//     "address": "boston"
+// }
+// Status: 200 OK   Time: 605 ms    Size: 470 B
+
+// Resource Creation Endpoints: Part I --------------------(*)
+// task-manager$ npm i nodemon@1.18.9 --save-dev
+// task-manager$ npm i express@4.16.4

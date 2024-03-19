@@ -459,7 +459,6 @@
 
 // Installing POSTMAN
 // https://www.postman.com/downloads/
-// https://web.postman.co/workspace/My-Workspace~4a5cdb5b-9b0a-459c-8d9d-546245b8e7c6/request/create?requestId=d3274914-3aba-4da7-b72d-2b3b4edd03da
 
 // GET v | https://mead-weather-application.herokuapp.com/weather?address=boston  ( There's nothing here, yet.)
 // {

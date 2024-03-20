@@ -9,7 +9,7 @@
 // $ node tryNode.js
 // 3
 
-// // Using chalk  ---------------- ( + )
+// Using chalk  ---------------- ( + )
 // import chalk from 'chalk'; // const chalk = require('chalk'); (CommanJS)
 
 // const string = 'Success!';
@@ -120,10 +120,10 @@
 // $ node tryNode.js
 // Your notes...
 
-import argv from 'yargs';
-process.argv.slice(2).parse();
-if (argv.ships > 3 && argv.distance < 53.5) {
-  console.log('Plunder more riffiwobbles!');
-} else {
-  console.log('Retreat from the xupptumblers!');
-}
+// import argv from 'yargs';
+// process.argv.slice(2).parse();
+// if (argv.ships > 3 && argv.distance < 53.5) {
+//   console.log('Plunder more riffiwobbles!');
+// } else {
+//   console.log('Retreat from the xupptumblers!');
+// }

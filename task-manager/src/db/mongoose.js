@@ -709,71 +709,211 @@
 // 2. Create the task creation endpoint (handle success and error)
 // 3. Test the endpoint from postman with good or bad data
 
-// models >> task.js
+// // models >> task.js
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const Task = mongoose.model('Task', {
-  description: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  completed: {
-    type: Boolean,
-    default: false,
-  },
-});
+// const Task = mongoose.model('Task', {
+//   description: {
+//     type: String,
+//     required: true,
+//     trim: true,
+//   },
+//   completed: {
+//     type: Boolean,
+//     default: false,
+//   },
+// });
 
-module.exports = Task;
+// module.exports = Task;
 
-// src >> db >> mongoose.js
-const mongoose = require('mongoose');
+// // src >> db >> mongoose.js
+// const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://27.0.0.1:27017/task-manager-api', {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+// mongoose.connect('mongodb://27.0.0.1:27017/task-manager-api', {
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+// });
 
-// src >> index.js
-const express = require('express');
-require('./db/mongoose');
-const User = require('./models/user');
-const Task = require('./models/task');
+// // src >> index.js
+// const express = require('express');
+// require('./db/mongoose');
+// const User = require('./models/user');
+// const Task = require('./models/task');
 
-const app = express();
-const port = process.env.PORT || 3000;
+// const app = express();
+// const port = process.env.PORT || 3000;
 
-app.use(express.json()); // automatically parse incoming json to an object
+// app.use(express.json()); // automatically parse incoming json to an object
 
-app.post('/users', (req, res) => {
-  const user = new User(req.body);
+// app.post('/users', (req, res) => {
+//   const user = new User(req.body);
 
-  user
-    .save()
-    .then(() => {
-      res.send(user);
-    })
-    .catch((e) => {
-      // res.status(400);
-      // res.send(e);
-      res.status(400).send(e);
-    });
-});
+//   user
+//     .save()
+//     .then(() => {
+//       res.send(user);
+//     })
+//     .catch((e) => {
+//       // res.status(400);
+//       // res.send(e);
+//       res.status(400).send(e);
+//     });
+// });
 
-app.post('/tasks', (req, res) => {
-  const task = new Task(req.body);
+// app.post('/tasks', (req, res) => {
+//   const task = new Task(req.body);
 
-  task
-    .save()
-    .then(() => {
-      res.status(201).send(task); //  ( The request succeeded, and a new resource was created as a result. )
-    })
-    .catch((e) => {
-      res.status(400).send(e);
-    });
-});
+//   task
+//     .save()
+//     .then(() => {
+//       res.status(201).send(task); //  ( The request succeeded, and a new resource was created as a result. )
+//     })
+//     .catch((e) => {
+//       res.status(400).send(e);
+//     });
+// });
 
-app.listen(port, () => {
-  console.log('Server is up on port ' + port);
-});
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
+
+// Resource Reading Endpoints: Part I --------------------(*)
+
+// // src >> index.js
+// app.get('/users', (req, res) => {
+//   User.find({})
+//     .then((users) => {
+//       res.send(users);
+//     })
+//     .catch((e) => {});
+// });
+
+// POSTMAN
+// Collections >> Task App >> Add a request >> Request name >> Read users
+// GET v | localhost:3000/users   >>   [ Send ]
+// >> Body >> raw >> Text to JSON (application/json)
+// [
+//   {
+//     "age": 0,
+//     "_id": "5c13e1...beac1",
+//     "name": "Andrew",
+//     "email": "myemail@mead.io",
+//     "__v": 0
+//   },
+//   {
+//     "age": 0,
+//     "_id": "5c13e1...be6bc",
+//     "name": "Andrew Maed",
+//     "email": "myemail@mead.io",
+//     "__v": 0
+//   },
+// ]
+// Click [ Save ] for each request..
+
+// // src >> index.js
+// const express = require('express');
+// require('./db/mongoose');
+// const User = require('./models/user');
+// const Task = require('./models/task');
+
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// app.use(express.json()); // automatically parse incoming json to an object
+
+// app.post('/users', (req, res) => {
+//   const user = new User(req.body);
+
+//   user
+//     .save()
+//     .then(() => {
+//       res.send(user);
+//     })
+//     .catch((e) => {
+//       // res.status(400);
+//       // res.send(e);
+//       res.status(400).send(e);
+//     });
+// });
+
+// app.get('/users', (req, res) => {
+//   // Reading all users
+//   User.find({})
+//     .then((users) => {
+//       res.send(users);
+//     })
+//     .catch((e) => {
+//       res.status(500).send();
+//     });
+// });
+
+// app.get('/users/:id', (req, res) => {
+//   // Route parameters
+//   // console.log(req.params);
+//   const _id = req.params.id;
+//   User.findById(_id)
+//     .then((user) => {
+//       if (!user) {
+//         return res.status(404).send();
+//       }
+
+//       res.send(user);
+//     })
+//     .catch((e) => {
+//       res.status(500).send();
+//     });
+// });
+
+// app.post('/tasks', (req, res) => {
+//   const task = new Task(req.body);
+
+//   task
+//     .save()
+//     .then(() => {
+//       res.status(201).send(task); //  ( The request succeeded, and a new resource was created as a result. )
+//     })
+//     .catch((e) => {
+//       res.status(400).send(e);
+//     });
+// });
+
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
+
+// For console.log(req.params);
+// POSTMAN
+// Collections >> Task App >> Add a request >> Request name >> Read user
+// GET v | localhost:3000/users/08712340982        [ Send ] [Save]
+// Loading...
+
+// Terminal
+// Server is up on port 3000
+// { id: '08712340982' }
+
+// For app.get('/users/:id', (req, res) => {}
+// POSTMAN
+// Collections >> Task App >> Add a request >> Request name >> Read user
+// GET v | localhost:3000/users/08712340982        [ Send ] [Save]
+// Blank
+
+// Take a valid id from previous -Read users- request
+// GET v | localhost:3000/users/5c13e1...eac1      [ Send ] [Save]
+// Status: 200 OK
+//   {
+//     "age": 0,
+//     "_id": "5c13e1...beac1",
+//     "name": "Andrew",
+//     "email": "myemail@mead.io",
+//     "__v": 0
+//   },
+
+// Resource Reading Endpoints: Part II --------------------(*)
+
+//
+// Goal: Setup the task reading endpoint
+//
+// 1. Create an endpoint for fetching all tasks
+// 2. Create an endpoint for fetching a task by its id
+// 3. Setup new requests in Postman and test your work

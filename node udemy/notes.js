@@ -8,4 +8,4 @@ export const getNotes = function () {
 };
 
 // // Exporting ES6 module
-// export const sum = (a, b) => a + b;
+export const sum = (a, b) => a + b;

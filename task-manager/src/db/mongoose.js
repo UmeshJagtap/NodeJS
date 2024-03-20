@@ -928,7 +928,7 @@
 //     });
 // });
 
-// app.get('/task:id', (req, res) => {
+// app.get('/tasks:id', (req, res) => {
 //   const _id = req.params.id;
 
 //   Task.findById(_id)
@@ -975,7 +975,7 @@
 //   },
 // ];
 
-// For app.get('/task:id', (req, res) => {}
+// For app.get('/tasks:id', (req, res) => {}
 // POSTMAN
 // Collections >> Task App >> Add a request >> Request name >> Read task
 // GET v | localhost:3000/tasks/5c13e...2f40       [ Send ] [Save]
@@ -1051,7 +1051,7 @@
 //     });
 // });
 
-// app.get('/task:id', (req, res) => {
+// app.get('/tasks:id', (req, res) => {
 //   const _id = req.params.id;
 
 //   Task.findById(_id)

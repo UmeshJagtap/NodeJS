@@ -532,22 +532,22 @@
 // }
 // Status: 200 OK
 
-// To automatically parse JSON for us accessible as object for use
-// src > index.js
-const express = require('express');
+// // To automatically parse JSON for us accessible as object for use
+// // src > index.js
+// const express = require('express');
 
-const app = express();
-const port = process.env.PORT || 3000;
+// const app = express();
+// const port = process.env.PORT || 3000;
 
-app.use(express.json()); // automatically parse incoming json to an object
-app.post('/users', (req, res) => {
-  console.log(req.body);
-  res.send('testing!');
-});
+// app.use(express.json()); // automatically parse incoming json to an object
+// app.post('/users', (req, res) => {
+//   console.log(req.body);
+//   res.send('testing!');
+// });
 
-app.listen(port, () => {
-  console.log('Server is up on port ' + port);
-});
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
 
 // Save, nodemon will run automatically in terminal
 
@@ -572,104 +572,104 @@ app.listen(port, () => {
 // ----------------------------------------------- +++
 // Create new Folder : src >> models >> user.js
 
-const mongoose = require('mongoose');
-const validator = require('validator');
+// const mongoose = require('mongoose');
+// const validator = require('validator');
 
-const User = mongoose.model('User', {
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error('Email is invalid');
-      }
-    },
-  },
-  passowrd: {
-    type: String,
-    required: true,
-    minlength: 7,
-    trim: true,
-    validate(value) {
-      if (value.toLowerCase().includes('password')) {
-        throw new Error('Passowrd cannot contain "password"');
-      }
-    },
-  },
-  age: {
-    type: Number,
-    default: 0,
-    validate(value) {
-      if (value < 0) {
-        throw new Error('Age must be a positive number');
-      }
-    },
-  },
-});
+// const User = mongoose.model('User', {
+//   name: {
+//     type: String,
+//     required: true,
+//     trim: true,
+//   },
+//   email: {
+//     type: String,
+//     required: true,
+//     trim: true,
+//     lowercase: true,
+//     validate(value) {
+//       if (!validator.isEmail(value)) {
+//         throw new Error('Email is invalid');
+//       }
+//     },
+//   },
+//   passowrd: {
+//     type: String,
+//     required: true,
+//     minlength: 7,
+//     trim: true,
+//     validate(value) {
+//       if (value.toLowerCase().includes('password')) {
+//         throw new Error('Passowrd cannot contain "password"');
+//       }
+//     },
+//   },
+//   age: {
+//     type: Number,
+//     default: 0,
+//     validate(value) {
+//       if (value < 0) {
+//         throw new Error('Age must be a positive number');
+//       }
+//     },
+//   },
+// });
 
-module.exports = User;
+// module.exports = User;
 
 // ----------------------------------------------- +++
 // src >> db >> mongoose.js
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
-  useNewParser: true,
-  useCreateIndex: true,
-});
+// mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
+//   useNewParser: true,
+//   useCreateIndex: true,
+// });
 
-const me = new User({
-  name: '    Andrew   ',
-  email: 'MYEMAIL@MEAD.IO    ',
-  // passowrd: '    re32   ',
-  // passowrd: 'Password123',
-  passowrd: 'phone@98!',
-});
+// const me = new User({
+//   name: '    Andrew   ',
+//   email: 'MYEMAIL@MEAD.IO    ',
+//   // passowrd: '    re32   ',
+//   // passowrd: 'Password123',
+//   passowrd: 'phone@98!',
+// });
 
-me.save()
-  .then(() => {
-    console.log(me);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+// me.save()
+//   .then(() => {
+//     console.log(me);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
 // ----------------------------------------------- +++
-// src >> index.js
-const express = require('express');
-require('./db/mongoose');
-const User = require('./models/user');
+// // src >> index.js
+// const express = require('express');
+// require('./db/mongoose');
+// const User = require('./models/user');
 
-const app = express();
-const port = process.env.PORT || 3000;
+// const app = express();
+// const port = process.env.PORT || 3000;
 
-app.use(express.json()); // automatically parse incoming json to an object
-app.post('/users', (req, res) => {
-  const user = new User(req.body);
+// app.use(express.json()); // automatically parse incoming json to an object
+// app.post('/users', (req, res) => {
+//   const user = new User(req.body);
 
-  user
-    .save()
-    .then(() => {
-      res.send(user);
-    })
-    .catch((e) => {
-      // res.status(400);
-      // res.send(e);
-      res.status(400).send(e);
-    });
-});
+//   user
+//     .save()
+//     .then(() => {
+//       res.send(user);
+//     })
+//     .catch((e) => {
+//       // res.status(400);
+//       // res.send(e);
+//       res.status(400).send(e);
+//     });
+// });
 
-app.listen(port, () => {
-  console.log('Server is up on port ' + port);
-});
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
 
 // Validating ...
 // POSTMAN
@@ -701,3 +701,79 @@ app.listen(port, () => {
 // - ( Wings1 May 2024 Assessment Registrations !! )
 
 // Resource Creation Endpoints: Part II --------------------(*)
+
+//
+// Goal: Setup the task creation endpoint
+//
+// 1. Create a seprate file for the task model (load it into index.js)
+// 2. Create the task creation endpoint (handle success and error)
+// 3. Test the endpoint from postman with good or bad data
+
+// models >> task.js
+
+const mongoose = require('mongoose');
+
+const Task = mongoose.model('Task', {
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+module.exports = Task;
+
+// src >> db >> mongoose.js
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://27.0.0.1:27017/task-manager-api', {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
+
+// src >> index.js
+const express = require('express');
+require('./db/mongoose');
+const User = require('./models/user');
+const Task = require('./models/task');
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(express.json()); // automatically parse incoming json to an object
+
+app.post('/users', (req, res) => {
+  const user = new User(req.body);
+
+  user
+    .save()
+    .then(() => {
+      res.send(user);
+    })
+    .catch((e) => {
+      // res.status(400);
+      // res.send(e);
+      res.status(400).send(e);
+    });
+});
+
+app.post('/tasks', (req, res) => {
+  const task = new Task(req.body);
+
+  task
+    .save()
+    .then(() => {
+      res.status(201).send(task); //  ( The request succeeded, and a new resource was created as a result. )
+    })
+    .catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.listen(port, () => {
+  console.log('Server is up on port ' + port);
+});

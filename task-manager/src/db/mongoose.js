@@ -917,3 +917,172 @@
 // 1. Create an endpoint for fetching all tasks
 // 2. Create an endpoint for fetching a task by its id
 // 3. Setup new requests in Postman and test your work
+
+// app.get('/tasks', (req, res) => {
+//   Task.find({})
+//     .then((tasks) => {
+//       res.send(tasks);
+//     })
+//     .catch((e) => {
+//       res.status(500).send(e);
+//     });
+// });
+
+// app.get('/task:id', (req, res) => {
+//   const _id = req.params.id;
+
+//   Task.findById(_id)
+//     .then((task) => {
+//       if (!task) {
+//         return res.status(404).send();
+//       }
+
+//       res.send(task);
+//     })
+//     .catch((e) => {
+//       res.status(500).send(e);
+//     });
+// });
+
+// For app.get('/tasks', (req, res) => {}
+// POSTMAN
+// Collections >> Task App >> Add a request >> Request name >> Read tasks
+// GET v | localhost:3000/tasks       [ Send ] [Save]
+// [
+//   {
+//     completed: false,
+//     _id: '5c3cc...74cee',
+//     description: 'Learn the Mongoose library',
+//     __v: 0,
+//   },
+//   {
+//     completed: false,
+//     _id: '5c13e...2f40',
+//     description: 'Eat Lunch',
+//     __v: 0,
+//   },
+//   {
+//     completed: false,
+//     _id: '5c1a...d4661',
+//     description: 'Finish Node.js course',
+//     __v: 0,
+//   },
+//   {
+//     completed: false,
+//     _id: '5c1a6...5ab28',
+//     description: 'Finish Node.js course',
+//     __v: 0,
+//   },
+// ];
+
+// For app.get('/task:id', (req, res) => {}
+// POSTMAN
+// Collections >> Task App >> Add a request >> Request name >> Read task
+// GET v | localhost:3000/tasks/5c13e...2f40       [ Send ] [Save]
+// {
+//   completed: false,
+//   _id: '5c13e...2f40',
+//   description: 'Eat Lunch',
+//   __v: 0,
+// }
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ TILL NOW
+// // src >> index.js
+// const express = require('express');
+// require('./db/mongoose');
+// const User = require('./models/user');
+// const Task = require('./models/task');
+
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// app.use(express.json()); // automatically parse incoming json to an object
+
+// app.post('/users', (req, res) => {
+//   const user = new User(req.body);
+
+//   user
+//     .save()
+//     .then(() => {
+//       res.send(user);
+//     })
+//     .catch((e) => {
+//       // res.status(400);
+//       // res.send(e);
+//       res.status(400).send(e);
+//     });
+// });
+
+// app.get('/users', (req, res) => {
+//   // Reading all users
+//   User.find({})
+//     .then((users) => {
+//       res.send(users);
+//     })
+//     .catch((e) => {
+//       res.status(500).send();
+//     });
+// });
+
+// app.get('/users/:id', (req, res) => {
+//   // Route parameters
+//   // console.log(req.params);
+//   const _id = req.params.id;
+//   User.findById(_id)
+//     .then((user) => {
+//       if (!user) {
+//         return res.status(404).send();
+//       }
+
+//       res.send(user);
+//     })
+//     .catch((e) => {
+//       res.status(500).send();
+//     });
+// });
+
+// app.get('/tasks', (req, res) => {
+//   Task.find({})
+//     .then((tasks) => {
+//       res.send(tasks);
+//     })
+//     .catch((e) => {
+//       res.status(500).send(e);
+//     });
+// });
+
+// app.get('/task:id', (req, res) => {
+//   const _id = req.params.id;
+
+//   Task.findById(_id)
+//     .then((task) => {
+//       if (!task) {
+//         return res.status(404).send();
+//       }
+
+//       res.send(task);
+//     })
+//     .catch((e) => {
+//       res.status(500).send(e);
+//     });
+// });
+
+// app.post('/tasks', (req, res) => {
+//   const task = new Task(req.body);
+
+//   task
+//     .save()
+//     .then(() => {
+//       res.status(201).send(task); //  ( The request succeeded, and a new resource was created as a result. )
+//     })
+//     .catch((e) => {
+//       res.status(400).send(e);
+//     });
+// });
+
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// Promise Chaining  --------------------(*)

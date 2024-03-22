@@ -1086,3 +1086,393 @@
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Promise Chaining  --------------------(*)
+
+// // task-manager >> playground >> promise-chaining.js
+
+// require('../src/db/mongoose');
+// const User = require('../src/models/user');
+
+// // https://mongoosejs.com/docs/queries.html
+// // Model.findByIdAndUpdate()
+
+// User.findByIdAndUpdate('5c13e...beac1', { age: 1 })
+//   .then((user) => {
+//     console.log(user);
+//     return User.countDocuments({ age: 1 });
+//   })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
+
+// // TERMINAL
+// // task-manager$ node playground/promise-chaining.js
+// // { age: 0,
+// // _id: 5c13e...beac1,
+// // name: 'Andrew',
+// // email: 'myemail@mead.io',
+// // __v: 0 }
+// // 1
+
+// // Running again with User.findByIdAndUpdate('5c1a5...8f6bc', { age: 1 })
+// // task-manager$ node playground/promise-chaining.js
+// // { age: 0,
+// // _id: 5c1a5...8f6bc,
+// // name: 'Andrew',
+// // email: 'myemail@mead.io',
+// // __v: 0 }
+// // 2
+
+// task-manager >> src >> db >> mongoose.js
+// const mongoose = require('mongoose');
+
+// mongoose.connect('mongodb://27.0.0.1:27017/task-manager-api', {
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+//   useFindAndModify: false,   // w=Wil  remove deprecation warnings
+// });
+
+// Promise Chaining Challenge --------------------(*)
+//
+// Goal: Mess around with promise chaining
+//
+// 1. Create promise-chaining-2.js
+// 2. Load in mongoose and task model
+// 3. Remove a given task by id
+// 4. Get and print the total number of incomplete tasks
+// 5. Test your work!
+
+// // task-manager >> playground >> promise-chaining-2.js
+// require('../src/db/mongoose');
+// const Task = require('../src/models/task');
+
+// // // https://mongoosejs.com/docs/queries.html
+// // // Model.findByIdAndDelete()
+
+// Task.findByIdAndDelete('5c13ed...112f40')
+//   .then((task) => {
+//     console.log(task);
+//     return Task.countDocuments({ completed: flase });
+//   })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
+
+// // TERMINAL
+
+// // For Task.findByIdAndDelete('5c13ed...112f40')
+// // task-manager$ node playground/promise-chaining-2.js
+// // { completed: false,
+// // _id: 5c13ed...112f40,
+// // description: "Eat lunch",
+// // __v: 0 }
+// // 3
+
+// // For Task.findByIdAndDelete('5c13ed...5ab28')
+// // task-manager$ node playground/promise-chaining-2.js
+// // { completed: false,
+// // _id: 5c13ed...5ab28,
+// // description: "Finish Node.js course",
+// // __v: 0 }
+// // 2
+
+// Async/Await --------------------(*)
+
+// // NODE-COURSE >> playground >> 9-async-await.js
+
+// const doWork = () => {};
+// console.log(doWork());
+// // node-course/playground$ node 9-async-await.js
+// // undefined
+
+// const doWork = async () => {};
+// console.log(doWork());
+// // node-course/playground$ node 9-async-await.js
+// // Promise { undefined }
+
+// const doWork = async () => {
+//   return 'Andrew';
+// };
+// console.log(doWork());
+// // node-course/playground$ node 9-async-await.js
+// // Promise { 'Andrew' }
+
+// const doWork = async () => {
+//   return 'Andrew';
+// };
+// doWork()
+//   .then((result) => {
+//     console.log('result', result);
+//   })
+//   .catch((e) => {
+//     console.log('e', e);
+//   });
+// // node-course/playground$ node 9-async-await.js
+// // Promise { 'Andrew' }
+
+// const doWork = async () => {
+//   throw new Error('Something went wrong');
+//   return 'Andrew';
+// };
+// doWork()
+//   .then((result) => {
+//     console.log('result', result);
+//   })
+//   .catch((e) => {
+//     console.log('e', e);
+//   });
+// // node-course/playground$ node 9-async-await.js
+// // Error: Someething went wrong
+
+// const add = (a, b) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (a < 0 || b < 0) {
+//         return reject('Numbers must be non-negative');
+//       }
+//       resolve(a + b);
+//     }, 2000);
+//   });
+// };
+// const doWork = async () => {
+//   const sum = await add(1, 99);
+//   const sum2 = await add(sum, 50);
+//   const sum3 = await add(sum2, 3);
+//   return sum3;
+// };
+// doWork()
+//   .then((result) => {
+//     console.log('result', result);
+//   })
+//   .catch((e) => {
+//     console.log('e', e);
+//   });
+
+// // For const sum3 = await add(sum2, 3);
+// // node-course/playground$ node 9-async-await.js
+// // result 153
+
+// // For const sum3 = await add(sum2, -3);
+// // node-course/playground$ node 9-async-await.js
+// // e Numbers must be non-negative
+
+// Async/Await: Part II   --------------------(*)
+
+// // task-manager >> playground >> promise-chaining.js
+
+// require('../src/db/mongoose');
+// const User = require('../src/models/user');
+
+// // User.findByIdAndUpdate('5c13e...beac1', { age: 1 })
+// //   .then((user) => {
+// //     console.log(user);
+// //     return User.countDocuments({ age: 1 });
+// //   })
+// //   .then((result) => {
+// //     console.log(result);
+// //   })
+// //   .catch((e) => {
+// //     console.log(e);
+// //   });
+
+// const updateAgeAndCount = async (id, age) => {
+//   const user = await User.findByIdAndUpdate(id, { age });
+//   const count = await User.countDocuments({ age });
+//   return count;
+// };
+
+// updateAgeAndCount('5c13e...beac1', 2)
+//   .then((count) => {
+//     console.log(count);
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
+
+// // TERMINAL
+// // task-manager$ node playground/promise-chaining.js
+// // 1
+
+//
+// Goal: Use async/await    --------------(+)
+//
+// 1. Create deleteTaskAndCount as an async function
+//    - Accept id of task to remove
+// 2. Use await to delete task and count up incomplete tasks
+// 3. Return the count
+// 4. Call the function and attach/catch to log results
+// 5. Test your work!
+
+// // task-manager >> playground >> promise-chaining-2.js
+// require('../src/db/mongoose');
+// const Task = require('../src/models/task');
+
+// // // https://mongoosejs.com/docs/queries.html
+// // // Model.findByIdAndDelete()
+
+// // Task.findByIdAndDelete('5c13ed...112f40')
+// //   .then((task) => {
+// //     console.log(task);
+// //     return Task.countDocuments({ completed: flase });
+// //   })
+// //   .then((result) => {
+// //     console.log(result);
+// //   })
+// //   .catch((e) => {
+// //     console.log(e);
+// //   });
+
+// const deleteTaskAndCount = async (id) => {
+//   const task = await Task.findByIdAndDelete(id);
+//   const count = await Task.countDocuments({ completed: false });
+//   return count;
+// };
+
+// deleteTaskAndCount('5c1a6...d4661')
+//   .then((count) => {
+//     console.log(count);
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
+
+// // TERMINAL
+// // For deleteTaskAndCount('5c1a6...d4661')
+// // task-manager$ node playground/promise-chaining-2.js
+// // 1
+
+// Integrating Async/Await   --------------------(*)
+
+// // src >> index.js
+// const express = require('express');
+// require('./db/mongoose');
+// const User = require('./models/user');
+// const Task = require('./models/task');
+
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// app.use(express.json()); // automatically parse incoming json to an object
+
+// app.post('/users', async (req, res) => {
+//   // Function now returns Promise rather than a value..as it is Asyn fun now.
+
+//   const user = new User(req.body);
+
+//   try {
+//     await user.save();
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+
+//   //   user
+//   //     .save()
+//   //     .then(() => {
+//   //       res.send(user);
+//   //     })
+//   //     .catch((e) => {
+//   //       // res.status(400);
+//   //       // res.send(e);
+//   //       res.status(400).send(e);
+//   //     });
+// });
+
+// app.get('/users', async (req, res) => {
+//   // Reading all users
+
+//   try {
+//     const users = await User.find({});
+//     res.send(users);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+//   //   User.find({})
+//   //     .then((users) => {
+//   //       res.send(users);
+//   //     })
+//   //     .catch((e) => {
+//   //       res.status(500).send();
+//   //     });
+// });
+
+// app.get('/users/:id', async (req, res) => {
+//   // Route parameters
+//   // console.log(req.params);
+//   const _id = req.params.id;
+//   try {
+//     const user = User.findById(_id);
+
+//     if (!user) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(user);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+
+//   //   User.findById(_id)
+//   //     .then((user) => {
+//   //       if (!user) {
+//   //         return res.status(404).send();
+//   //       }
+
+//   //       res.send(user);
+//   //     })
+//   //     .catch((e) => {
+//   //       res.status(500).send();
+//   //     });
+// });
+
+// //
+// // Goal: Refactor task routes to use async/await
+// //
+// // 1. Refactor task routes to use async/await
+// // 2. Test all routes in Postman
+
+// app.get('/tasks', async (req, res) => {
+//   try {
+//     const tasks = await Task.find({});
+//     res.send(tasks);
+//   } catch (e) {
+//     res.status(500).send(e);
+//   }
+// });
+
+// app.get('/tasks:id', async (req, res) => {
+//   const _id = req.params.id;
+
+//   try {
+//     const task = await Task.findById(_id);
+
+//     if (!task) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(task);
+//   } catch (e) {
+//     res.status(500).send(e);
+//   }
+// });
+
+// app.post('/tasks', async (req, res) => {
+//   const task = new Task(req.body);
+
+//   try {
+//     await task.save();
+//     res.status(201).send(task); //  ( The request succeeded, and a new resource was created as a result. )
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+// });
+
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
+
+// Resource Updating Endpoints   --------------------(*)

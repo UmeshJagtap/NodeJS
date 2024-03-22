@@ -1475,4 +1475,251 @@
 //   console.log('Server is up on port ' + port);
 // });
 
-// Resource Updating Endpoints   --------------------(*)
+// // Resource Updating Endpoints: Part I   --------------------(*)
+
+// // https://mongoosejs.com/docs/queries.html
+// // Model.findByIdAndUpdate()
+
+// app.patch('/users/:id', async (req, res) => {
+//   try {
+//     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//       runValidators: true,
+//     });
+
+//     if (!user) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(user);
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+// });
+
+// // For app.patch('/users/:id', async (req, res) => {}
+// // POSTMAN
+// // Collections >> Task App >> Add a request >> Request name >> Update user
+
+// // Take a valid id from previous -Read users- request
+// // PATCH v | localhost:3000/users/5c13e1...eac1    [ Send ] [Save]
+// // Body >> raw >> Text --> jSON
+// // {
+// //   "name": "Andrew Mead"
+// // }
+
+// // Status: 200 OK
+// //   {
+// //     "age": 1,
+// //     "_id": "5c13e1...beac1",
+// //     "name": "Andrew Mead",
+// //     "email": "myemail@mead.io",
+// //     "__v": 0
+// //   }
+
+// // Take a In-Valid id from previous -Read users- request (5c13e1...eac2 )
+// // PATCH v | localhost:3000/users/5c13e1...eac1    [ Send ] [Save]
+// // Body >> raw >> Text --> jSON
+// // {
+// //   "name": "Andrew Mead"
+// // }
+// // Status: 404 Not Found
+
+// // Take a valid id from previous -Read users- request (5c13e1...eac1 )
+// // PATCH v | localhost:3000/users/5c13e1...eac1    [ Send ] [Save]
+// // Body >> raw >> Text --> jSON
+// // {
+// //   "name": ""
+// // }
+// // Status: 400 Bad Request
+// // {
+// //   "errors": {
+// //       "name": {
+// //         "message": "Path `name` is required",
+// //         "name": "ValidatorError",
+// //       }
+// //   }
+// // }
+
+// // Take a valid id from previous -Read users- request (5c13e1...eac1)
+// // PATCH v | localhost:3000/users/5c13e1...eac1    [ Send ] [Save]
+// // Body >> raw >> Text --> jSON
+// // {
+// //   "height": 72
+// // }
+
+// // Any of the New property which do not exist on the user, will be completed ignored,
+// // We are going to see our Object but not our height property.
+// // Status: 200 OK
+// //   {
+// //     "age": 1,
+// //     "_id": "5c13e1...beac1",
+// //     "name": "Andrew Mead",
+// //     "email": "myemail@mead.io",
+// //     "__v": 0
+// //   }
+
+// // To restrict invalid addition of properties
+// app.patch('/users/:id', async (req, res) => {
+//   const updates = Object.keys(req.body);
+//   const allowedUpdates = ['name', 'email', 'password', 'age'];
+//   const isValidOperation = updates.every((update) =>
+//     allowedUpdates.includes(update)
+//   );
+
+//   if (!isValidOperation) {
+//     return res.status(400).send({ error: 'Invalid updates!' });
+//   }
+
+//   try {
+//     // https://mongoosejs.com/docs/queries.html
+//     // Model.findByIdAndUpdate()
+//     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//       runValidators: true,
+//     });
+
+//     if (!user) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(user);
+//   } catch (e) {
+//     res.status(201).send(e);
+//   }
+// });
+
+// // Take a valid id from previous -Read users- request (5c13e1...eac1)
+// // PATCH v | localhost:3000/users/5c13e1...eac1    [ Send ] [Save]
+// // Body >> raw >> Text --> jSON
+// // {
+// //   "height": 72
+// // }
+
+// // Any of the New property which do not exist on the user, will be throw "Invalid updates" now
+// // Status: 400 Bad Request
+// //   {
+// //     "error": "Invalid updates!",
+// //   }
+
+// Resource Updating Endpoints: Part II   --------------------(*)
+
+//
+// Goal : Allow for task updates
+//
+// 1. Setup the riute handler
+// 2. Send error if unknown updates
+// 3. Attempt to update the task
+//    - Handle task not found
+//    - Handle validation errors
+// 4. Test your work!
+
+app.patch('/tasks/:id', async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ['description', 'completed'];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) {
+    return res.status(400).send({ error: 'Invalid updates' });
+  }
+
+  try {
+    const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!task) {
+      return res.status(404).send();
+    }
+
+    res.send(task);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+// // For app.patch('/tasks/:id', async (req, res) => {}
+// // POSTMAN
+// // Collections >> Task App >> Add a request >> Request name >> Update task
+
+// // Take a valid id from previous -Read tasks- request
+// // PATCH v | localhost:3000/tasks/5c13cc...74cee    [ Send ] [Save]
+// // Body >> raw >> Text --> jSON
+// // {
+// //   "completed": true
+// // }
+
+// // Status: 200 OK
+// //   {
+// //     "completed": true,
+// //     "_id": "5c13cc...74cee",
+// //     "description": "Learn the Mongoose library",
+// //     "__v": 0
+// //   }
+
+// // Take a valid id from previous -Read tasks- request (5c13cc...74cee)
+// // PATCH v | localhost:3000/tasks/5c13cc...74cee    [ Send ] [Save]
+// // Body >> raw >> Text --> jSON
+// // {
+// //   "completedd": true
+// // }
+
+// // Any of the New property which do not exist on the user, will be throw "Invalid updates" now
+// // Status: 400 Bad Request
+// //   {
+// //     "error": "Invalid updates!",
+// //   }
+
+// Resource Deleting Endpoints   --------------------(*)
+
+// https://mongoosejs.com/docs/queries.html
+// Model.findByIdAndDelete()
+
+app.delete('/user/:id', async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+
+    if (!user) {
+      return res.status(404).send();
+    }
+
+    res.send(user);
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
+// // For app.delete('/user/:id', async (req, res) => {}
+// // POSTMAN
+// // Collections >> Task App >> Add a request >> Request name >> Delete user
+// // Take a valid id from previous -Read users- request (5c13cc...7e5b5)
+// // DELETE v | localhost:3000/users/5c13cc...7e5b5    [ Send ] [Save]
+// // Save >> Send
+
+// // Status: 200 OK
+// //   {
+// //     "age": 0,
+// //     "_id": "5c13cc...7e5b5",
+// //     "name": "Andrew",
+// //     "email": "myemail@mead.io",
+// //     "passowrd": "phone098!",
+// //     "__v": 0
+// //   }
+
+// // Firing the same request with same id
+// // DELETE v | localhost:3000/users/5c13cc...7e5b5    [ Send ] [Save]
+// // Status: 404 Not Found
+
+//
+// Goal : Allow for removal of tasks
+//
+// 1. Setup the riute handler
+// 2. Send error if unknown updates
+// 3. Attempt to update the task
+//    - Handle task not found
+//    - Handle validation errors
+// 4. Test your work!
+
+app.delete('./tasks/:id');

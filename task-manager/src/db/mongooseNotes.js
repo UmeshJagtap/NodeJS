@@ -1602,43 +1602,43 @@
 // //     "error": "Invalid updates!",
 // //   }
 
-// Resource Updating Endpoints: Part II   --------------------(*)
+// // Resource Updating Endpoints: Part II   --------------------(*)
 
-//
-// Goal : Allow for task updates
-//
-// 1. Setup the riute handler
-// 2. Send error if unknown updates
-// 3. Attempt to update the task
-//    - Handle task not found
-//    - Handle validation errors
-// 4. Test your work!
+// //
+// // Goal : Allow for task updates
+// //
+// // 1. Setup the route handler
+// // 2. Send error if unknown updates
+// // 3. Attempt to update the task
+// //    - Handle task not found
+// //    - Handle validation errors
+// // 4. Test your work!
 
-app.patch('/tasks/:id', async (req, res) => {
-  const updates = Object.keys(req.body);
-  const allowedUpdates = ['description', 'completed'];
-  const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
-  );
+// app.patch('/tasks/:id', async (req, res) => {
+//   const updates = Object.keys(req.body);
+//   const allowedUpdates = ['description', 'completed'];
+//   const isValidOperation = updates.every((update) =>
+//     allowedUpdates.includes(update)
+//   );
 
-  if (!isValidOperation) {
-    return res.status(400).send({ error: 'Invalid updates' });
-  }
+//   if (!isValidOperation) {
+//     return res.status(400).send({ error: 'Invalid updates' });
+//   }
 
-  try {
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!task) {
-      return res.status(404).send();
-    }
+//   try {
+//     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//       runValidators: true,
+//     });
+//     if (!task) {
+//       return res.status(404).send();
+//     }
 
-    res.send(task);
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
+//     res.send(task);
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+// });
 
 // // For app.patch('/tasks/:id', async (req, res) => {}
 // // POSTMAN
@@ -1672,24 +1672,24 @@ app.patch('/tasks/:id', async (req, res) => {
 // //     "error": "Invalid updates!",
 // //   }
 
-// Resource Deleting Endpoints   --------------------(*)
+// // Resource Deleting Endpoints   --------------------(*)
 
-// https://mongoosejs.com/docs/queries.html
-// Model.findByIdAndDelete()
+// // https://mongoosejs.com/docs/queries.html
+// // Model.findByIdAndDelete()
 
-app.delete('/user/:id', async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
+// app.delete('/user/:id', async (req, res) => {
+//   try {
+//     const user = await User.findByIdAndDelete(req.params.id);
 
-    if (!user) {
-      return res.status(404).send();
-    }
+//     if (!user) {
+//       return res.status(404).send();
+//     }
 
-    res.send(user);
-  } catch (e) {
-    res.status(500).send();
-  }
-});
+//     res.send(user);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+// });
 
 // // For app.delete('/user/:id', async (req, res) => {}
 // // POSTMAN
@@ -1712,14 +1712,346 @@ app.delete('/user/:id', async (req, res) => {
 // // DELETE v | localhost:3000/users/5c13cc...7e5b5    [ Send ] [Save]
 // // Status: 404 Not Found
 
-//
-// Goal : Allow for removal of tasks
-//
-// 1. Setup the riute handler
-// 2. Send error if unknown updates
-// 3. Attempt to update the task
-//    - Handle task not found
-//    - Handle validation errors
-// 4. Test your work!
+// //
+// // Goal : Allow for removal of tasks
+// //
+// // 1. Setup the riute handler
+// // 2. Send error if unknown updates
+// // 3. Attempt to update the task
+// //    - Handle task not found
+// //    - Handle validation errors
+// // 4. Test your work!
 
-app.delete('./tasks/:id');
+// app.delete('/tasks/:id', async (req, res) => {
+//   try {
+//     const task = await Task.findByIdAndDelete(res.params.id);
+
+//     if (!task) {
+//       res.status(404).send();
+//     }
+
+//     res.send(task);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+// });
+
+// // For app.delete('/tasks/:id', async (req, res) => {}
+// // POSTMAN
+// // Collections >> Task App >> Add a request >> Request name >> Delete task
+// // Take a valid id from previous -Read tasks- request (5c13cc...4cee)
+// // DELETE v | localhost:3000/tasks/5c13cc...4cee    [ Send ] [Save]
+// // Save >> Send
+
+// // Status: 200 OK
+// //   {
+// //     "completed": true,
+// //     "_id": "5c13cc...4cee",
+// //     "description": "Learn the Mongoose library",
+// //     "__v": 0
+// //   }
+
+// // Firing the above command again
+// // Status: 404 Not Found
+
+// // Seprate Route Files   --------------------(*)
+// // Currently index.js supports all the routes.....
+
+// // task-manager >> index.js
+
+// // const app = express();
+// // const port = process.env.PORT || 3000;
+
+// // app.use(express.json());
+
+// // const router = new express.Router();
+// // router.get('/test', (req, res) => {
+// //   res.send('This is from my other router');
+// // });
+// // app.use(router);
+
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
+
+// // OUTPUT
+// // Browser :-
+// // localhost:3000/
+// // This is from my other router
+
+// // task-manager >> src >> routers >> user.js
+// const express = require('express');
+// const router = new express.Router();
+
+// router.get('/test', (req, res) => {
+//   res.send('From a new file');
+// });
+
+// module.express = router;
+
+// // Deleted router.get('/test', (req, res) => {}) from above index.js
+// // Refactoring index.js
+
+// // task-manager >> index.js
+// const express = require('express');
+// require('./db/mongoose');
+// const User = require('./models/user');
+// const Task = require('./models/task');
+// const userRouter = require('./routers/user');
+
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// app.use(express.join());
+// app.use(userRouter);
+// app.use(taskRouter);
+
+// // app.post('/users'. async (req, res) => {}) .....
+
+// app.listen(port, () => {
+//   console.log('Server is up on port ' + port);
+// });
+
+// // OUTPUT
+// // Browser :-
+// // localhost:3000/
+// // From a new File
+
+// // Taking all routes related to user and moving it to user.js
+
+// // task-manager >> src >> routers >> user.js
+// const express = require('express');
+// const User = require('../models/user');
+// const router = new express.Router();
+
+// router.post('/users', async (req, res) => {
+//   // Function now returns Promise rather than a value..as it is Asyn fun now.
+
+//   const user = new User(req.body);
+
+//   try {
+//     await user.save();
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+
+//   //   user
+//   //     .save()
+//   //     .then(() => {
+//   //       res.send(user);
+//   //     })
+//   //     .catch((e) => {
+//   //       // res.status(400);
+//   //       // res.send(e);
+//   //       res.status(400).send(e);
+//   //     });
+// });
+
+// router.get('/users', async (req, res) => {
+//   // Reading all users
+
+//   try {
+//     const users = await User.find({});
+//     res.send(users);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+//   //   User.find({})
+//   //     .then((users) => {
+//   //       res.send(users);
+//   //     })
+//   //     .catch((e) => {
+//   //       res.status(500).send();
+//   //     });
+// });
+
+// router.get('/users/:id', async (req, res) => {
+//   // Route parameters
+//   // console.log(req.params);
+//   const _id = req.params.id;
+//   try {
+//     const user = User.findById(_id);
+
+//     if (!user) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(user);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+
+//   //   User.findById(_id)
+//   //     .then((user) => {
+//   //       if (!user) {
+//   //         return res.status(404).send();
+//   //       }
+
+//   //       res.send(user);
+//   //     })
+//   //     .catch((e) => {
+//   //       res.status(500).send();
+//   //     });
+// });
+
+// // To restrict invalid addition of properties
+// router.patch('/users/:id', async (req, res) => {
+//   const updates = Object.keys(req.body);
+//   const allowedUpdates = ['name', 'email', 'password', 'age'];
+//   const isValidOperation = updates.every((update) =>
+//     allowedUpdates.includes(update)
+//   );
+
+//   if (!isValidOperation) {
+//     return res.status(400).send({ error: 'Invalid updates!' });
+//   }
+
+//   try {
+//     // https://mongoosejs.com/docs/queries.html
+//     // Model.findByIdAndUpdate()
+//     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//       runValidators: true,
+//     });
+
+//     if (!user) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(user);
+//   } catch (e) {
+//     res.status(201).send(e);
+//   }
+// });
+
+// // https://mongoosejs.com/docs/queries.html
+// // Model.findByIdAndDelete()
+
+// router.delete('/user/:id', async (req, res) => {
+//   try {
+//     const user = await User.findByIdAndDelete(req.params.id);
+
+//     if (!user) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(user);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+// });
+
+// module.express = router;
+
+// // TESTING THE ABOVE CHANGES
+
+// // POSTMAN
+// // Collections >> Task App >> Add a request >> Request name >> Read users
+// // GET v | localhost:3000/users   >>   [ Send ]
+// // >> Body >> raw >> Text to JSON (application/json)
+// // [
+// //   {
+// //     "age": 0,
+// //     "_id": "5c13e1...beac1",
+// //     "name": "Andrew",
+// //     "email": "myemail@mead.io",
+// //     "__v": 0
+// //   },
+// //   {
+// //     "age": 0,
+// //     "_id": "5c13e1...be6bc",
+// //     "name": "Andrew Maed",
+// //     "email": "myemail@mead.io",
+// //     "__v": 0
+// //   },
+// // ]
+
+// //
+// //  Goal: Create Task router
+// //
+// // 1. Create new file the creates/exports new router
+// // 2. Move all the task routes over
+// // 3. Load in an use that router with the express app
+// // 4. Test your work
+
+// // // task-manager >> src >> routers >> task.js
+// const express = require('express');
+// // const User = require('../models/user');
+// const Task = require('../models/task');
+// const router = new express.Router();
+
+// router.get('/tasks', async (req, res) => {
+//   try {
+//     const tasks = await Task.find({});
+//     res.send(tasks);
+//   } catch (e) {
+//     res.status(500).send(e);
+//   }
+// });
+
+// router.get('/tasks:id', async (req, res) => {
+//   const _id = req.params.id;
+
+//   try {
+//     const task = await Task.findById(_id);
+
+//     if (!task) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(task);
+//   } catch (e) {
+//     res.status(500).send(e);
+//   }
+// });
+
+// router.post('/tasks', async (req, res) => {
+//   const task = new Task(req.body);
+
+//   try {
+//     await task.save();
+//     res.status(201).send(task); //  ( The request succeeded, and a new resource was created as a result. )
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+// });
+
+// router.patch('/tasks/:id', async (req, res) => {
+//   const updates = Object.keys(req.body);
+//   const allowedUpdates = ['description', 'completed'];
+//   const isValidOperation = updates.every((update) =>
+//     allowedUpdates.includes(update)
+//   );
+
+//   if (!isValidOperation) {
+//     return res.status(400).send({ error: 'Invalid updates' });
+//   }
+
+//   try {
+//     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//       runValidators: true,
+//     });
+//     if (!task) {
+//       return res.status(404).send();
+//     }
+
+//     res.send(task);
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+// });
+
+// router.delete('/tasks/:id', async (req, res) => {
+//   try {
+//     const task = await Task.findByIdAndDelete(res.params.id);
+
+//     if (!task) {
+//       res.status(404).send();
+//     }
+
+//     res.send(task);
+//   } catch (e) {
+//     res.status(500).send();
+//   }
+// });

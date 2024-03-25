@@ -2055,3 +2055,9 @@
 //     res.status(500).send();
 //   }
 // });
+
+// Filtering Data  --------------------(*)
+
+// We will use query string as we did in weather-app
+// Example :
+// const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + encodeURIComponent(address) + '.json?access_token=pk.eyJ1joI.....&limit=1';

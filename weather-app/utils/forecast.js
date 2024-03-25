@@ -67,3 +67,6 @@ module.exports = forecast;
 // };
 
 // module.exports = forecast;
+
+// INFO
+// https://weatherstack.com/signup/free ( Needs CC )

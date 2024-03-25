@@ -1,0 +1,29 @@
+(*) node-udemy
+    -Listdown Processes
+    -Importing ES6 module -------- ( + )
+    -Using chalk  ---------------- ( + )
+    -Installation yargs ---------- ( + )
+
+(*) playground
+    1-json.js   
+    2-arrow-functions
+    3-arrow-challenge
+    4-callback
+    5-es6-objects
+    6-raw-http
+    7-default-params
+    8-promises
+
+(*) task-manager
+    MongoDB
+    mongoose
+
+(*) test
+    MongoDB connectivity
+
+(*) weather-app
+    API ( forecast n geocode )  
+    callback functions
+
+(*) web-server
+    templates

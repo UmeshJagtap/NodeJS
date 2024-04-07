@@ -121,9 +121,101 @@
 // Your notes...
 
 // import argv from 'yargs';
+// console.log(process.argv.slice(2).parse());
+
 // process.argv.slice(2).parse();
 // if (argv.ships > 3 && argv.distance < 53.5) {
 //   console.log('Plunder more riffiwobbles!');
 // } else {
 //   console.log('Retreat from the xupptumblers!');
 // }
+
+// // #!/usr/bin/env node
+// import yargs from 'yargs';
+// // const yargs = require('yargs/yargs');
+// // import hideBin from 'yargs/helpers';
+// // const { hideBin } = require('yargs/helpers');
+// const argv = yargs(process.argv.slice(2));
+// console.log(argv);
+// // process.argv.slice(2);
+// if (argv.ships > 3 && argv.distance < 53.5) {
+//   console.log('Plunder more riffiwobbles!');
+// } else {
+//   console.log('Retreat from the xupptumblers!');
+// }
+
+// $ ./plunder.js --ships=4 --distance=22
+// Plunder more riffiwobbles!
+
+// $ ./plunder.js --ships 12 --distance 98.7
+// Retreat from the xupptumblers!
+
+// const argv = process.argv.slice(2);
+// console.log(argv);
+// if (argv.ships > 3 && argv.distance < 53.5) {}
+
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/node-udemy (main)
+// $ node tryNode.js --ships=4 --distance=60
+// [ '--ships=4', '--distance=60' ]
+
+// --------------------------------------- (^*^)
+// YARGS - Handling parameters in NodeJS CLI Applications
+
+// const argv = process.argv.slice(2);
+// console.log(argv);
+
+// if (argv[0] == '--build') {
+//   console.log(argv[1]);
+// }
+
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/node-udemy (main)
+// $ node tryNode.js --build ASDF
+// [ '--build', 'ASDF' ]
+// ASDF
+
+// const argv = process.argv.slice(2);
+// console.log(argv);
+
+// if (argv[0] == '--build') {
+//   if (argv[1] === 'uat') {
+//     console.log('do uat build');
+//   } else {
+//     console.log('other build');
+//   }
+// }
+
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/node-udemy (main)
+// $ node tryNode.js --build uat
+// [ '--build', 'uat' ]
+// do uat build
+
+// import yargs from 'yargs';
+
+// const argv = yargs(process.argv.slice(2)).argv;
+// console.log(argv);
+
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/node-udemy (main)
+// $ node tryNode.js --build uat
+// { _: [], build: 'uat', '$0': 'tryNode.js' }
+
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/node-udemy (main)
+// $ node tryNode.js --server box1 --build uat
+// { _: [], server: 'box1', build: 'uat', '$0': 'tryNode.js' }
+
+import yargs from 'yargs';
+
+const argv = yargs(process.argv.slice(2)).argv;
+console.log(argv);
+
+if (argv.build == 'uat') {
+  console.log('do uat build');
+} else {
+  console.log('other build');
+}
+
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/node-udemy (main)
+// $ node tryNode.js --server box1 --build uat
+// { _: [], server: 'box1', build: 'uat', '$0': 'tryNode.js' }
+// do uat build
+
+// --------------------------------------- (^*^)

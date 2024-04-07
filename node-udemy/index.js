@@ -73,7 +73,12 @@
 // const msg = getNotes();
 // console.log(msg);
 
-var argv = require('yargs/yargs')(process.argv.slice(2)).parse();
+// ---------------------------------------------- (^*^)
+import yargs from 'yargs';
+
+const argv = yargs(process.argv.slice(2)).argv;
+console.log(argv);
+
 if (argv.ships > 3 && argv.distance < 53.5) {
   console.log('Plunder more riffiwobbles!');
 } else {

@@ -1,0 +1,12 @@
+https://www.youtube.com/watch?v=QiGpW-56qtQ
+https://github.com/UmeshJagtap/NodeJS/tree/main
+
+http://localhost:3000/
+
+https://www.npmjs.com/package/express
+https://www.npmjs.com/package/nodemon
+
+https://www.mongodb.com/cloud/atlas/register 
+https://cloud.mongodb.com/v2/64114ea4bf942379b4242816#/clusters
+
+https://www.npmjs.com/package/mongoose

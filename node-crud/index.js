@@ -10,14 +10,24 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', async (req, res) => {
+app.get('/api/products', async (req, res) => {
   // console.log('Hello from Node API');
   // res.send('<h1>Hello from Node API Server Updated !</h1>');
   // res.send('<h1>Products :-</h1>');
   try {
     const products = await Product.find({});
     res.status(200).json(products);
-  } catch (e) {
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.get('/api/products/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    res.status(200).json(product);
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });

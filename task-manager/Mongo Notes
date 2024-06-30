@@ -25,7 +25,8 @@ Collection    Document    Fields
 https://www.npmjs.com/package/mongodb
 https://mongodb.github.io/node-mongodb-native/6.5/
 
->> task-manager
+>> task-manager  
+       
 Open 2nd Terminal :-
 $ cd task-manager
 $ npm init -y

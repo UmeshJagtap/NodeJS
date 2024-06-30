@@ -10,11 +10,21 @@ const apiUrl =
 async function checkWeather() {
   const response = await fetch(apiUrl + `&appid=${apiKey}`);
   var data = await response.json();
+  // data.message ? console.log(data.message) : ''
+  // console.log(data.message);
+  // console.log(data?.message);
+  
   // console.log(data);
-  console.log(`Location : ${data.name}`);
-  console.log(`Coordinates : Lat ${data.coord.lon}  Lon ${data.coord.lat}`);
-  console.log(`Temperature : ${data.main.temp}`);
-  console.log(`Wind Speed ${data.wind.speed}`);
+  
+  const showData = () => {
+    console.log(`Location : ${data.name}`);
+    console.log(`Coordinates : Lat ${data.coord.lon}  Lon ${data.coord.lat}`);
+    console.log(`Temperature : ${data.main.temp}`);
+    console.log(`Wind Speed ${data.wind.speed}`); 
+  }
+
+  data.message ? console.log(data.message) : showData();
+
 }
 checkWeather();
 

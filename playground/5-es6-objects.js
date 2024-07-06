@@ -35,3 +35,9 @@ const transaction = (type, { label, stock }) => {
 };
 
 transaction('order', product);
+
+// OUTPUT
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/playground (main)
+// $ node 5-es6-objects.js
+// { name: 'Andrew', age: 27, location: 'Philadelphia' }
+// order Red notebook 201

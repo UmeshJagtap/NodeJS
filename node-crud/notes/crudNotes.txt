@@ -1,0 +1,135 @@
+Create folder node-crud
+$ cd node-crud
+$ npm init -y
+package.json will be created..
+Wrote to C:\Users\ZUK\Documents\GitHub\NodeJS\node-crud\package.json:
+{
+  "name": "crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test 
+specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+Check and run basic program
+// console.log('Hello there');
+ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/node-crud (main)$ node index.js
+Hello there
+
+Add below to package.json for _npm run --_ command
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "serve": "node index.js"
+},
+to run the app $npm run serve
+
+Install express
+$ npm i express
+
+Check dependencies in package.json
+"dependencies": {
+  "express": "^4.19.2"
+},
+"devDependencies": {
+  "nodemon": "^3.1.0"
+}
+
+Every time if we make changes, we need to restat server..!!
+So nodemon can help
+$ npm i nodemon -D
+add below to package.json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "serve": "node index.js",
+  "dev": "nodemon index.js"
+},
+
+Check dependencies in package.json
+"devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+
+Using nodemon
+$ npm run dev
+
+> crud@1.0.0 dev  
+> nodemon index.js
+
+[nodemon] 3.1.0
+[nodemon] to restart at any time, enter `rs`  
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node index.js`
+Server is up and running on port 3000
+
+Heading to MongoDB Atlas  -----------
+Google OAuth SignIn
+Add current IP
+New Project >> NodeAPI 
+Create new Project
+
+Create a cluster > Deploy your cluster > MO Free
+Name > backendDB
+Provider > aws
+Region > Mumbai (ap-south-1)
+
+Copy username and password
+
+Add IP Access List Entry
+Access List Entry: 0.0.0.0/0
+Comment: Allow from anywhere
+
+Overview > 
+Connect to backendDB
+$ npm install mongodb
+Add your connection string into your application code
+mongodb+srv://umeshjagtap7866:<password>@backenddb.al5xeiy.mongodb.net/?retryWrites=true&w=majority&appName=backendDB
+
+-----------
+
+Install Mongoose
+https://www.npmjs.com/package/mongoose
+$ npm i mongoose
+
+POSTMAN
+GET http://localhost:3000/  [SEND]
+
+GET http://localhost:3000/api/product/6647980c349ffe3aea4764fd [SEND]
+{
+    "_id": "6647980c349ffe3aea4764fd",
+    "name": "cake",
+    "quantity": 5,
+    "price": 6.99,
+    "createdAt": "2024-05-17T17:46:52.467Z",
+    "updatedAt": "2024-05-17T17:46:52.467Z",
+    "__v": 0
+}
+
+POST http://localhost:3000/api/products  [SEND]
+Body > raw > JSON
+{
+    "name": "Coading clerverly",
+    "value": 123
+}
+
+PUT http://localhost:3000/api/product/66472b41bf8da8f6daec70fd [SEND]
+{
+    "_id": "66472b41bf8da8f6daec70fd",
+    "name": "UPDATED PIZZA",
+    "quantity": 10,
+    "price": 7.99,
+    "createdAt": "2024-05-17T10:02:41.177Z",
+    "updatedAt": "2024-05-23T13:12:40.115Z",
+    "__v": 0
+}
+
+DELETE http://localhost:3000/api/product/664f4d7c60fa58db0c6b37f9 [SEND]
+{
+    "message": "Product deleted successfully"
+}

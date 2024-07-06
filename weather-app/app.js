@@ -395,3 +395,14 @@ if (!address) {
     });
   });
 }
+
+// INFO:
+// geocode(address >> lat, long);         --->  (https://www.mapbox.com/  ( Needs CC ))
+// forecast(lat, long >> weatherData);    --->  (https://weatherstack.com ( Needs CC ))
+
+// INFO
+// https://www.mapbox.com/  ( Needs CC )
+// https://weatherstack.com/signup/free ( Needs CC )
+
+// Alternate API :-
+// https://api.openweathermap.org/data/2.5/weather?lat=30&lon=-20&appid=738a4a05515ef80b5a910354f66a63c

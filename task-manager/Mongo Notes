@@ -33,7 +33,8 @@ $ npm i mongodb@3.1.10
 
 >> task-manager >> mongodb.js
 
-
+robo 3t -Mongo Admin Tool -GUI
+https://studio3t.com/download/   -tool like Postman to check on API
 
 // Inserting Documents
 // Querying Documents

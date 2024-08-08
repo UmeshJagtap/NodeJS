@@ -10,10 +10,46 @@ const app = express();
 
 app.use(express.json());
 
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*'); //LINE 5
+
+  // Request methods you wish to allow
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  );
+
+  // Request headers you wish to allow
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With,content-type'
+  );
+  //ALLOW MULTIPLE ORIGINS
+  const allowedOrigins = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+    'http://127.0.0.1:5000',
+    'http://localhost:5000',
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
+
 app.get('/api/products', async (req, res) => {
   // console.log('Hello from Node API');
   // res.send('<h1>Hello from Node API Server Updated !</h1>');
   // res.send('<h1>Products :-</h1>');
+
   try {
     const products = await Product.find({});
     res.status(200).json(products);
@@ -90,3 +126,16 @@ mongoose
   .catch(() => {
     console.log('Connection Failed!');
   });
+
+// .
+// .
+// .
+// .
+// .
+// .
+
+// To get products >> http://localhost:3000/api/products
+
+// Solving CORS issue >> https://medium.com/@fdikmen/node-js-error-has-been-blocked-by-cors-policy-187f6ef1aeeb
+
+// .env file setup >> https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786

@@ -34,3 +34,5 @@
 
 Backend Ref :
 1. https://github.com/hiteshchoudhary/fastify-crash-course/blob/main/src/controllers/courseController.js 
+
+2. How to Configure a Pub/Sub Modal Using RabbitMQ in Node.js from Scratch to Hero | Code with Ayaanhttps: -https://www.youtube.com/watch?v=V1rHy1pMjns

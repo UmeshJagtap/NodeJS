@@ -13,18 +13,17 @@ async function checkWeather() {
   // data.message ? console.log(data.message) : ''
   // console.log(data.message);
   // console.log(data?.message);
-  
+
   // console.log(data);
-  
+
   const showData = () => {
     console.log(`Location : ${data.name}`);
     console.log(`Coordinates : Lat ${data.coord.lon}  Lon ${data.coord.lat}`);
     console.log(`Temperature : ${data.main.temp}`);
-    console.log(`Wind Speed ${data.wind.speed}`); 
-  }
+    console.log(`Wind Speed ${data.wind.speed}`);
+  };
 
   data.message ? console.log(data.message) : showData();
-
 }
 checkWeather();
 

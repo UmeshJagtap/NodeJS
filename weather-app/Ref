@@ -5,7 +5,7 @@ Async method can help in Database related requests,
 where we can request 60 or multiple DB req.. still doing other things
 
 npm init -y --->> creates package.json
-npm
+npm i express
 
 https://www.worldweatheronline.com/weather-api/signup.aspx
 https://www.npmjs.com/package/postman-request

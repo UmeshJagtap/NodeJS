@@ -1,8 +1,11 @@
 // React
 // https://github.com/academind/react-complete-guide-course-resources/tree/main/attachments
 
-// Aceternity UI
-// https://ui.aceternity.com/components/meteors
+//
+//
+// !!!!!! -----  THIS IS JUST FOR REFERENCE , CODE IS NOT TESTED  ----- !!!!!
+//
+//
 
 // Hello Express
 // https://expressjs.com/

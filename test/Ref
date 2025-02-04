@@ -1,6 +1,7 @@
 Terminal :-
- - ( https://learn.mongodb.com/learn/course/connecting-to-mongodb-in-nodejs/lesson-2-connecting-to-an-atlas-cluster-in-nodejs-applications/learn )
- 
+
+- ( https://learn.mongodb.com/learn/course/connecting-to-mongodb-in-nodejs/lesson-2-connecting-to-an-atlas-cluster-in-nodejs-applications/learn )
+
 mkdir test
 cd test
 npm init -y

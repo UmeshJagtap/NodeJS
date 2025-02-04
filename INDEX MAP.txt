@@ -29,7 +29,7 @@
     callback functions
 
 (*) web-server
-    templates
+    templates  --just for ref, code not tested yet !!
 
 
 Backend Ref :

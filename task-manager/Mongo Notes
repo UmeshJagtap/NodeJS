@@ -1,11 +1,6 @@
-
 MongoDB and Promises (Task App)
 
 $ nodemon src/app.js -e js, hbs // Will restart server incase js, hbs changes..
-
-Amazon e-voucher Rs.500/-
-Voucher Code:
-5QRD-FRJUYQ-NF67
 
 // NODE js
 
@@ -13,11 +8,11 @@ Voucher Code:
 https://www.mongodb.com/
 
 SQL (Structured Query Language)
-Table   RowRecord   Coloumns
-id  name  email password
+Table RowRecord Coloumns
+id name email password
 
 NoSQL (Not Only SQL)
-Collection    Document    Fields
+Collection Document Fields
 [{"id": "13poijadf", "name": "Andrew"}, { ... }, ..]
 
 // Connecting and Inserting Documents
@@ -25,20 +20,19 @@ Collection    Document    Fields
 https://www.npmjs.com/package/mongodb
 https://mongodb.github.io/node-mongodb-native/6.5/
 
->> task-manager  
-       
+> > task-manager
+
 Open 2nd Terminal :-
 $ cd task-manager
 $ npm init -y
 $ npm i mongodb@3.1.10
 
->> task-manager >> mongodb.js
+> > task-manager >> mongodb.js
 
 robo 3t -Mongo Admin Tool -GUI
-https://studio3t.com/download/   -tool like Postman to check on API
+https://studio3t.com/download/ -tool like Postman to check on API
 
 // Inserting Documents
 // Querying Documents
 // Updating Documents
 // Deleting Documents
-

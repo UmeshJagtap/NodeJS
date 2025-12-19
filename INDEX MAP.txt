@@ -1,5 +1,7 @@
 (*) node-crud
     -Basic CRUD operations + CORS handling
+    -product api --index.js
+    -feedback api --index2.js
 
 (*) node-udemy
     -Listdown Processes
@@ -32,8 +34,14 @@
     templates  --just for ref, code not tested yet !!
 
 
+[Backend Project 🚀] Realtime Device track | Map with node.js express and socket.io | Maps | Leaflet
+>> https://www.youtube.com/watch?v=JmpDGMgRFfo
+
 Backend Ref :
 1. https://github.com/hiteshchoudhary/fastify-crash-course/blob/main/src/controllers/courseController.js 
    https://github.com/hiteshchoudhary/chai-backend
 
 2. How to Configure a Pub/Sub Modal Using RabbitMQ in Node.js from Scratch to Hero | Code with Ayaanhttps: -https://www.youtube.com/watch?v=V1rHy1pMjns
+
+
+Alex Rusin >> Node.js Express Server Tutorial (2026) | From Zero to API >> https://www.youtube.com/watch?v=UYGLAyHA4pw

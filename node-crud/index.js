@@ -6,7 +6,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('./models/product.model.js');
 const app = express();
-// const port = process.env.PORT || 3000;
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+const port = process.env.PORT || 3000;
+const mongodb_url = process.env.MONGODB_URL;
 
 app.use(express.json());
 
@@ -114,13 +119,11 @@ app.delete('/api/product/:id', async (req, res) => {
 });
 
 mongoose
-  .connect(
-    'mongodb+srv://umeshjagtap7866:UW3v2tk4Gtp3P1bz@backenddb.al5xeiy.mongodb.net/?retryWrites=true&w=majority&appName=backendDB'
-  )
+  .connect(mongodb_url)
   .then(() => {
     console.log('Connected to database!');
-    app.listen(3000, () => {
-      console.log('Server is up and running on port ' + 3000);
+    app.listen(port, () => {
+      console.log('Server is up and running on port ' + port);
     });
   })
   .catch(() => {
@@ -139,3 +142,4 @@ mongoose
 // Solving CORS issue >> https://medium.com/@fdikmen/node-js-error-has-been-blocked-by-cors-policy-187f6ef1aeeb
 
 // .env file setup >> https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786
+// PORT=8626 node index.js   >> running without .env file

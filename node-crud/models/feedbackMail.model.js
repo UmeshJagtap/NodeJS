@@ -1,11 +1,12 @@
 //
 // Creating mongoose model for feedbackMail from a website :)
-// -Dev in prog.., -Not yet tested !!
+// -Dev in prog... ,
 
 const mongoose = require('mongoose');
 
 const FeedbackSchema = mongoose.Schema(
   {
+    // Adding persons mail
     name: {
       type: String,
       required: [true, 'Please enter your Full Name'],
@@ -13,10 +14,11 @@ const FeedbackSchema = mongoose.Schema(
 
     // Adding email of the person giving feedback
     email: {
-      type: Email,
+      type: String,
       required: [true, 'Please enter your Email'],
     },
 
+    // Adding feedback
     feedback: {
       type: String,
       required: [true, 'Please share your Feedback here'],
@@ -45,6 +47,6 @@ const FeedbackSchema = mongoose.Schema(
   }
 );
 
-const Product = mongoose.model('Product', ProductSchema);
+const FeedbackMail = mongoose.model('FeedbackMail', FeedbackSchema);
 
-module.exports = Product;
+module.exports = FeedbackMail;

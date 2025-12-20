@@ -24,7 +24,7 @@
     mongoose
 
 (*) test
-    MongoDB connectivity
+    MongoDB connectivity, (output tested)
 
 (*) weather-app
     API ( forecast n geocode )  

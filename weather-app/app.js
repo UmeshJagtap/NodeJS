@@ -404,5 +404,5 @@ if (!address) {
 // https://www.mapbox.com/  ( Needs CC )
 // https://weatherstack.com/signup/free ( Needs CC )
 
-// Alternate API :-
-// https://api.openweathermap.org/data/2.5/weather?lat=30&lon=-20&appid=738a4a05515ef80b5a910354f66a63c
+// Alternate API :- (refer tryWeather.js)
+// https://api.openweathermap.org/data/2.5/weather?lat=30&lon=-20&appid=738a4a05515ef80b5a910354f66a63c (OK)

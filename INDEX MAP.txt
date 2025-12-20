@@ -45,3 +45,18 @@ Backend Ref :
 
 
 Alex Rusin >> Node.js Express Server Tutorial (2026) | From Zero to API >> https://www.youtube.com/watch?v=UYGLAyHA4pw
+
+
+
+
+
+
+//-------------------------------------------------------------- Node/Express Theory
+
+The full form of EJS is Embedded JavaScript. 
+EJS is a popular template engine used with server-side JavaScript environments, primarily Node.js and the Express.js framework. 
+Key Details
+Purpose: EJS allows developers to embed plain JavaScript code directly within HTML templates to generate dynamic web page content on the server side.
+Functionality: The server processes the EJS file, replaces the special tags (like <%= %> and <% %>) with actual data, and then sends the final, complete HTML to the client's browser.
+File Extension: EJS template files are saved with the .ejs extension.
+Simplicity: It is known for its simple syntax, which makes it easy for developers familiar with traditional server-side languages (like PHP) to use. 

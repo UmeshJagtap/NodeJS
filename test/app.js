@@ -28,3 +28,8 @@ const main = async () => {
 
 // Run the main function
 main();
+
+// Output
+// ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/test (main)
+// $ node app.js
+// Connected to the bank database (0)

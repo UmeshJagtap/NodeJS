@@ -406,3 +406,48 @@ if (!address) {
 
 // Alternate API :- (refer tryWeather.js)
 // https://api.openweathermap.org/data/2.5/weather?lat=30&lon=-20&appid=738a4a05515ef80b5a910354f66a63c (OK)
+
+// Alternate API Response
+// {
+//   "coord": {
+//     "lon": -20,
+//     "lat": 30
+//   },
+//   "weather": [
+//     {
+//       "id": 804,
+//       "main": "Clouds",
+//       "description": "overcast clouds",
+//       "icon": "04d"
+//     }
+//   ],
+//   "base": "stations",
+//   "main": {
+//     "temp": 291.68,
+//     "feels_like": 291.16,
+//     "temp_min": 291.68,
+//     "temp_max": 291.68,
+//     "pressure": 1025,
+//     "humidity": 60,
+//     "sea_level": 1025,
+//     "grnd_level": 1025
+//   },
+//   "visibility": 10000,
+//   "wind": {
+//     "speed": 8.15,
+//     "deg": 33,
+//     "gust": 8.4
+//   },
+//   "clouds": {
+//     "all": 99
+//   },
+//   "dt": 1766239321,
+//   "sys": {
+//     "sunrise": 1766218278,
+//     "sunset": 1766255039
+//   },
+//   "timezone": -3600,
+//   "id": 0,
+//   "name": "",
+//   "cod": 200
+// }

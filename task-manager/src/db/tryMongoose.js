@@ -15,6 +15,7 @@
 // task-manager$ npm i mongoose@5.3.10
 
 const mongoose = require('mongoose');
+// import { connect, model } from 'mongoose';
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
   useNewUrlParser: true,

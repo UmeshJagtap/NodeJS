@@ -1,0 +1,17 @@
+
+WebSocket in NodeJS | Socket.IO - Real Time Messaging
+>> https://www.youtube.com/watch?v=UUddpbgPEJM&list=PLinedj3B30sDby4Al-i13hQJGQoRQDfPo&index=33
+
+Installation Commands :-
+$ npm init
+$ npm install express
+$ npm install socket.io
+$ npm install -g nodemon
+
+added "scripts": { "start": "nodemon index.js",
+to package.json
+
+--- TO RUN APP ---
+$ npm start
+
+// 21:00

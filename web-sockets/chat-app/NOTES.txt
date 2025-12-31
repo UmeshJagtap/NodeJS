@@ -20,3 +20,6 @@ to debug/check message : Inspect > Network > WB/Socket > Messages
 Implement the chat app from the docs...
 https://socket.io/docs/v4/tutorial/introduction
 implementing this under "socket-chat-example"
+
+https://github.com/piyushgarg-dev/piyushgargdev-nextjs
+https://www.piyushgarg.dev/

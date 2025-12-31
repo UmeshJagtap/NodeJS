@@ -15,7 +15,10 @@ const io = new Server(server);
 // Socket.io
 io.on('connection', (socket) => {
   console.log('A new user has connected', socket.id);
-  socket.emit('hello', 'world');
+  socket.on('user-message', (message) => {
+    console.log('A new User Message : ', message);
+    io.emit('server_message', message);
+  });
 });
 
 app.use(express.static(path.resolve('./public')));

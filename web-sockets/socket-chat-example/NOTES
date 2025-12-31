@@ -1,0 +1,17 @@
+//
+// socket-chat-example
+//
+
+https://socket.io/docs/v4/tutorial/step-1
+
+npm install express
+npm install socket.io
+
+http://localhost:3000
+
+// Project initialization
+// Serving HTML
+// Integrating Socket.IO
+// Emitting events
+// Broadcasting
+// Overview of the API

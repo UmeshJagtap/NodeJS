@@ -61,7 +61,9 @@ WebSocket in NodeJS | Socket.IO - Real Time Messaging >> https://www.youtube.com
 NodeJS Streams >> https://www.youtube.com/watch?v=64LJJhT6Ybo&list=PLinedj3B30sDby4Al-i13hQJGQoRQDfPo&index=34
 
 
+WDS >> Learn Socket.io In 30 Minutes >> https://www.youtube.com/watch?v=ZKEqqIO7n-k
 
+Automate Node.js Deployment to AWS EC2 | GitHub Actions CI/CD Tutorial >> https://www.youtube.com/watch?v=bLh79eCbnCs
 
 //-------------------------------------------------------------- Node/Express Theory
 

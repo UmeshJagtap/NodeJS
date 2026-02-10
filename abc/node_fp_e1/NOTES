@@ -1,0 +1,18 @@
+INDEX :-
+1. Function n Objects
+    app.js
+    fizzbuzz
+    palindrome
+    
+2. 
+
+ZUK@DESKTOP-0M6F0IP MINGW64 ~/Documents/GitHub/NodeJS/abc/node_fp_e1/functionsNObjects (main)
+$ npm ls
+ZUK@ C:\Users\ZUK
+├── @mui/icons-material@7.3.4
+├── @radix-ui/react-dialog@1.0.5
+├── @types/node@20.12.12
+├── axios@1.7.2
+├── bcryptjs@2.4.3
+├── express@4.21.2
+└── mongoose@8.4.4

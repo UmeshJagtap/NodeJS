@@ -37,6 +37,7 @@ function isPalindrome(str) {
 
 console.log(isPalindrome('madam'));
 console.log(isPalindrome('madaam'));
+
 // palindrome with array  ---------------------<<
 
 // function isPalindrome(str) {

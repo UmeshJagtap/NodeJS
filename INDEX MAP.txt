@@ -74,3 +74,7 @@ Purpose: EJS allows developers to embed plain JavaScript code directly within HT
 Functionality: The server processes the EJS file, replaces the special tags (like <%= %> and <% %>) with actual data, and then sends the final, complete HTML to the client's browser.
 File Extension: EJS template files are saved with the .ejs extension.
 Simplicity: It is known for its simple syntax, which makes it easy for developers familiar with traditional server-side languages (like PHP) to use. 
+
+
+Advanced Backend Project | Learn Bank Transaction System with Node.js, Express & MongoDB
+https://www.youtube.com/watch?v=NQOAQP0mow0

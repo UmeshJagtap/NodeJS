@@ -7,8 +7,8 @@
 //
 
 // const fs = require('fs');
+import fs from 'fs/promises';
 
-/*
 fs.writeFile('test.txt', 'hello world', (err) => {
   if (err) {
     console.log('error', err);
@@ -16,9 +16,7 @@ fs.writeFile('test.txt', 'hello world', (err) => {
     console.log('file created');
   }
 });
-*/
 
-/*
 async function readFileFirst() {
   try {
     const test = await fs.readFile('test.txt');
@@ -29,7 +27,10 @@ async function readFileFirst() {
 }
 
 readFileFirst();
-*/
+
+// -------------------------- OUTPUT
+// $ node filesystem.js
+// <Buffer 68 65 6c 6c 6f 20 77 6f 72 6c 64>
 
 // -------------------------------------------------------------------------------
 

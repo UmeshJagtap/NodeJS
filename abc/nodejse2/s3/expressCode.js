@@ -27,7 +27,7 @@ let tasks = [
     createdAt: new Date().toISOString(),
   },
 ];
-let nextID = 3;
+let nextId = 3;
 
 // --- Helpers ---
 const findTask = (id) => tasks.find((t) => t.id === Number(id));
@@ -84,6 +84,30 @@ app.patch('/tasks/:id', (req, res) => {
 });
 
 // 15:14
+
+app.listen(PORT, () => {
+  console.log('Server is up on port ' + PORT);
+});
+
+// ------------ RUN
+// node expressCode.js
+
+// ------------ OUTPUT
+// http://localhost:3000/tasks
+// [
+//   {
+//     "id": 1,
+//     "title": "Prepare demo",
+//     "status": "pending",
+//     "createdAt": "2026-02-21T21:35:38.457Z"
+//   },
+//   {
+//     "id": 2,
+//     "title": "Go live",
+//     "status": "in-progress",
+//     "createdAt": "2026-02-21T21:35:38.457Z"
+//   }
+// ]
 
 // ---------------------------------------------------------------------
 

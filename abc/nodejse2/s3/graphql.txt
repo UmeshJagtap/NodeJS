@@ -1,0 +1,38 @@
+What is GraphQL
+> GraphQL is a query language and runtime for APIs that allows client to request exactly the data they need --nothing ore, nothing less.
+> Created by Facebook in 2012 (open sourced in 2015), GrphQL solves ineffiencies commonly 
+
+
+query -it will fetch the data
+mutation - crud operation
+subscription -real time updates
+
+apollo server
+express-graphql
+graphql packages
+
+
+client /frontend sends query
+graphql validate
+calls resolver function
+fetch the data from database
+return json response
+
+POST /graphql
+
+
+Benefits of GraphQL
+> Ask for what you need 
+> One endpoint for everything
+> Strong typing -> safer API's, strongly-typed schemas: Self-documenting API, IDE autocompletion and validation.
+> Perfect for UI-driven development - Great for UI composition and mobile bandwidth constraints.
+> Fewer backend requests
+> Easy API evolution (no versions)
+> Excellent tooling ecosystem - GraphQL/Apollo Sandbox, codgen for TS/JS, schema registries.  
+
+Limitations of GraphQL
+> Harder caching than REST, Because every request is dynamic 
+> Can cause N+1 performance problems -Solve via DataLoader (batch DB calls)
+> More complex server logic 
+> Not always necessary - For simple CRUD microservices, REST may be easier.
+> Learning curve for teams used to REST

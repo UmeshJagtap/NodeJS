@@ -78,3 +78,7 @@ Simplicity: It is known for its simple syntax, which makes it easy for developer
 
 Advanced Backend Project | Learn Bank Transaction System with Node.js, Express & MongoDB
 https://www.youtube.com/watch?v=NQOAQP0mow0
+
+
+CRUD App with Next.js 16 and tRPC
+https://www.youtube.com/watch?v=DcAj1e4Jeis

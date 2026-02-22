@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "task": "Implement a simple command-line todo list application in Node.js. ",
+    "done": false
+  },
+  {
+    "task": "Hello world!",
+    "done": false
+  },
+  {
+    "task": "Learn Node.js, make projects",
+    "done": false
+  }
+]

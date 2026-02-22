@@ -22,18 +22,18 @@ const saveTasks = (tasks) => {
 };
 
 const showMenu = () => {
-  console.log('\nTodo List Application');
+  console.log('\n===== Todo List =====');
   console.log('1. Add Tasks');
   console.log('2. View Task');
   console.log('3. Remove Task');
   console.log('4. Exit');
-  console.log('Enter your choice:');
-  //   rl.prompt();
+  // console.log('Enter your choice:');
+  // rl.prompt();
   rl.question('Enter your choice: ', handleMenu);
 };
 
-const handleMenu = (choice) => {
-  switch (choice) {
+function handleMenu(option) {
+  switch (option) {
     case '1': {
       rl.question('Enter Task:', (task) => {
         const tasks = loadTasks();
@@ -50,10 +50,10 @@ const handleMenu = (choice) => {
       if (tasks.length === 0) {
         console.log('No tasks found.');
       } else {
-        console.log('Tasks:');
+        console.log('\n --- Tasks ---');
         tasks.forEach((task, index) => {
           console.log(
-            `${index + 1}. ${task.task} - ${task.done ? 'Done' : 'Not Done'}`
+            `|  ${index + 1}. ${task.task} - ${task.done ? 'Done' : 'Not Done'}`
           );
         });
       }
@@ -77,10 +77,17 @@ const handleMenu = (choice) => {
       break;
     }
 
+    case '4': {
+      rl.close();
+      break;
+    }
+
     default: {
       console.log('Invalid choice. Please try again.');
       showMenu();
       break;
     }
   }
-};
+}
+
+showMenu();

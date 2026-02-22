@@ -2,6 +2,7 @@
 
 // const apiKey = '863242cfb2b1d357e6093d9a4df19a4b';
 const apiKey = '738a4a05515ef80b5a910354f66a63c';
+// 6
 const city = 'pune';
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}`;
 // const apiUrl =

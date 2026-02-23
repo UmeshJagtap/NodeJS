@@ -118,3 +118,6 @@ app.listen(3000);
     </ul>
   </body>
 </html>
+
+Explore here :-
+EJS >> https://www.geeksforgeeks.org/node-js/ejs-abbreviations-full-forms-meanings-and-definitions/

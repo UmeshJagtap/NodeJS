@@ -1,0 +1,120 @@
+What is Template Engine, Why it is used?
+  > Template Engine is a tool that allows you to generate HTML dynamically by combining Static Markup (HTML) & Dynamic Data (arrays, objects).
+
+Why it is used?
+ > You want to serve dynamic content (e.g., user profiles, product lists).
+ > You want to separate business logic from UI.
+ > You don't want to manually concatenate strings to create HTML.
+
+
+Popular Template Engines :-
+
+----------------------------------------------------------------------------
+Template Engine   | Syntax Style       | Known For
+----------------------------------------------------------------------------
+EJS               | JS-like <%= %>     | Simple and very popular
+Pug (Jade)        | Indentation-based  | Minimalistic syntax
+Handlebars        | {{ }}              | Logic-less templating
+Mustache          | {{ }}              | Lightweight, logic-less
+----------------------------------------------------------------------------
+
+
+Benefits of Template Engine
+  • Separation of Concerns (SoC)
+    - Keeps HTML separate from backend logic, improving project structure.
+  • Faster Development
+    - Simplifies dynamic content generation.
+  • Easy to Learn & Use
+    - Most engines are beginner-friendly.
+  • Reusability
+    - Supports Layouts, Partials (header/footer), Components.
+  • Cleaner Code
+    - Avoid messy string concatenation in JavaScript.
+
+Limitation of Template Engine
+  • Not ideal for rich, interactive front-end apps
+    - Modern apps often use React, Vue, Angular instead.
+  • Server-Side Rendering Only (mostly)
+    - Each page load requires a round trip to the server.
+  • Learning Curve
+    - Each engine has its own syntax (e.g., indentation rules).
+  • Harder to maintain for Very Large UIs
+    - Frontend frameworks handle complexity better.
+
+
+npm install express ejs
+
+browser request -> express routes ->
+res.sender() -> ejs engine
+html
+browser
+
+project
+  index.js
+  package,json
+  views/
+    index.ejs
+    emp.ejs
+      partials/
+
+//----------------------------------------------  EJS
+
+<html>
+  <h1>Hello world</h1>
+</html>
+
+<h1>Hello <% empname %></h1>
+
+//---------------------------------------------
+
+// fshksj.js
+const express require ('express');
+const app = express();
+
+app.set('view engine', 'ejs');
+
+app.get('/hello', (req, res) => {
+  res.render("index', { name:'Rohan' });
+})
+
+// abc.ejs
+<DOCTYPE html>
+<html>
+  <title>Hello World</title>
+  <body>
+    Welcome <%= name %>
+  </body>
+</html>
+
+//-------------------------------------------------
+
+// fshksj.js
+const express require ('express');
+const app = express();
+
+app.set('view engine', 'ejs');
+
+app.get('/hello', (req, res) => {
+  res.render("index', { name:'Rohan' });
+})
+
+app.get('/emps', (req, res) => {
+  const emps = ['rohan', 'mayur', 'prashant']
+  res.render("emps", {emps});
+})
+
+app.listen(3000);
+
+// abc.ejs
+<DOCTYPE html>
+<html>
+  <title>Hello World</title>
+  <body>
+    Welcome <%= name %>
+    <ul>
+      <% emps.forEach(emp => { %>
+        <li><% emp %>></li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

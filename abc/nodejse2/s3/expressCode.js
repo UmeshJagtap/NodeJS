@@ -81,12 +81,53 @@ app.post('/task', (req, res) => {
 app.patch('/tasks/:id', (req, res) => {
   const task = findTask(req.params.id);
   if (!task) return res.status(404).json({ error: 'NotFound' });
+
+  const { title, status } = req.body || {};
+  if (title != undefined) {
+    if (!title || typeof title !== 'string') {
+      return res
+        .status(400)
+        .json({ error: 'BadRequest', message: 'Title must be string' });
+    }
+    task.title = title;
+  }
+
+  if (status != undefined) {
+    if (!['pending', 'in-progress', 'done'].includes(status)) {
+      return res
+        .status(400)
+        .json({ error: 'BadRequest', message: 'Invalid status' });
+    }
+    task.status = status;
+  }
+  res.json(task);
 });
 
-// 15:14
+// Delete Task
+app.delete('/task/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const before = tasks.length;
+  tasks = tasks.filter((t) => t.id !== id);
+  if (tasks.length === before)
+    return res.status(404).json({ error: 'NotFound' });
+  res.status(204).send();
+});
 
+// 404 fallback
+app.use((req, res) => res.status(404).json({ error: 'RouteNotFound' }));
+
+// Global error handler
+// (any thrown errors will be caught here if next(err) is used)
+app.use((err, req, res, next) => {
+  console.log('Unhandled error', err);
+  res.status(500).json({ error: 'InternalServerError' });
+});
+
+// Start server
 app.listen(PORT, () => {
   console.log('Server is up on port ' + PORT);
+  console.log(`API running at http://localhost:${PORT}`);
+  console.log(`Try: curl http://localhost:${PORT}/tasks`);
 });
 
 // ------------ RUN

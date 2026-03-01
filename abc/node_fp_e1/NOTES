@@ -1,10 +1,28 @@
 INDEX :-
-1. Function n Objects
+1. nodejs_introduction
+    intro.txt
+    
+2. functions_n_objects
     app.js
+    async.js
     fizzbuzz
     palindrome
+    z_notes.js
     
-2. 
+3. modules_n_events
+    Modules
+        app.js
+        atheletics.js
+        modules.js 
+    Http Module
+        app.js
+    fs module
+        app.js
+    Events
+
+4. streams_n_pipes
+
+
 
 Refs :-
 https://stackblitz.com/edit/node-cm3puhkv?file=fno%2Fasyncjs.js  T.S

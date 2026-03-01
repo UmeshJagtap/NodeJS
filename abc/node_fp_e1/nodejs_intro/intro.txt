@@ -1,0 +1,47 @@
+//-------------------------------------- Node.js
+
+// Introduction to Node.js
+// Let us get started with one of the important server-side scripting languages Node.js
+
+// Intro and overview
+
+// Installing Node.js
+
+// Node.js Usage
+// Node.js shines in real-time web applications employing push technology over web sockets. It can be used for the following purposes:
+
+//   Web applications (especially real-time web apps)
+//   Network applications
+//   Distributed systems
+//   General purpose applications
+
+// Advantage of using node.js
+//   Provides an easy way to build scalable network programs
+//   Easy to install and run locally
+//   Generally fast
+//   Great concurrency
+//   Asynchronous everything
+//   Almost never blocks
+//   Unified programming language and data type
+
+// REPL
+// REPL stands for Read Eval Print Loop and it represents a computer environment like a Windows console or Unix/Linux shell where a command is entered and the system responds with an output in an interactive mode.
+
+// Read − Reads user's input, parses the input into JavaScript data-structure, and stores in memory.
+// Eval − Takes and evaluates the data structure.
+// Print − Prints the result.
+// Loop − Loops the above command until the user presses ctrl-c twice
+
+// REPL Commands
+// Ctrl + c − terminate the current command.
+// Ctrl + c twice − terminate the Node REPL.
+// Ctrl + d − terminate the Node REPL.
+// Up/Down Keys − see command history and modify previous commands.
+// Tab Keys − list of current commands.
+// .help − list of all commands.
+// .break − exit from multiline expression.
+// .clear − exit from multiline expression.
+// .save filename − save the current Node REPL session to a file.
+// .load filename − load file content in current Node REPL session.
+
+// Node.js Intro Quiz

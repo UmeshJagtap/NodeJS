@@ -64,12 +64,19 @@ console.log(__filename);
 
 // Callback Functions
 
-// Callback function is used in Node.js to deal with multiple requests made to the server. If a server takes a long time to read a large file and if you don’t want a server to get engaged in reading that large file while dealing with other requests, the call back function is used. The Call back function allows the server to deal with the pending requests first and call a function when it is completed.
+// Callback function is used in Node.js to deal with multiple requests made to the server.
+// If a server takes a long time to read a large file and if you don’t want a server
+// to get engaged in reading that large file while dealing with other requests, the call back function is used.
+// The Call back function allows the server to deal with the pending requests first and call a function when it is completed.
 
 // Callback Functions
 
 // Package delivery example
 // Restaurent [ Customer <> Server <> Chef ]
+
+// Customer1 \
+// Customer1 --> Server --> Database
+// Customer1 /
 
 // Example 1
 
@@ -100,9 +107,5 @@ function callback() {
   console.log('Queried the database and delivered data in 5 seconds');
 }
 
-// So, callback function is another function that can be usually passed as an argument to another function, it is ivoked after some time of the event.
-
-//-------------------------------------- Modules
-//
-// Modules
-//
+// So, callback function is another function that can be usually passed as an argument to another function,
+// it is invoked after some time of the event.

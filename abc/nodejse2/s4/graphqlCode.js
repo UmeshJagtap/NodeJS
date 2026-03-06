@@ -1,4 +1,4 @@
-// npm init -yield
+// npm init -y
 // npm install express graphql express-graphql
 
 // graphql
@@ -10,9 +10,16 @@
 // -> return
 
 const express = require('express');
-const graphqlHTTP = require('graphql-express');
+// const graphqlHTTP = require('express-graphql');
+const { graphqlHTTP } = require('express-graphql');
 
-const { GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql');
+const {
+  GraphQLID,
+  GraphQLSchema,
+  GraphQLObjectType,
+  GraphQLString,
+} = require('graphql');
+// import { GraphQLID, GraphQLObjectType, GraphQLString } from 'graphql';
 
 const app = express();
 

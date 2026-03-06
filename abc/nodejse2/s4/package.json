@@ -1,0 +1,19 @@
+{
+  "name": "s4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "graphqlCode.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "express": "^5.2.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.13.1"
+  }
+}

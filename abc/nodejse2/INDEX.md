@@ -30,3 +30,11 @@
 - templateEngine EJS
 
 ## Session 5
+
+auth
+
+## Session 6
+
+socket io
+
+## Session 7

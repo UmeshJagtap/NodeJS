@@ -34,8 +34,9 @@ Benefits of Rest API
 
 Limitation of Rest API
 > CPU-bound work: Node's single threaded event loop isn't ideal for heavy CPU tasks (use workers, queues or seprate services)
-> Callback
-// 19:45
+> Callback legacy: Some libraries still have akward async patterns (mitigated by async/await).
+> Type saftey: TypeScript helps, but requires discipline
+> Performance vs Go/Rust: For ultra-low latency or compute-heavy API's, other runtimes might edge out Node.
 
 
 Restrictions of Rest API

@@ -1,0 +1,63 @@
+// Our Flow
+client > host application - 3000 --> emp service 3002  --> response --> host --> client
+
+// Production Flow
+client 
+api gateway
+loadbalancer
+--emp service
+payment service
+
+graphana -monitoring
+pm2 -
+
+// Microservices
+// npm install express axios --save
+
+// index.js
+ const express = require('express');
+const axios = require('axios');
+const app = express();
+
+app.get("emp-details/:id", async (req, res) => {
+
+try {
+	const response = await axios.get('https://localhost:3002/emp/${req.params.id}');
+
+	res.json({message: "data getting from remote", emp:response.data});
+} catch (err) {
+	res.status(500).json({ message: "microservices example"})
+}
+});
+
+app.listen(3000, () => {
+	console.log("server host running on 3000");
+});
+
+// Running above app
+$ node index.js
+localhost:3000/emp-details/1
+{ message: "microservices example"}
+
+//index2.js
+const express = require('express');
+const apps = express();
+
+const emps = [
+	{id:1, name:'rohan'},
+	{id:2, name:'rohan2'},
+	{id:3, name:'rohan3'},
+];
+
+app.get("/emp/:id, (req, res) => {
+	const emp = emps.find(e => e.id ===  req.params.id);
+
+	if(!emp){
+		return res.status(404).json({message:"emp not found"})
+	}
+	res.json(emp);
+});
+
+app.listen(3002, () => {
+	console.log('server running on 3002')
+})

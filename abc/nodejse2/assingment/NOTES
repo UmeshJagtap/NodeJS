@@ -1,7 +1,7 @@
-Assignment :  -- +v+--
+Assignment : -- +v+--
 CRUD
 EJS
-Name 
+Name
 User Image
 Email ID
 Password
@@ -16,3 +16,5 @@ CSS for better UI/UX
 3. Create User
 4. Edit User
 5. Delete User
+
+http://localhost:3000/users

@@ -1,0 +1,21 @@
+EDITED ON DADUS Chrome
+
+BASIC NODE : https://stackblitz.com/edit/node?file=index.js,package.json
+AUTH Ref : https://stackblitz.com/edit/node-8hwxjzhl?file=nodejse2%2Fs5%2Fauthjs
+
+
+ASSIGNMENT :-
+npm install express dotenv jsonwebtoken bcryptjs nodemon
+nodemon index.js
+
+Trying MySQL :-
+
+1. Install Required Software
+node -v
+npm -v
+mysql --version
+
+npm install --save mysql2
+
+// docs : https://sidorares.github.io/node-mysql2/docs
+

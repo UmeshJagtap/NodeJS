@@ -18,3 +18,9 @@ CSS for better UI/UX
 5. Delete User
 
 http://localhost:3000/users
+
+//
+Random Stuff in Node -------- +++_=_+++
+//
+const password = req.body.password.slice(0,30) (....)
+zxcvbn() --lib to check pass strength --heavy cpu intensive lib, if pass is long

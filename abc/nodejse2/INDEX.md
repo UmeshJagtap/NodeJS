@@ -38,3 +38,12 @@ auth
 socket io
 
 ## Session 7
+
+microservices
+[ micro.js ]
+[ index.js ]
+
+## Assignment
+
+auth
+crud user

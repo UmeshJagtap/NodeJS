@@ -39,6 +39,7 @@ router.post('/create', async (req, res) => {
   };
   users.push(new_user);
   res.json({ message: 'emp created' });
+  console.log('users : ', users);
 
   // const query = 'insert into emps (name, email, password) values (?, ?, ?)';
 
@@ -50,21 +51,27 @@ router.post('/create', async (req, res) => {
 
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
+  console.log('email : ', email);
+  console.log('password : ', password);
 
-  // const user_logging_in = users.find({user} => user.email === email);
+  const user_logging_in = users.find((user) => user.email === email);
   if (!user_logging_in)
     return res.status(400).json({ message: 'emp not found' });
 
   // const usersWithRoleUser = users.filter(user => user.role === "User");
 
-  const match = bcrypt.compare(password, emp.password);
+  const match = bcrypt.compare(password, user_logging_in.password);
 
   if (!match) {
     return res.status(400).json({ message: 'invalid credentials' });
   }
-  const token = jwt.sign({ id: emp.id, email: emp }, process.env.JWT_SECRET, {
-    expiresIn: '30',
-  });
+  const token = jwt.sign(
+    { id: user_logging_in.id, email: user_logging_in.email },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: '30',
+    }
+  );
 
   res.json({ token });
 
@@ -95,8 +102,40 @@ router.post('/login', (req, res) => {
 // Authorization: Bearer TOKEN
 
 router.get('/profile', verifyToken, (req, res) => {
+  res.set('Content-Type', 'text/plain'); // Set a single header
+  // res.set({
+  //   'Cache-Control': 'no-cache', // Set multiple headers using an object
+  //   'X-Custom-Header': 'my-value',
+  // });
+  res.send('protected data');
+  //
   res.json({ message: 'protected data', emp: req.emp });
 });
 
 // module.exports = router;
 export default router;
+
+// OUTPUT
+// POST >> http://localhost:3000/api/emps/login
+//
+// Body >> raw >> JSON
+// {
+//   "email": "Rohan@gmail.com",
+//   "password": "Rohan123"
+// }
+//
+// {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJSb2hhbkBnbWFpbC5jb20iLCJpYXQiOjE3NzI5OTE5ODcsImV4cCI6MTc3Mjk5MTk4N30.v3L-BjrD59heeOEWd_v7Xze-DYPDi-ww1-P9xIJLsiA"}
+//
+// POST >> http://localhost:3000/api/emps/create
+// Body >> raw >> JSON
+// {
+//   "empname":"Umesh",
+//   "email":"Umesh123@mail.com",
+//   "password":"Umesh123"
+// }
+//
+// {
+//   "message": "emp created"
+// }
+//
+// Issue :- JSON not getting updated

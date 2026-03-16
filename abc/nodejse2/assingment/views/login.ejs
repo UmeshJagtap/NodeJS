@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Form</title>
+    <style type="text/css" media="screen">
+      body {
+        background-color: skyblue;
+        padding: 0px 20px;
+      }
+      ul {
+        padding: 2rem;
+      }
+      .form-container {
+        border: 2px solid gray;
+        border-radius: 2rem;
+        padding: 20px 20px;
+      }
+      input {
+        margin: 1rem;
+        border-radius: 2px;
+      }
+      .submit-btn {
+        padding: 0.5rem;
+        margin: 1rem;
+        border-radius: 0.5rem;
+      }
+      .submit-btn:hover {
+        background-color: greenyellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Login Page</h1>
+    <!-- The form submits a POST request to the /create-user route -->
+    <form action="/login" method="POST" class="form-container">
+      <br />
+      <table>
+        <tr>
+          <td>
+            <label for="email">Email : </label>
+          </td>
+          <td>
+            <input type="email" id="email" name="email" required />
+          </td>
+        </tr>
+
+        <tr>
+          <td><label for="password">Password :</label></td>
+          <td>
+            <input type="password" id="password" name="password" required />
+          </td>
+        </tr>
+        <br />
+      </table>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </body>
+</html>

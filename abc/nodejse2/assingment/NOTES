@@ -97,89 +97,6 @@ Optional Enhancements
 
 //=============================================================
 
-Assignment Objectives
-Build a web application using Node.js, Express, EJS, Socket.io, Rest Apis, Microservices
-Implement user authentication, user management, and CRUD (Create, Read, Update, Delete) operations for users.
-Assignment Details
-
-1. Login Page (Landing Page)
-   Using EJS, create a Login Page with:
-   Fields
-   Email ID
-   Password
-   Requirements
-   Validate credentials asynchronously
-   On successful login → Redirect to User List Page.
-   On failure → Show error message.
-   Security Requirements
-   Store passwords hashed (bcrypt recommended).
-   Prevent unauthorized access to all internal routes via sessions/JWT.
-2. User List Page
-   Accessible only after user authentication.
-   Display
-   A table showing:
-   Name
-   Email
-   Birthdate
-   Profile Photo
-   Role (SuperAdmin / ViewAdmin / EditAdmin)
-   Role-Based Access
-   SuperAdmin → Full access
-   EditAdmin → Edit only
-   ViewAdmin → View only
-   Real‑Time Update (Socket.IO Requirement)
-   Notify all connected users when a new user is created/updated/deleted.
-3. Create User Page
-   User Form should include:
-   Name
-   Email (must be unique)
-   Password
-   Birthdate
-   User Photo (upload)
-   User Role
-   Requirements
-   Handle file upload asynchronously using fs module.
-   Store user details in JSON file or DB.
-   After successful creation → Redirect to User List Page.
-4. Edit User Page
-   Editable fields:
-   Name
-   Password
-   User Photo
-   Requirements
-   Update data asynchronously.
-   Refresh User List after update.
-5. Delete User
-   Implement delete function (REST API DELETE or server-side route).
-   Perform deletion asynchronously.
-   Update user list and notify via Socket.IO.
-   Additional Requirements
-   Use Express for backend routing and server handling.
-   Use EJS as the template engine for dynamic HTML rendering.
-   Implement basic validation for all input fields.
-   Use a temporary in-memory data store (e.g., JSON file) to manage users. (Optional: Use a database for persistence.)
-   Ensure proper error handling and feedback for each action (e.g., success and failure messages).
-   You must perform at least the following using the Node.js File System:
-   Store all users in users.json (if not using DB).
-   Store uploaded images in an /uploads folder.
-   You must use: async/await, Promises, Non‑blocking FS operations in all CRUD operations.
-   Create a separate REST API (Express Router or separate microservice):
-   Endpoints:
-   GET /api/users
-   GET /api/users/:id
-   POST /api/users
-   PUT /api/users/:id
-   DELETE /api/users/:id
-   Split the application into at least 2 services:
-   Authentication Service
-   Login
-   JWT/Session
-   User Management Service
-   CRUD Operations
-   REST API Endpoints
-
-//------------------------------------------------------------
-
 Assignment : -- +v+--
 CRUD
 EJS
@@ -206,3 +123,4 @@ Random Stuff in Node -------- +++_=_+++
 //
 const password = req.body.password.slice(0,30) (....)
 zxcvbn() --lib to check pass strength --heavy cpu intensive lib, if pass is long
+Multer --File server

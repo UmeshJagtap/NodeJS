@@ -124,6 +124,7 @@ app.listen(3000, () => {
 });
 
 // Sample Data to POST
+// http://localhost:3000/create-user
 // {
 //   "name":"Umesh",
 //   "email":"Umesh123@mail.com",

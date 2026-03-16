@@ -34,23 +34,27 @@ app.set('view engine', 'ejs');
 // Middleware to parse URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
 
+// *v* Login
 app.get('/', (req, res) => {
-  res.render('home', { name: 'Umesh_Jagtap', data: data });
+  res.render('login', { name: 'Umesh_Jagtap', data: data });
 });
 
+// Route TEST
+app.get('/hello', (req, res) => {
+  res.send('Hello world');
+});
+
+// 1. GET /api/users
+app.get('/api/user-list', (req, res) => {
+  res.render('user-list', { name: 'Umesh_Jagtap', users: users });
+  // res.json(users);
+});
+
+// 2. GET /api/users/:id
 // app.get('/userr', (req, res) => {
 //   res.render('user', { name: 'Umesh_Jagtap', users: users });
 //   // res.json(users);
 // });
-
-app.get('/users', (req, res) => {
-  res.render('users', { name: 'Umesh_Jagtap', users: users });
-  // res.json(users);
-});
-
-app.get('/hello', (req, res) => {
-  res.send('Hello world');
-});
 
 app.get('/user-form', (req, res) => {
   res.render('userForm'); // Renders views/userForm.ejs
@@ -79,6 +83,11 @@ app.get('/user-form', (req, res) => {
 //   res.status(201).json(task);
 // });
 
+// Loin
+app.post('/login', (req, res) => {
+  const { email, password } = req.body || {};
+  console.log('Login Data received : ', email, password);
+});
 // Create user
 
 app.post('/create-user', (req, res) => {
@@ -114,10 +123,23 @@ app.post('/create-user', (req, res) => {
     imageurl,
   };
   console.log('USERDATA to be POSTED to USERS', user);
-  users.push(user);
-  console.log('User created Successfully .. ');
-  res.status(201).json(user);
+
+  async function createUser(user) {
+    try {
+      users.push(user);
+      console.log('User created Successfully .. ');
+      res.status(201).json(user);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  createUser(user);
 });
+
+// 3. POST /api/users
+// 4. PUT /api/users/:id
+// 5. DELETE /api/users/:id
 
 app.listen(3000, () => {
   console.log('server running on 3000');
@@ -131,3 +153,12 @@ app.listen(3000, () => {
 //   "password":"Umesh123",
 //   "image": "http://abc.img.com"
 // }
+
+// GET http://localhost:3000/api/users
+// GET http://localhost:3000/api/users/:id
+
+// 1. GET /api/users
+// 2. GET /api/users/:id
+// 3. POST /api/users
+// 4. PUT /api/users/:id
+// 5. DELETE /api/users/:id

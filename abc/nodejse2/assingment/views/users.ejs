@@ -10,6 +10,9 @@
         margin: 1rem;
         border: 2px solid red;
       }
+      .profile-image {
+        height: 5rem;
+      }
     </style>
   </head>
   <body>
@@ -30,7 +33,12 @@
 
     <% users.forEach((user)=>{%>
     <div class="user-container">
-      <p><%=user.imageurl%></p>
+      <!-- <p><%=user.imageurl%></p> -->
+      <img
+        src="<%= user.imageurl %>"
+        alt="Profile image"
+        class="profile-image"
+      />
       <h3><%=user.name%></h3>
       <p><%=user.password%></p>
       <p><%=user.email%></p>
@@ -38,3 +46,23 @@
     <%});%>
   </body>
 </html>
+
+<!-- For Single User
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Add New User</p>
+    <form action="/user">
+      <label for="name">Name</label><input type="text" id="name" />
+      <label for="email">Email</label><input type="email" id="email" />
+      <label for="password">Password</label
+      ><input type="password" id="password" />
+      <label for="imageurl">Imageurl</label><input type="link" id="imageurl" />
+    </form>
+  </body>
+</html> -->

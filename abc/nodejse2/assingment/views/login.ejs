@@ -6,7 +6,7 @@
     <title>User Form</title>
     <style type="text/css" media="screen">
       body {
-        background-color: skyblue;
+        /* background-color: skyblue; */
         padding: 0px 20px;
       }
       ul {
@@ -16,11 +16,26 @@
         border: 2px solid gray;
         border-radius: 2rem;
         padding: 20px 20px;
+        background-color: aliceblue;
       }
+
       input {
         margin: 1rem;
         border-radius: 2px;
       }
+      label {
+        display: block;
+        /* margin-top: 1em; */
+      }
+
+      input:valid {
+        background-color: palegreen;
+      }
+
+      input:invalid {
+        background-color: lightpink;
+      }
+
       .submit-btn {
         padding: 0.5rem;
         margin: 1rem;
@@ -33,7 +48,6 @@
   </head>
   <body>
     <h1>Login Page</h1>
-    <!-- The form submits a POST request to the /create-user route -->
     <form action="/login" method="POST" class="form-container">
       <br />
       <table>
@@ -42,14 +56,27 @@
             <label for="email">Email : </label>
           </td>
           <td>
-            <input type="email" id="email" name="email" required />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+              "
+              required
+            />
           </td>
         </tr>
 
         <tr>
           <td><label for="password">Password :</label></td>
           <td>
-            <input type="password" id="password" name="password" required />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              pattern="\w{10,16}"
+              required
+            />
           </td>
         </tr>
         <br />
@@ -57,4 +84,10 @@
       <button type="submit" class="submit-btn">Submit</button>
     </form>
   </body>
+  <!-- <script>
+    const validEmailFormat = (email) => {
+      const emailPattern = /^[\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    };
+  </script> -->
 </html>

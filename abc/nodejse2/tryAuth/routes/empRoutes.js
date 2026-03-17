@@ -1,13 +1,8 @@
 import express from 'express';
-
-// const bcrypt = require('bcrypt.js');
 import bcrypt from 'bcryptjs';
-
-// const jwt = require('jsonwebtoken');
 import jwt from 'jsonwebtoken';
 
 // const db = require("../config/database");
-// const verifyToken = require('../middleware/auth');
 import verifyToken from '../middleware/auth.js';
 
 const router = express.Router();
@@ -25,7 +20,15 @@ const users = [
     email: 'Rohan2@gmail.com',
     password: 'Rohan123',
   },
+  {
+    id: 3,
+    empname: 'Umesh',
+    email: 'Umesh123@mail.com',
+    password: 'Umesh123',
+  },
 ];
+
+let loginToken = '';
 
 router.post('/create', async (req, res) => {
   const { empname, email, password } = req.body;
@@ -38,8 +41,8 @@ router.post('/create', async (req, res) => {
     password: hashpwd,
   };
   users.push(new_user);
-  res.json({ message: 'emp created' });
   console.log('users : ', users);
+  res.json({ message: 'emp created' });
 
   // const query = 'insert into emps (name, email, password) values (?, ?, ?)';
 
@@ -73,7 +76,15 @@ router.post('/login', (req, res) => {
     }
   );
 
+  // Set the Authorization header in the response
+  // res.set({
+  //   Authorization: `Bearer ${token}`,
+  // });
+  res.setHeader('Authorization', `Bearer ${token}`);
+
   res.json({ token });
+  // loginToken = token;
+  console.log('loginToken', token);
 
   // db.query("select * from emps where email = ?", [email], async (err, result) => {
   //  	if(err) return res.status(500).json(err);
@@ -102,11 +113,14 @@ router.post('/login', (req, res) => {
 // Authorization: Bearer TOKEN
 
 router.get('/profile', verifyToken, (req, res) => {
+  consol.log('Entered in /profile');
+  console.log('/profile token', loginToken);
   res.set('Content-Type', 'text/plain'); // Set a single header
-  // res.set({
-  //   'Cache-Control': 'no-cache', // Set multiple headers using an object
-  //   'X-Custom-Header': 'my-value',
-  // });
+  res.set({
+    'Cache-Control': 'no-cache', // Set multiple headers using an object
+    // 'X-Custom-Header': 'my-value',
+  });
+
   res.send('protected data');
   //
   res.json({ message: 'protected data', emp: req.emp });

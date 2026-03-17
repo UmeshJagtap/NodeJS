@@ -3,18 +3,25 @@ import jwt from 'jsonwebtoken';
 
 const verifyToken = (req, res, next) => {
   const token = req.headers['authorization'];
+  console.log('Token got it /profile :- ', token);
 
   if (!token) {
     return res.status(401).json({ message: 'no token' });
   }
 
   try {
-    const decoded = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
+    const actualToken = token.split(' ')[1];
+    console.log('Secret used for verification:', process.env.JWT_SECRET);
+    console.log('Extracted token:', actualToken);
+
+    const decoded = jwt.verify(actualToken, process.env.JWT_SECRET);
     req.emp = decoded;
     next();
   } catch (err) {
-    // return res.status(401).json({ message: 'invalid token' });
-    console.log(err);
+    console.error('Token Verification Error:', err);
+    return res
+      .status(401)
+      .json({ message: 'invalid token', error: err.message });
   }
 };
 

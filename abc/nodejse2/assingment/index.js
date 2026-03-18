@@ -1,47 +1,39 @@
-// Name
-// User Image
-// Email ID
-// Password
-
 import express from 'express';
 
 const app = express();
 
 const users = [
   {
-    name: 'rohan',
-    email: 'rohan@123',
-    password: '1234',
+    name: 'umesh',
+    email: 'umesh321@gmail.com',
+    password: 'umesh56$78',
     imageurl:
       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+    role: 'SuperAdmin',
   },
   {
-    name: 'rohan2',
-    email: 'rohan2@123',
-    password: '5678',
+    name: 'rohan',
+    email: 'rohan123@gmail.com',
+    password: 'rohan@4523',
     imageurl:
       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+    role: 'EditAdmin',
   },
 ];
-
-let data = {
-  name: 'Akashdeep',
-  hobbies: ['playing football', 'playing chess', 'cycling'],
-};
 
 app.set('view engine', 'ejs');
 
 // Middleware to parse URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
 
-// *v* Login
-app.get('/', (req, res) => {
-  res.render('login', { name: 'Umesh_Jagtap', data: data });
-});
-
 // Route TEST
 app.get('/hello', (req, res) => {
   res.send('Hello world');
+});
+
+// *v* Login
+app.get('/', (req, res) => {
+  res.render('login');
 });
 
 // 1. GET /api/users
@@ -51,13 +43,13 @@ app.get('/api/user-list', (req, res) => {
 });
 
 // 2. GET /api/users/:id
-// app.get('/userr', (req, res) => {
-//   res.render('user', { name: 'Umesh_Jagtap', users: users });
-//   // res.json(users);
-// });
+app.get('/user', (req, res) => {
+  res.render('user', { name: 'Umesh_Jagtap', users: users });
+  // res.json(users);
+});
 
 app.get('/user-form', (req, res) => {
-  res.render('userForm'); // Renders views/userForm.ejs
+  res.render('user-form'); // Renders views/userForm.ejs
 });
 
 // Create task
@@ -162,3 +154,8 @@ app.listen(3000, () => {
 // 3. POST /api/users
 // 4. PUT /api/users/:id
 // 5. DELETE /api/users/:id
+
+// My Endpoints
+// http://localhost:3000/user-form
+
+// http://localhost:3000/api/user-list

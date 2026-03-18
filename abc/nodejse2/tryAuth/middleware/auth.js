@@ -10,9 +10,15 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    const actualToken = token.split(' ')[1];
-    console.log('Secret used for verification:', process.env.JWT_SECRET);
-    console.log('Extracted token:', actualToken);
+    // Bulletproof extraction: handles 'Bearer ', 'bearer ', '"Bearer token"', etc.
+    const actualToken = token
+      .replace(/^"|"$/g, '') // Strip surrounding quotes
+      .replace(/^Bearer\s+/i, '') // Strip 'Bearer ' (case-insensitive)
+      .replace(/^"|"$/g, '') // Strip quotes again if it was Bearer "token"
+      .trim(); // Remove extra spaces
+
+    console.log('🔓 Verifying token with secret:', process.env.JWT_SECRET);
+    console.log('🎟️ Extracted token exactly:', actualToken);
 
     const decoded = jwt.verify(actualToken, process.env.JWT_SECRET);
     req.emp = decoded;

@@ -68,11 +68,13 @@ router.post('/login', (req, res) => {
   if (!match) {
     return res.status(400).json({ message: 'invalid credentials' });
   }
+
+  console.log('🔑 Signing token with secret:', process.env.JWT_SECRET);
   const token = jwt.sign(
     { id: user_logging_in.id, email: user_logging_in.email },
     process.env.JWT_SECRET,
     {
-      expiresIn: '30',
+      expiresIn: '30m',
     }
   );
 

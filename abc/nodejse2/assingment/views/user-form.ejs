@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Form</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      main {
+        display: flex;
+        justify-content: center;
+      }
+      form {
+        padding: 1rem;
+        margin: 1rem;
+        border: 2px solid red;
+      }
+      /* .profile-image {
+        height: 5rem;
+        border-radius: 3rem;
+      } */
+      input,
+      label {
+        margin: 0.4rem;
+      }
+      input {
+        padding: 0px 0.5rem;
+        border-radius: 0.5rem;
+      }
+      button {
+        display: flex;
+        justify-content: center;
+        color: white;
+        background-color: blue;
+        border-radius: 2rem;
+        padding: 0.2rem 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create a New User</h1>
+    <!-- The form submits a POST request to the /create-user route -->
+    <main>
+      <form action="/create-user" method="POST">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+        <br />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+        <br />
+        <label for="password">Password</label
+        ><input type="password" id="password" name="password" required />
+        <br />
+        <label for="imageurl">Imageurl</label
+        ><input type="text" id="imageurl" name="imageurl" />
+        <br />
+        <label for="birthdate">Birthdate</label>
+        <input type="date" id="birthdate" name="birthdate" />
+        <br />
+        <label for="role">Role</label>
+        <input
+          type="radio"
+          id="roleSuperAdmin"
+          name="role"
+          value="SuperAdmin"
+        />SuperAdmin
+        <input type="radio" id="roleEditAdmin" name="role" value="EditAdmin" />
+        EditAdmin
+        <input type="radio" id="roleViewAdmin" name="role" value="ViewAdmin" />
+        ViewAdmin
+        <br />
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    </main>
+  </body>
+</html>

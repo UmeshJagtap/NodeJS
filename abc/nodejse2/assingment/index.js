@@ -1,25 +1,36 @@
 import express from 'express';
-
+import fs from 'fs';
 const app = express();
+const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 
-const users = [
-  {
-    name: 'umesh',
-    email: 'umesh321@gmail.com',
-    password: 'umesh56$78',
-    imageurl:
-      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-    role: 'SuperAdmin',
-  },
-  {
-    name: 'rohan',
-    email: 'rohan123@gmail.com',
-    password: 'rohan@4523',
-    imageurl:
-      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-    role: 'EditAdmin',
-  },
-];
+// const users = [
+//   {
+//     name: 'Umesh J',
+//     email: 'umesh321@gmail.com',
+//     password: 'umesh56$78',
+//     imageurl:
+//       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+//     birthdate: '1997-02-23',
+//     role: 'SuperAdmin',
+//   },
+//   {
+//     name: 'Rohan R',
+//     email: 'rohan123@gmail.com',
+//     password: 'rohan@4523',
+//     imageurl:
+//       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+//     birthdate: '1994-02-18',
+//     role: 'EditAdmin',
+//   },
+//   {
+//     name: 'Raj K',
+//     email: 'rajkamble9536@gmail.com',
+//     password: '324ed3r3fraxw2r3wfcwfr2',
+//     imageurl: '23rfcwvgtweaxftf.jpg',
+//     birthdate: '1996-07-27',
+//     role: 'ViewAdmin',
+//   },
+// ];
 
 app.set('view engine', 'ejs');
 
@@ -79,6 +90,7 @@ app.get('/user-form', (req, res) => {
 app.post('/login', (req, res) => {
   const { email, password } = req.body || {};
   console.log('Login Data received : ', email, password);
+  res.redirect(301, '/api/user-list');
 });
 // Create user
 
@@ -89,8 +101,16 @@ app.post('/create-user', (req, res) => {
   //   'X-Custom-Header': 'my-value',
   // });
 
-  const { name, email, password, imageurl } = req.body || {};
-  console.log('Data received : ', name, email, password, imageurl);
+  const { name, email, password, imageurl, birthdate, role } = req.body || {};
+  console.log(
+    'Data received : ',
+    name,
+    email,
+    password,
+    imageurl,
+    birthdate,
+    role
+  );
   if (!name || typeof name !== 'string') {
     return res
       .status(400)
@@ -113,14 +133,24 @@ app.post('/create-user', (req, res) => {
     email,
     password,
     imageurl,
+    birthdate,
+    role,
   };
   console.log('USERDATA to be POSTED to USERS', user);
 
   async function createUser(user) {
     try {
       users.push(user);
+
+      res.status(201);
+
+      res.render('user-card', {
+        message: 'User created Successfully .. ',
+        user: user,
+      });
+
+      // res.status(201).json(user);
       console.log('User created Successfully .. ');
-      res.status(201).json(user);
     } catch (error) {
       throw error;
     }

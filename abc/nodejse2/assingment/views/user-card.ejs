@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New User</title>
+    <style>
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .user-container {
+        padding: 2rem;
+        margin: 1rem;
+        border: 2px solid red;
+      }
+      .profile-image {
+        height: 5rem;
+        border-radius: 3rem;
+        border: 1px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <% if (message) { %>
+    <center><h2><%=message%></h2></center>
+    <% } %>
+
+    <center>Below are the details of <%=user.name%></center>
+
+    <main>
+      <div class="user-container">
+        <img
+          src="<%= user.imageurl %>"
+          alt="Profile image"
+          class="profile-image"
+        />
+        <h3>Name : <%=user.name%></h3>
+        <p>Email : <%=user.email%></p>
+        <p>Bitrthdate : <%=user.birthdate%></p>
+        <p>Role : <%=user.role%></p>
+      </div>
+    </main>
+  </body>
+</html>
+
+<!-- 
+. Name
+. Email
+. Birthdate
+. Profile Photo
+. Role (SuperAdmin / ViewAdmin / EditAdmin) 
+-->
+
+<!-- For Single User
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Add New User</p>
+    <form action="/user">
+      <label for="name">Name</label><input type="text" id="name" />
+      <label for="email">Email</label><input type="email" id="email" />
+      <label for="password">Password</label
+      ><input type="password" id="password" />
+      <label for="imageurl">Imageurl</label><input type="link" id="imageurl" />
+    </form>
+  </body>
+</html> -->

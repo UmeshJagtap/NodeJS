@@ -19,6 +19,8 @@ Assignment Details
    . Store passwords hashed (bcrypt recommended).
    . Prevent unauthorized access to all internal routes via sessions/JWT.
 
+   PAGE DONE ( login.ejs )
+
 2. User List Page
    Accessible only after user authentication.
    Display
@@ -47,6 +49,8 @@ Assignment Details
    . Handle file upload asynchronously using fs module.
    . Store user details in JSON file or DB.
    . After successful creation - Redirect to User List Page.
+
+   PAGE ALMOST DONE ( user-form.ejs )
 
 4. Edit User Page
    Editable fields:

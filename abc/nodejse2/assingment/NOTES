@@ -50,7 +50,8 @@ Assignment Details
    . Store user details in JSON file or DB.
    . After successful creation - Redirect to User List Page.
 
-   PAGE ALMOST DONE ( user-form.ejs )
+   PAGE ALMOST DONE ( user-form.ejs ) --> file upload pending ...
+   http://localhost:3000/user-form && http://localhost:3000/create-user
 
 4. Edit User Page
    Editable fields:

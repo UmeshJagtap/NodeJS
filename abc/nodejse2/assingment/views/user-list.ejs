@@ -12,6 +12,14 @@
       }
       .profile-image {
         height: 5rem;
+        border-radius: 3rem;
+      }
+      tr {
+        padding: 1rem;
+      }
+      th,
+      td {
+        padding: 1rem 3rem;
       }
     </style>
   </head>
@@ -31,25 +39,33 @@
       <%});%>
     </ul> -->
 
-    <% users.forEach((user)=>{%>
     <div class="user-container">
-      <!-- Profile Photo -->
-      <!-- <p><%=user.imageurl%></p> -->
-      <img
-        src="<%= user.imageurl %>"
-        alt="Profile image"
-        class="profile-image"
-      />
+      <table>
+        <tr>
+          <th>Profile Photo</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Bitrthdate</th>
+          <th>Role</th>
+        </tr>
 
-      <h3><%=user.name%></h3>
-
-      <p><%=user.email%></p>
-
-      <p><%=user.birthhdate%></p>
-
-      <p><%=user.role%></p>
+        <% users.forEach((user)=>{%>
+        <tr>
+          <td>
+            <img
+              src="<%= user.imageurl %>"
+              alt="Profile image"
+              class="profile-image"
+            />
+          </td>
+          <td><h3><%=user.name%></h3></td>
+          <td><p><%=user.email%></p></td>
+          <td><p><%=user.birthhdate%></p></td>
+          <td><p><%=user.role%></p></td>
+        </tr>
+        <%});%>
+      </table>
     </div>
-    <%});%>
   </body>
 </html>
 

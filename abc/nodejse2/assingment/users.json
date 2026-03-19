@@ -2,7 +2,7 @@
   {
     "name": "Umesh J",
     "email": "umesh321@gmail.com",
-    "password": "umesh56$78",
+    "password": "$2b$10$L/3JLpe2FNFNbJsIuKK6C.3ivoc.8aeYZy/HXGsgjEXx2KIShLO6q",
     "imageurl": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "birthdate": "1997-02-23",
     "role": "SuperAdmin"
@@ -10,7 +10,7 @@
   {
     "name": "Rohan R",
     "email": "rohan123@gmail.com",
-    "password": "rohan@4523",
+    "password": "$2b$10$g.8vaii71on3BPnKJysZeu/eP/VznrOWA.JGMorwHP77TO.q0f1Py",
     "imageurl": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "birthdate": "1994-02-18",
     "role": "EditAdmin"
@@ -18,7 +18,7 @@
   {
     "name": "Raj K",
     "email": "rajkamble9536@gmail.com",
-    "password": "324ed3r3fraxw2r3wfcwfr2",
+    "password": "$2b$10$9AdERIXFfVqM0tvu1x2Z8.4Wa82MlbK23vcy5UjOP8xgS4cYu5k7a",
     "imageurl": "23rfcwvgtweaxftf.jpg",
     "birthdate": "1996-07-27",
     "role": "ViewAdmin"

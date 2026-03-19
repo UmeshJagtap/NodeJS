@@ -1,5 +1,7 @@
 import express from 'express';
 import fs from 'fs';
+import bcrypt from 'bcrypt';
+
 const app = express();
 const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 
@@ -7,7 +9,7 @@ const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 //   {
 //     name: 'Umesh J',
 //     email: 'umesh321@gmail.com',
-//     password: 'umesh56$78',
+//     password: 'umesh14276jagtap',
 //     imageurl:
 //       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
 //     birthdate: '1997-02-23',
@@ -16,7 +18,7 @@ const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 //   {
 //     name: 'Rohan R',
 //     email: 'rohan123@gmail.com',
-//     password: 'rohan@4523',
+//     password: 'helloRohan4523',
 //     imageurl:
 //       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
 //     birthdate: '1994-02-18',
@@ -25,8 +27,9 @@ const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 //   {
 //     name: 'Raj K',
 //     email: 'rajkamble9536@gmail.com',
-//     password: '324ed3r3fraxw2r3wfcwfr2',
-//     imageurl: '23rfcwvgtweaxftf.jpg',
+//     password: 'welcomeRaj2349',
+//     imageurl:
+//        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
 //     birthdate: '1996-07-27',
 //     role: 'ViewAdmin',
 //   },
@@ -87,14 +90,34 @@ app.get('/user-form', (req, res) => {
 // });
 
 // Loin
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { email, password } = req.body || {};
+  let isLoggedIn = false;
   console.log('Login Data received : ', email, password);
-  res.redirect(301, '/api/user-list');
+
+  let user_logging_in = users.find((user) => user.email === email);
+  if (!user_logging_in)
+    return res.status(400).json({ message: 'emp not found' });
+
+  // const usersWithRoleUser = users.filter(user => user.role === "User");
+
+  let match = await bcrypt.compare(password, user_logging_in.password);
+  console.log('match : ', match);
+
+  if (!match) {
+    return res.status(400).json({ message: 'invalid credentials' });
+  } else {
+    isLoggedIn = true;
+    res.status(200).send('Login successful!');
+  }
+
+  if (isLoggedIn) {
+    // res.redirect(301, '/api/user-list');
+  }
 });
 // Create user
 
-app.post('/create-user', (req, res) => {
+app.post('/create-user', async (req, res) => {
   // res.set('Content-Type', 'text/plain'); // Set a single header
   // res.set({
   //   'Cache-Control': 'no-cache', // Set multiple headers using an object
@@ -127,11 +150,12 @@ app.post('/create-user', (req, res) => {
       .json({ error: 'BadRequest', message: 'Password is required' });
   }
   // const id = 0;
+  const hashpwd = await bcrypt.hash(password, 10);
   const user = {
     // id: id++,
     name,
     email,
-    password,
+    hashpwd,
     imageurl,
     birthdate,
     role,
@@ -151,6 +175,10 @@ app.post('/create-user', (req, res) => {
 
       // res.status(201).json(user);
       console.log('User created Successfully .. ');
+
+      // io.on('connection', (socket) => {
+      //   socket.broadcast.emit('hello', 'world');
+      // });
     } catch (error) {
       throw error;
     }

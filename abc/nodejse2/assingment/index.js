@@ -108,11 +108,13 @@ app.post('/login', async (req, res) => {
     return res.status(400).json({ message: 'invalid credentials' });
   } else {
     isLoggedIn = true;
-    res.status(200).send('Login successful!');
+    // res.status(200).send('Login successful!');
+    console.log('Login successful!');
   }
 
   if (isLoggedIn) {
-    // res.redirect(301, '/api/user-list');
+    res.redirect(301, '/api/user-list');
+    console.log('will redirect to user-list page');
   }
 });
 // Create user

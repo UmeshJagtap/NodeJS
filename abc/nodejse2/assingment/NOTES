@@ -131,3 +131,8 @@ Random Stuff in Node -------- +++_=_+++
 const password = req.body.password.slice(0,30) (....)
 zxcvbn() --lib to check pass strength --heavy cpu intensive lib, if pass is long
 Multer --File server
+
+https://stackblitz.com/edit/node-pfnvcdr5?file=assAuth%2Fpackage.jsn
+assAuth
+nodejse2
+nodejse1fp

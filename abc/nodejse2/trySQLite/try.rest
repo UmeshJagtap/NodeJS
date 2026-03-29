@@ -1,0 +1,33 @@
+POST http://localhost:3000/todos HTTP/1.1
+content-type: application/json
+
+{
+    "title": "sampleee",
+    "completed": true
+}
+
+###
+
+GET http://localhost:3000/todos
+
+###
+
+GET http://localhost:3000/todos/1
+
+###
+
+PUT http://localhost:3000/todos/3
+content-type: application/json
+
+{
+    "title": "updatedtitle",
+    "completed": false
+}
+
+###
+
+PATCH http://localhost:3000/todos/3
+
+###
+
+DELETE http://localhost:3000/todos/1

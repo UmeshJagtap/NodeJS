@@ -27,6 +27,11 @@ content-type: application/json
 ###
 
 PATCH http://localhost:3000/todos/3
+content-type: application/json
+
+{
+    "title": "updatedtitleee"
+}
 
 ###
 

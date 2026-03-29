@@ -18,7 +18,7 @@ const users = [
     id: 2,
     empname: 'Rohan2',
     email: 'Rohan2@gmail.com',
-    password: 'Rohan123',
+    password: 'Rohan1234',
   },
   {
     id: 3,
@@ -86,7 +86,7 @@ router.post('/login', (req, res) => {
 
   res.json({ token });
   // loginToken = token;
-  console.log('loginToken', token);
+  console.log('loginToken : ', token);
 
   // db.query("select * from emps where email = ?", [email], async (err, result) => {
   //  	if(err) return res.status(500).json(err);

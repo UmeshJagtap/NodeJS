@@ -127,3 +127,5 @@ app.listen(8080, () => {
 // http://localhost:8080
 // http://localhost:8080/profile
 // http://localhost:8080/admin
+
+// REF : https://medium.com/@shivam.artoonsolution/nodejs-authentication-best-practices-and-tools-89daccd7dc42

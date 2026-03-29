@@ -29,8 +29,8 @@ app.set('view engine', 'ejs');
 
 // Sample user database
 const users = [
-  { id: 1, username: 'user1', password: 'password1', role: 'user' },
-  { id: 2, username: 'user2', password: 'password2', role: 'admin' },
+  { id: 1, username: 'user1', password: 'i@mUser#1', role: 'user' },
+  { id: 2, username: 'user2', password: 'iloveNode@User#2', role: 'admin' },
 ];
 
 app.get('/hello', (req, res) => {
@@ -122,3 +122,8 @@ app.get('/admin', authenticateJWT, (req, res) => {
 app.listen(8080, () => {
   console.log('Server running on port 8080');
 });
+
+// URLS
+// http://localhost:8080
+// http://localhost:8080/profile
+// http://localhost:8080/admin

@@ -1,4 +1,4 @@
-POST http://localhost:3000/login HTTP/1.1
+POST http://localhost:3000/api/emps/login HTTP/1.1
 content-type: application/json
 
 {
@@ -8,7 +8,8 @@ content-type: application/json
 
 ###
 
-GET http://localhost:3000/profile
+GET http://localhost:3000/api/emps/profile
+
 
 ###
 

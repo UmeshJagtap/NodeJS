@@ -136,3 +136,59 @@ https://stackblitz.com/edit/node-pfnvcdr5?file=assAuth%2Fpackage.jsn
 assAuth
 nodejse2
 nodejse1fp
+
+//////////////////////////////////////////////////////
+
+// http://localhost:3000
+// http://localhost:3000/user-form
+// http://localhost:3000/api/user-list
+
+// const users = [
+// {
+// name: 'Umesh J',
+// email: 'umesh321@gmail.com',
+// password: 'umesh14276jagtap',
+// imageurl:
+// 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+// birthdate: '1997-02-23',
+// role: 'SuperAdmin',
+// },
+// {
+// name: 'Rohan R',
+// email: 'rohan123@gmail.com',
+// password: 'helloRohan4523',
+// imageurl:
+// 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+// birthdate: '1994-02-18',
+// role: 'EditAdmin',
+// },
+// {
+// name: 'Raj K',
+// email: 'rajkamble9536@gmail.com',
+// password: 'welcomeRaj2349',
+// imageurl:
+// 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+// birthdate: '1996-07-27',
+// role: 'ViewAdmin',
+// },
+// ];
+
+//
+// setup :-
+//
+
+// npm i express bcrypt bcryptjs dotenv socket.io nodemon ejs
+
+// "scripts": {
+// "dev": "nodemon index.js",
+// "test": "echo \"Error: no test specified\" && exit 1"
+// },
+
+// "bcrypt": "^6.0.0",
+// "bcryptjs": "^3.0.3",
+// "ejs": "^5.0.1",
+// "express": "^5.2.1",
+// "nodemon": "^3.1.14",
+// "socket.io": "^4.8.3"
+
+3/4/2026 from 9900LenTPChrome

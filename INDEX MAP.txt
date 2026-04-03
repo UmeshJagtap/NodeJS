@@ -1,3 +1,10 @@
+(*) abc
+    -fpe1
+    -fpe2
+    -nodejse2
+        --assAuth : JWT auth with cookies
+        --assignment : POC (Users Management) 
+    -z_nodejs
 
 (*) node-crud
     -Basic CRUD operations + CORS handling
@@ -75,10 +82,16 @@ Functionality: The server processes the EJS file, replaces the special tags (lik
 File Extension: EJS template files are saved with the .ejs extension.
 Simplicity: It is known for its simple syntax, which makes it easy for developers familiar with traditional server-side languages (like PHP) to use. 
 
+//-----------------
+
+
+Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices
+https://www.youtube.com/watch?v=pkKn8q5AvsY
+--30/3/26
 
 Advanced Backend Project | Learn Bank Transaction System with Node.js, Express & MongoDB
 https://www.youtube.com/watch?v=NQOAQP0mow0
 
 
 CRUD App with Next.js 16 and tRPC
-https://www.youtube.com/watch?v=DcAj1e4Jeis
+https://www.youtube.com/watch?v=DcAj1e4Jeis 

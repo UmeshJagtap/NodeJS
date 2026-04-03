@@ -2,8 +2,8 @@
     -fpe1
     -fpe2
     -nodejse2
-        --assAuth : JWT auth with cookies
-        --assignment : POC (Users Management) 
+        --assAuth : JWT auth with cookies (working)
+        --assignment : POC (Users Management), JWT auth not yet implemented
     -z_nodejs
 
 (*) node-crud

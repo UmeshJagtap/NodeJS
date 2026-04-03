@@ -124,7 +124,7 @@ app.listen(8080, () => {
 });
 
 // URLS
-// http://localhost:8080
+// http://localhost:8080  >> username: 'user2', password: 'iloveNode@User#2'
 // http://localhost:8080/profile
 // http://localhost:8080/admin
 

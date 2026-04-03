@@ -6,19 +6,17 @@ content-type: application/json
     "password": "iloveNode@User#2"
 }
 
-# BELOW routes ARE NOT TESTED YET !!!!!
+###
+
+GET http://localhost:8080/profile 
 
 ###
 
-# GET http://localhost:3000/profile
+GET http://localhost:8080/admin
 
+###
 
-# ###
-
-# GET http://localhost:3000/todos/1
-
-# ###
-
+# BELOW routes ARE NOT TESTED YET !!!!!
 # PUT http://localhost:3000/todos/3
 # content-type: application/json
 

@@ -16,8 +16,9 @@ https://superprofile.bio/in?referralCode=jJDMNG&referralType=creatorReferral
     -fpe2
     -nodejse2
         --assAuth : JWT auth with cookies (working)
-        --assignment : POC (Users Management), JWT auth not yet implemented
+        --assignment : POC (Users Management), JWT implemented
     -z_nodejs
+        --osModule.js, session.js, todoApp.js, weatherApp.js
 
 (*) node-crud
     -Basic CRUD operations + CORS handling
@@ -108,3 +109,7 @@ https://www.youtube.com/watch?v=NQOAQP0mow0
 
 CRUD App with Next.js 16 and tRPC
 https://www.youtube.com/watch?v=DcAj1e4Jeis 
+
+
+Node JS Full Course 2025 | Microservices, Redis, CI CD, Docker, VPS Hosting | Hostinger | Part 2
+https://www.youtube.com/watch?v=_f7h6xQXiLA

@@ -17,6 +17,10 @@ https://superprofile.bio/in?referralCode=jJDMNG&referralType=creatorReferral
     -nodejse2
         --assAuth : JWT auth with cookies (working)
         --assignment : POC (Users Management), JWT implemented
+        --completeAuth : JWT, Refresh Token, OTP, Logout All Devices, MongoDB Atlas
+        --refCode (s1 to s7)
+        --tryAuth
+        --trySQLite
     -z_nodejs
         --osModule.js, session.js, todoApp.js, weatherApp.js
 
@@ -105,10 +109,6 @@ https://www.youtube.com/watch?v=pkKn8q5AvsY
 
 Advanced Backend Project | Learn Bank Transaction System with Node.js, Express & MongoDB
 https://www.youtube.com/watch?v=NQOAQP0mow0
-
-
-CRUD App with Next.js 16 and tRPC
-https://www.youtube.com/watch?v=DcAj1e4Jeis 
 
 
 Node JS Full Course 2025 | Microservices, Redis, CI CD, Docker, VPS Hosting | Hostinger | Part 2

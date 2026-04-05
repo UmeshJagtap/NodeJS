@@ -164,3 +164,39 @@ Stack Overflow
   --Reduce third-party domains 
   --Enable caching (DNS + connection)
   --Use CDN + HTTP/2
+
+// 
+// tRPC -- -<+>- --
+//
+
+// Client side
+const user = await trpc.user.getById
+  .query({ id: 123 })
+
+// Server side
+getById: procedure
+  .input(z.obect({ id: z.number()}))
+  .query(({ input }) => getUser(input.id)) 
+
+
+Open-Source UI -<+>-
+UIverse
+Haikei
+Gradient Hunt
+Neumorphism
+Animista
+DevHints
+CSS Scan
+ReadMe
+Get Waves
+Shadows Brumm
+Squoosh
+Remove BG
+Fontpair
+
+https://devdocs.io/html/reference/elements/select
+https://explainshell.com/
+
+// TODO : -<+>-
+// Node JS Full Course 2025 | Microservices, Redis, CI CD, Docker, VPS Hosting | Hostinger | Part 2
+https://www.youtube.com/watch?v=_f7h6xQXiLA

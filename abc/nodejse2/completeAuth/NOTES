@@ -1,5 +1,17 @@
+TO DOOOOO :-
++++ Create MongoDB instance for completeAuth
+47:26
+
 Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices --https://www.youtube.com/watch?v=pkKn8q5AvsY
 
-npm i express morgan
+//----------------------------------------------------------
 
-https://github.com/krishnakant20/Movie-Booking-Reactjs-Nodejs-website/blob/main/NodeJS%20Movie%20App%20Backend/controllers/user.controller.js
+npm i express morgan dotenv mongoose nodemon crypto
+
+jwt secrects
+
+/abc/nodejse2/completeAuth
+
+REF DOC : https://stackblitz.com/edit/node-pfnvcdr5?file=assAuth%2Fpackage.jsn
+
+REF : https://github.com/krishnakant20/Movie-Booking-Reactjs-Nodejs-website/blob/main/NodeJS%20Movie%20App%20Backend/controllers/user.controller.js

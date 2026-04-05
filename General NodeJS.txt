@@ -130,3 +130,37 @@ Stack Overflow
     app.listen(port, () => {
     console.log(`Server running on port ${port}`);
     });
+
+// ========================================================
+//  From an HTTPS website, what happens before page loads (Performance)
+// ========================================================
+
+1. DNS Lookup (Where is this site?)
+   --Browser first asks: "What is the IP address?"
+     > if not cached -> delay
+     > First visit is always slower
+     * PRO move : <link rel="dns-prefetch" href="//api.yoursite.com">
+
+2. TCP Handshake (Connection setup)
+   --Before sending any data, Browser & server do a 3-step handshake
+     > No handshake = no communication
+     * Insight: Connections are expensive -> reuse them (keep-alive)
+
+3. HTTPS Handshake (Security check)
+   --Now browser verifies: SSL certificate, encryption keys
+     > This can take multiple round trips ()
+     * PRO move : <link rel="preconnect" href="//api.yoursite.com">
+
+* Real truth (most people miss this)
+  > Your website can feel slow ... even BEFORE your HTML starts loading 
+  Because all this happens first: DNS -> TCS -> SSL
+
+* Why it matters
+  > On slow networks , this alone can take:
+  >> 300-800ms before first byte (v^v) And devs blame React, images, etc
+
+* Why actually helps
+  --Use preconnect for APIs/CDNs
+  --Reduce third-party domains 
+  --Enable caching (DNS + connection)
+  --Use CDN + HTTP/2

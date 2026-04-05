@@ -137,11 +137,6 @@ const password = req.body.password.slice(0,30) (....)
 zxcvbn() --lib to check pass strength --heavy cpu intensive lib, if pass is long
 Multer --File server
 
-https://stackblitz.com/edit/node-pfnvcdr5?file=assAuth%2Fpackage.jsn
-assAuth
-nodejse2
-nodejse1fp
-
 //////////////////////////////////////////////////////
 
 // http://localhost:3000
@@ -197,3 +192,8 @@ nodejse1fp
 // "socket.io": "^4.8.3"
 
 3/4/2026 from 9900LenTPChrome
+
+https://stackblitz.com/edit/node-pfnvcdr5?file=assAuth%2Fpackage.jsn
+assAuth
+nodejse2
+nodejse1fp

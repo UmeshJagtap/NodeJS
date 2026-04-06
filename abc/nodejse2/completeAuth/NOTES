@@ -8,10 +8,12 @@ Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices --h
 
 npm i express morgan dotenv mongoose nodemon crypto
 
-jwt secrects
+jwt secrects > https://jwtsecrets.com/#generator
 
-/abc/nodejse2/completeAuth
+PATH >> cd abc/nodejse2/completeAuth
 
 REF DOC : https://stackblitz.com/edit/node-pfnvcdr5?file=assAuth%2Fpackage.jsn
+
+//----------------------------------------------------------
 
 REF : https://github.com/krishnakant20/Movie-Booking-Reactjs-Nodejs-website/blob/main/NodeJS%20Movie%20App%20Backend/controllers/user.controller.js

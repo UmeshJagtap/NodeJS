@@ -1,9 +1,19 @@
 https://github.com/tirth8205/code-review-graph?utm_source=sp_auto_dm&utm_referrer=sp_auto_dm
 
-Claude code Token Optimization :-
+1. Claude code Token Optimization :-
 pip install code-review-graph
 code-review-graph install
 code-review-graph build
+
+2. Cut your Claude Code’s token consumption by 90% 🤯
+
+Someone built RTK, a high-performance CLI proxy that filters and compresses command outputs before they hit your LLM context.
+
+- Reduces token usage by 60-90% on common dev commands.
+- Supports 100+ commands like git status, ls, and test runners.
+- Integrates instantly with Claude Code, Cursor, Windsurf, and Gemini CLI.
+
+100% open-source.
 
 PAYMENT : https://engineering.razorpay.com/monolith-to-module-federation-8c400b4e5646
 

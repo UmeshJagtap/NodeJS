@@ -1,7 +1,14 @@
+# Register
 POST http://localhost:3000/api/auth/register HTTP/1.1
 content-type: application/json
 
 { "username": "test2", "email": "test2@test.com", "password": "test2" }
+
+###
+
+# GetMe
+GET http://localhost:3000/api/auth/get-me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTlmMTNlMmZiMWM1NWVkYjAzM2RkZCIsImlhdCI6MTc3Njk0MjQxOSwiZXhwIjoxNzc3NTQ3MjE5fQ.timva3To-_4Ld6n_4krNIOpW4mugBivMd8Js0Xdllu
 
 ###
 
@@ -10,12 +17,6 @@ GET http://localhost:3000/api/auth/refresh-token
 
 
 ### BELOW ARE YET TO BE TESTED
-
-GET http://localhost:3000/api/auth/get-me
-
-{ "Authorization: ": "Bearer " }
-
-###
 
 GET http://localhost:3000/todos/1
 

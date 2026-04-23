@@ -75,8 +75,8 @@ export async function register(req, res) {
 }
 
 export async function getMe(req, res) {
-  const token = req.heders.authorization?.split(' ')[1];
-  console.log('Token from header:', token);
+  const token = req.headers.authorization?.split(' ')[1];
+  // console.log('Token from header:', token);
 
   if (!token) {
     return res.status(401).json({
@@ -85,8 +85,23 @@ export async function getMe(req, res) {
   }
 
   const decoded = jwt.verify(token, config.JWT_SECRET);
+  // console.log(decoded);
 
-  console.log(decoded);
+  const user = await userModel.findById(decoded.id);
+
+  if (!user) {
+    return res.status(404).json({
+      message: 'User not found',
+    });
+  }
+
+  res.status(200).json({
+    message: 'User details fetched successfully',
+    user: {
+      username: user.username,
+      email: user.email,
+    },
+  });
 }
 
 export async function refreshToken(req, res) {

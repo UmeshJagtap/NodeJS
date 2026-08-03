@@ -98,8 +98,7 @@ Functionality: The server processes the EJS file, replaces the special tags (lik
 File Extension: EJS template files are saved with the .ejs extension.
 Simplicity: It is known for its simple syntax, which makes it easy for developers familiar with traditional server-side languages (like PHP) to use. 
 
-//-----------------
-
+//----------------- Backend deepdive
 
 Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices
 https://www.youtube.com/watch?v=pkKn8q5AvsY

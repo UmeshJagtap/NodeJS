@@ -1,11 +1,16 @@
-TO DOOOOO :-
-+++ Create MongoDB instance for completeAuth
+TO DOOOOO :- RESUME here v=v
 
-1:14:26
+Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices
+--https://www.youtube.com/watch?v=pkKn8q5AvsY
+1:30:00
 
-Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices --https://www.youtube.com/watch?v=pkKn8q5AvsY
+[ abc > nodejse2 > completeAuth ]
 
-//----------------------------------------------------------
++++ Refresh Token DONE
+
+Logout on all devices ... NEXT UP
+
+//---------------------------------------------------------- START
 
 npm i express morgan dotenv mongoose nodemon crypto
 
@@ -13,7 +18,24 @@ jwt secrects > https://jwtsecrets.com/#generator
 
 PATH >> cd abc/nodejse2/completeAuth
 
+Source Code (GitHub):
+https://github.com/ankurdotio/yt-auth
+
 REF DOC : https://stackblitz.com/edit/node-pfnvcdr5?file=assAuth%2Fpackage.jsn
+& https://stackblitz.com/edit/node-tzyyua5g?file=middleware%2Fauth.js
+
+//---------------------------------------------------------- THEORY
+
+Q. where is Token stored
+A. - x - local storage --attacker can run the script and get the token on client side.
+A. - x - cookies --form action="/api/account/transaction/:xyz" method="POST"
+A. - x - memory --data is lost as soon as tab is reloaded.
+A. So we use 1. Access token 2. Refresh token
+
+Access Token --will be used for transactions
+Refresh Token --will never be used for trancactions, only used to generate a new Access token.
+
+cookie-parser > too store and retrive data from cookies.
 
 //----------------------------------------------------------
 

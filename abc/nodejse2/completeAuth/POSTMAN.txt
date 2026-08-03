@@ -1,0 +1,18 @@
+// --- register ---
+
+POST http://localhost:3000/api/auth/register 
+Body > raw : 
+    { "username": "test23", "email": "test23@test.com", "password": "test23pass" }
+ 
+
+// --- getMe ---
+
+GET http://localhost:3000/api/auth/get-me
+Headers > [ Key | Value ] > [ Authorization | Bearer ey..dc..dsc ]
+OR 
+Authorization > Auth Type : Bearer Token > Token : eyJCJ9.eyJN5Q.mFY6w
+
+
+// --- refreshToken ---
+
+GET http://localhost:3000/api/auth/refresh-token

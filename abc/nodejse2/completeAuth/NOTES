@@ -2,7 +2,7 @@ TO DOOOOO :- RESUME here v=v
 
 Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices
 --https://www.youtube.com/watch?v=pkKn8q5AvsY
-1:30:00
+1:41:00
 
 [ abc > nodejse2 > completeAuth ]
 
@@ -32,10 +32,23 @@ A. - x - cookies --form action="/api/account/transaction/:xyz" method="POST"
 A. - x - memory --data is lost as soon as tab is reloaded.
 A. So we use 1. Access token 2. Refresh token
 
-Access Token --will be used for transactions
-Refresh Token --will never be used for trancactions, only used to generate a new Access token.
+Access Token --will be used for transactions, Expiry : 10-15 mins
+Refresh Token --will never be used for trancactions, only used to generate a new Access token. Expiry : 7 - 15 days
 
 cookie-parser > too store and retrive data from cookies.
+
+Logout feature :-
+Session Mgmt
+
+{
+userid
+refreshTokenHash
+ip
+userAgent
+createdAt
+updatedAt
+revoke:true
+}
 
 //----------------------------------------------------------
 

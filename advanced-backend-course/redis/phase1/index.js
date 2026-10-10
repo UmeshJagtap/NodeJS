@@ -16,20 +16,21 @@ app.get('/', (req, res) => {
 
 app.post('/create', async (req, res) => {
   const { name, email, password } = req.body;
-  const user = User.create({
+  console.log('req.body', req.body);
+  const user = await User.create({
     name,
     email,
     password,
   });
-  //   name, email, password,
-  //   name: 'umesh',
-  //   email: 'qwerty' + Date.now() + '@gmail.com',
-  //   password: 'try123*()',
+  // name, email, password,
+  // name: 'umesh',
+  // email: 'qwerty' + Date.now() + '@gmail.com',
+  // password: 'try123*()',
   return res.status(200).json(user, { message: 'user created successfully' });
 });
 
 app.get('/get', async (req, res) => {
-  const users = User.find({});
+  const users = await User.find({});
   return res.json(users, { message: 'users fetched successfully' });
 });
 
@@ -37,3 +38,5 @@ app.listen(port, () => {
   connectDb();
   console.log(`server started ${port}`);
 });
+
+// withou redis  --- 64ms

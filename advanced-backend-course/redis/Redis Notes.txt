@@ -1,0 +1,122 @@
+---------------------------------------------------------------- Redis
+LEVEL2  |  redis
+
+⚡ Redis
+• API Caching
+• Rate Limiting
+• Message Queues
+
+Example
+Gada Electronics
+
+Situation
+Customers baar baar same cheez puch rahe he:
+ iphone hai?
+ Samsung TV hai?
+ AC available hai?
+
+
+Problem :
+Agar 
+1000 customers aaa gaye
+toh
+Jethalal thak jayega
+aur
+bahut slow
+ho jayega
+
+
+Smart Solution : 
+Jethalal
+ popular products counter pe ready rakh deta hai
+
+Example
+Counter par
+iPhone,  Samsung TV,  AC 
+already hain.
+
+
+Real Technical Meaning
+
+RealLife	Technical
+Godown		MongoDB
+Counter		Redis
+Jethalal	Backend Server
+Customer	User	
+Product Data    API/Data
+
+Here Redis is In-Memory  .. which is very fast.
+
+Without redis -v-
+
+  {@ @}                    -----                  |------|
+  -----     -------->     /    *\    ------->     --------
+ |     |    <--------     |-----|    <-------     |------|
+			  !-----!                 --------
+
+ Client                    Server                 Database
+
+
+With redis -v-
+
+				      cahce miss  |*0[]/\|	
+					  ----->
+  {@ @}                    -----         /        |*0[]/\|   in memory  
+  -----     -------->     /    *\    ----    --- 
+ |     |    <--------     |-----|  <--------/    
+			  !-----!  |              --------
+			     ^     |----------->  |------|
+  Client		   Server		  --------    DB
+ 			     |------------------  |------|
+
+
+Steps
+1. Client sends request to Server
+2. Server checks Redis for data
+3a. If Cache Hit --> retyrn data to client
+3b. If Cache Miss--> fetch data from DB
+4. DB returns data to Server
+5. Server stores data in Redis (cache)
+6. Server sends response to Client
+
+Redis Defination
+Redis is an in-memory key-value database used for super fast data access.
+
+Use Case		Example
+API Caching             products/users
+OTP Storage  	        temporary OTP
+Sessions		login
+Rate limiting		API protection
+Queues			emails/jobs
+AI Memory		chatbot history
+
+
+Redis Practically
+[+] level2
+
++ docker-compose.yml
+services:
+  redis
+    image: redis
+    ports: 
+      - 6379:6379
+
+Terminal 
+ABC > cd level2
+ABC\level2> docker compose up
+
+Same will be reflecting on Docker desktop
+docker desktop > 
+Name	 ContainerID	Image	Ports	   Actions
+level2  
+ redis-1 db7a8d         redis   6379:6379  []
+
+http://localhost:6379
+This page isn't working
+...aka though page is not displayed, we can use redis.
+
+
+Terminal : npm init
+           npm i express dotenv mongoose nodemon
+
++ index.js

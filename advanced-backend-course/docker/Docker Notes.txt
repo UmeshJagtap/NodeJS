@@ -1,0 +1,574 @@
+---------------------------------------------------------------- Docker Notes
+
+
+Advanced Backend + AI Full Course 🚀 | Docker, Redis, System Design, AWS, RAG, LangChain
+https://www.youtube.com/watch?v=_itqpLVS660
+
+Advanced Backend + AI Full Course 🚀 | Part 2 | LangChain, LangGraph, RAG, Vector DB, AWS & CI/CD
+https://www.youtube.com/watch?v=lweDf3_q-sk
+
+🐳 Docker
+• Images & Containers
+• Dockerizing Node.js Applications
+• Port Mapping
+• Docker Compose
+• Docker Networking
+• Docker Volumes
+
+Docker 
+Problem it solves : Code not workig on my machine.
+
+Images and Containers
+
+Docker Image
+Image ek blueprint/template hota hai
+Image ke andar hota hai:
+> app code
+> node
+> packages
+> dependencies
+> configs
+
+Docker Desktop   --Windows App
+Download Docker Desktop  >>  amd64 for windows
+
+wsl update
+
+CMD :
+docker run -it ubuntu
+-it >> interactive tty
+
+ls 
+mkdir
+
+All official Images available >> hub.docker.com
+
+docker pull node:current-alpine3.23
+docker run -it node:current-alpine3.23
+
+Simple Docker Commands 
+docker ps -a
+docker images
+docker stop 91e45
+docker start 91e45
+docker rm container_id
+docker exec it kind_perlman bash
+root@3c033ab:/# ls
+root@3c033ab:/# node --version
+root@3c033ab:/# mkdir hello
+
+Note : We need to stop the container to remove it.
+docker start kind_perlman
+docker rm kind_perlman 
+	Error response from daemon : Cannot remove container
+docker stop kind_perlman
+docker rm kind_perlman
+
+How docker works
+1. User command deta hai
+2. Docker CLI command receive karta hai
+3. CLI request daemon ko bhejta hai
+4. Daemon image check karta hai
+5. Missing image Docker Hub se download hoti hai
+6. Container create hota hai
+7. Application run hoti hai
+
+DOCKER ARCHITECTURE
+CLIENT <-> HOST aka DAEMON <-> REGISTRY
+
+How to Dockerize Node Application -
+[Docker File] (Build) -> [Docker Image] (Run) -> [Docker Container]
+
+Creating a simple Node App
+New Folder -> Advanced Backend Course
+New Folder -> level1
+Terminal -> cd level1
+npm init 
+package.json is created
+
+npm i express  >> node_modules are installed
+In package.json -> "type": "module",
+
+Create .env file
+
+-------------------------------------vv
+index.js
+import express from "express"
+import dotenv from 'dotenv"
+dotenv.config()
+
+const port = process.env.PORT || 5000
+
+const app = express()
+
+app.get("/", (req, res) => {
+    return res.status(200).json({message: "hello from docker 2026"
+})
+
+app.listen(port, () => {
+    console.log(`server started ${port}`)
+)}
+-------------------------------------AA
+
+Terminal -> node index.js
+
+Create New File -> Dockerfile
+vsCode > Extensions > Container Tools -Microsoft
+
+HOW TO DOCKERIZE NODE APPLICATION
+[docker file] --docker build -t test . --> [docker image] --> [container]
+# --docker build -t test .  >> "." is path here 
+OS base Image
+package.json
+npm install
+copy index.js
+copy models/controllers
+node index.js
+
+
+-------------------------------------vv
+Dockerfile
+FROM node
+
+WORKDIR /app
+
+#--COPY source dest--
+COPY index.js index.js
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN npm install
+
+CMD ["node", "index.js"]
+-------------------------------------AA
+
+Build Image
+Terminal > docker build -t test-image .
+docker run -it test-image
+
+docker exec -it frosty_panini bash  --to run commands
+ls
+app boot etc  lib   media opt  root sbin sys usr
+bin dev  home lib64 mnt   proc run  srv  tmp var
+cd app
+ls
+index.js node_modules package-lock.json package.json
+cat index.js
+
+Docker build is cached on first run
+Also if any changes are done in Docker File 
+> It starts build from the changed part
+
+-------------------------------------vv
+Dockerfile (Optimized)
+FROM node
+
+WORKDIR /app
+
+#--COPY source dest--
+COPY package*.json .
+
+RUN npm install
+
+COPY . .
+
+CMD ["node", "index.js"]
+-------------------------------------AA
+
+docker exec -it cranky_shtern bash
+ls
+Dockerfile index.js node_modules      package.json
+db.js      models   package-lock.json socket.js
+
+# If we notice now Dockerfile and node_modules are getting copied 
+# To handle this we have .dockerignore
+
+Create file > .dockerignore
+Dockerfile
+node_modules
+
+docker exec -it zen_grothendiek bash
+ls
+db.js  index.js  models  node_modules  package-lock.json  package.json  socket.js
+
+cat index.js  #We can see our code
+
+Browser >> localhost:5000
+This site can't be reached
+
+vsCode >> THUNDER CLIENT 
+No output
+
+Why this happens :
+docker container  ---> isolated
+
+			https://localhost:8000
+|---------------------------------|
+|                  local-machine  |
+| |------------------------------||
+| |[test-image  container  5000] ||
+| |------------------------------||
+
+So we need to take care of PORT Mapping
+
+Port Mapping -
+Port Mapping ka use:
+	container ke andar chal rahi application ko
+	outside/browser se access karne ke liye hota hai
+
+docker run -it -p 8000:5000    .. aka local-port : container-port
+
+https://localhost:8000  >> -- Output -- { "message":"hello from docker 26" }
+
+docker run -it -e PORT=7000 -p 8000:7000 test-image   
+.. aka -e denotes environment variable
+
+!!!!! Port Mapping - !!!!!
+Syntax 
+Bash
+docker run -p host_port:container_port image_name
+Bash 
+docker run -p 8000:5000 my app
+
+
+!!!!! Add Environment Variable in run time - !!!!!
+Bash
+docker run -e PORT=8000 -p 8000:8000 myapp
+
+
+!!!!!  How to Push  custom Image on Docker Hub: !!!!!
+Bash
+docker push username/image-name
+
+Docker Hub  >>  SignUp  >> virtualcode27
+Check Repositories
+
+Terminal >
+docker login
+Authenticating with existing credentials... [Username: virtualcode27]
+Login Succeeded
+
+docker build -t virtualcode27/test-image .
+=> exporting to image
+=> => exporting layers
+=> => unpacking to docker.io/virtualcode2/test-image:latest
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/03qmi...
+
+docker push virtualcode27/test-image
+b53089: Mounted from virtualcode27/first-app
+919b1f: Mounted from library/node
+742bb7: Pushed
+latest: digest: sha2566:11fb366... size:856
+
+Docker Hub >> Repositories  -- virtualcode/test-image
+
+CMD : docker run -it -e PORT=8000 -p 8000:8000 virtualcode/test-image
+Unable to find Imagge
+latest: Pulling from virtualcode27/test-image
+3e331d: Pull complete
+45doe6: Download complete
+Digest: sha2566:11fb366...
+Status: Downloaded newer image from virtualcode27/test-image:latest
+^ injected env (0) from .env  
+server started 8000
+
+localhost:8000
+{"message":"hello from docker 27"}
+
+
+!!!!! Docker Compose - !!!!!
+Docker Compose is a tool used to run multiple Docker container
+together using one file and one command
+
+Main File
+Docker Compose ki file:
+	docker-compose.yml
+
+Ref Problem:
+CMD >> docker run -it ubuntu
+New CMD >> docker run -it node
+So to run multiple containers we can use Docker compose
+Eg: FrontEnd in one container and BackEnd in other.
+
+Creating New Project
+[vsCode] >> Create new Folder >> phase2 
+>> phase2 > backend  & frontend
+
+>> backend 
+Terminal : npm init
+package.json > "type": "module"
++ index.js ...copy from previos code file  
+{message:hello from docker phase 2"}
+npm i express dotenv 
++ Dockerfile ...copy from previos code file
++ .dockerignore 
+ node_modules
+ Dockerfile
+
+>> frontend  ..aka level1\phase2\frontend
+Terminal:
+npm create vite@latest
+-> Local: http://localhost:5173/
++ Dockerfile
+
++ .dockerignore 
+node_modules
+Dockerfile ...copy from previos code file
+ Modify CMD ["npm", "run", "dev"]
+>> phase2 
++ docker-compose.yml
+services:
+
+ backend:
+  build: ./backend    ..aka it will use Dockerfile in [backend]
+  environment:
+   - PORT=7000
+  env_file:
+   - ./backend/.env
+  ports:
+   - 8000:7000        ..localMcPort:dockerContainerPort
+
+
+ frontend:
+  build: ./frontend   ..aka it will use Dockerfile in [frontend]
+  ports:
+   - 5173:5173        ..localMcPort:dockerContainerPort
+   
+ redis:
+  images: redis
+  ports:
+   - 6379:6379
+
+>> level1\phase2
+Terminal:
+docker compose up
+
+-Image redis Pulling
+redis-1    | 1:M 03 Jun 2026 06:36:51.602 * Server initialized 
+frontend-1 | Vite v8.0.16 reday in 232 ms 
+
+Docker Desktop
+  Name		 ContainerID	Image	      Ports
+o phase2
+o   redis-1	 66345		redis         6379:6379
+o   backend-1    55440          phase2-back.. 8000:5000
+o   frontend-1   a5957          phase2-front. 5173:5173
+
+https://localhost:5173
+Getting started
+Edit src/App.jsx and save to test HMR
+
+>> level1\phase2
+Terminal:
+docker compose down
+[+] down 4/4
+Container phase2-backend-1  Removed
+Container phase2-redis-1    Removed
+Container phase2-frontend-1 Removed
+Network phase2-default      Removed
+
+If changes are done in environments
+>> level1\phase2
+Terminal:
+docker compose up --build
+
+Docker Compose: -------------------- in short
+Docker Compose is a tool to run multiple Docker Containers
+together using one file and one command.
+
+Main File
+Docker Compose ki file:
+  docker-compose.yml
+
+Docker Compose:
+services:
+ web:
+  build:
+  ports:
+   - "${APP_PORT}:5000"
+  environment:
+   - REDIS_HOST=${REDIS_HOST}
+   - REDIS_PORT=${REDIS_PORT}
+
+ redis:
+  image: redis:alpine
+
+
+!!!!! Docker Networking !!!!!
+Docker network allows containers to communicate with eact other.
+
+Check Networks
+Bash
+docker network ls 
+
+CMD : docker network ls
+NETWORK ID    NAME	DRIVER	  SCOPE
+0d0fbe	      bridge    bridge    local
+ac65d2	      host	host	  local
+5854a6	      none      null      local
+here default n/w of container in bridge
+
+-- BRIDGE NETWORK -- (default)
+CMD : docker network inspect bridge
+"Containers": {},
+
+CMD : docker run -it ubuntu
+CMD2: docker network inspect bridge
+
+"Containers": {
+   "e47f0": {
+      "Name": "great_einstein",
+      "EndpoitID": "64c2f",
+      "IPv4Address": "172.17.0.2/166"
+      "IPv6Address": ""
+    }
+}
+
+-- HOST NETWORK --
+CMD : docker run -it --network host ubuntu 
+CMD2: docker network inspect bridge     ...aka as of now only great_einstein is running on bridge
+CMD2: docker network inspect host
+
+"Containers": {
+   "2871c4": {
+      "Name": "jolly_austin",
+      "EndpoitID": "58cdd4",
+      "IPv4Address": ""
+      "IPv6Address": ""
+    }
+}
+
+
+CMD : docker run -it -e PORT=8000 virtual27/test-image
+^ injected env (0) from .env
+server started 8000
+
+https//localhost:8000
+This site can't be reached
+... aka as this is running on bridge n/w
+
+CMD : docker run -it -e PORT=8000 --network host virtual27/test-image
+^ injected env (0) from .env
+server started 8000
+
+https//localhost:8000
+{"message":"hello from docker 27"}
+
+-- NONE NETWORK --
+CMD : docker run -it -e PORT=8000 --network none -p 8000:8000 virtualcode27/test-image
+^ injected env (0) from .env
+server started 8000
+
+https//localhost:8000
+This site can't be reached
+... aka as this is running on none n/w
+
+-- CUSTOM NETWORK --
+
+CMD : docker network create ayush 
+880e88
+CMD : docker network ls
+NETWORK ID    NAME	DRIVER	  SCOPE
+6880e8        ayush     bridge    local
+0d0fbe	      bridge    bridge    local
+ac65d2	      host	host	  local
+5854a6	      none      null      local
+
+CMD : docker run -it -e PORT=8000 --network ayush virtualcode27/test-image
+^ injected env (0) from .env
+server started 8000
+
+CMD2: docker run -it -e PORT=7000 virtualcode27/test-image
+^ injected env (0) from .env
+server started 7000
+
+CMD3: docker exec -it focused_chaplygin bash
+root@d4439e:/app# curl http://strange_solomon:8000
+curl: (6) Could not resolve host: strange_solomon
+root@d4439e:/app# exit
+..aka this will work only if both are on same network
+
+-- TRY2 --
+CMD: docker run -it -e PORT=7000 --network ayush virtualcode2/test-image
+^ injected env (0) from .env
+server started 7000
+
+CMD2: docker ecec -it tender_cohen bash
+root@c87ba6:/app# curl http://strange_solomon:8000
+{"message":"hello from docker 27"}
+
+
+Docker Networking -------------------- in short
+Most Important Network Types
+
+Type		Purpose
+-------------   ---------------------
+bridge     	default local network
+host       	host machine network
+none       	no network
+custom bridge   custom communication
+
+Docker Networking Commands
+docker network ls	show networks
+docker network create   create network
+docker network inspect  network details
+docker network rm       remove network
+docker run --network    attach container
+
+
+!!!!! Docker Volumes !!!!!
+Docker volumes store data permanently outside containers
+so data remains safe even if containers are deleted or restarted.
+
+Type | Syntax | Data Kaha Save Hota Hai | Use Case | Example Command
+
+Bind Mount    -v "local-folder:container-folder     Local Machine	      Development	
+docker run -it -v "D:\project:/app" ubuntu
+
+Named Volume  -v volume-name:container-folder 	    Docker Internal Storage   Database Storage
+docker run -it -v mongo-data:/data/db mongo
+
+Example
+CMD : docker exec -it tender_cohen bash
+root@c87ba6:/app# curl http://strange_solomon:8000
+{"message":"hello from docker 27"}
+:/app# ls 
+db.js      models         package-lock.json   socket.js
+index.js   node_modules   package.json
+
+If we stop and remove the container .. all data is lost ..
+So to handle the container data, we have Docker Volumes
+
+-- Bind Mount --
+CMD : docker run -it -v "D:\docker volumes:/app/models" virtualcode27/test-image
+[+] D: > docker volumes
+^ injected env (0) from .env
+server started 5000
+
+CMD2: docker exec -it focused_brahmagupta bash
+root@7d2bbc:/app# ls
+db.js  index.js  models  node_modules  package-lock.json package.json  socket.js
+root@7d2bbc:/app# cd models
+root@7d2bbc:/app/models# ls
+root@7d2bbc:/app/models# mkdir user
+root@7d2bbc:/app/models# mkdir products
+  You will see similar folder is getting created on D:/docker volumes
+root@7d2bbc:/app/models# cd user
+root@7d2bbc:/app/models/user# touch user.js
+  user.js is created in D:/docker volumes/user/user.js
+
+-- Named Volume --
+CMD : docker run -it -v "ayush:/app/models" virtualcode27/test-image 
+^ injected env (0) from .env
+server started 5000
+
+On Docker desktop > Volumes > ayush --volume will be reflected 
+
+CMD2: docker exec -it festive_saha bash
+root@728c7c:/app# cd models
+root@728c7c:/app/models# mkdir user
+  Same will be reflected on Docker desktop > Volumes > ayush > user
+root@728c7c:/app/models# touch app.js
+  Same will be reflected on Docker desktop > Volumes > ayush > app.js
+
+

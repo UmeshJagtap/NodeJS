@@ -1,6 +1,9 @@
 ### Response Check
 GET http://localhost:8000/
 
+### Get With Redis
+GET http://localhost:8000/get-with-redis
+
 ### Get Users   
 GET http://localhost:8000/get
 
@@ -14,7 +17,18 @@ Content-Type: application/json; charset=utf-8
   "password": "iloveNode@User#2"
 }
 
+### Send OTP
+POST http://localhost:8000/send-otp
+{
+    "email": "rupesh@gmail.com"
+}
 
+### Verify OTP
+POST http://localhost:8000/verify-otp
+{
+    "email": "rupesh@gmail.com",
+    "otp": "123456"
+}
 
 
 

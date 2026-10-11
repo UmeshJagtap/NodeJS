@@ -52,22 +52,22 @@ Without redis -v-
   {@ @}                    -----                  |------|
   -----     -------->     /    *\    ------->     --------
  |     |    <--------     |-----|    <-------     |------|
-			  !-----!                 --------
+                          !-----!                 --------
 
  Client                    Server                 Database
 
 
 With redis -v-
 
-				      cahce miss  |*0[]/\|	
-					  ----->
+				                              cahce miss  |*0[]/\|	
+					                                ----->
   {@ @}                    -----         /        |*0[]/\|   in memory  
   -----     -------->     /    *\    ----    --- 
  |     |    <--------     |-----|  <--------/    
-			  !-----!  |              --------
-			     ^     |----------->  |------|
-  Client		   Server		  --------    DB
- 			     |------------------  |------|
+			                    !-----!  |              --------
+			                       ^     |----------->  |------|
+  Client		               Server		              --------    DB
+ 			                       |------------------  |------|
 
 
 Steps
@@ -82,16 +82,26 @@ Steps
 Redis Defination
 Redis is an in-memory key-value database used for super fast data access.
 
-Use Case		Example
-API Caching             products/users
+Use Case		          Example
+API Caching           products/users
 OTP Storage  	        temporary OTP
-Sessions		login
-Rate limiting		API protection
-Queues			emails/jobs
-AI Memory		chatbot history
+Sessions		          login
+Rate limiting		      API protection
+Queues			          emails/jobs
+AI Memory		          chatbot history
 
+------------------------------------------
+Use Case		             Example
+1. API Caching           products/users
+------------------------------------------
+
+API Caching 
+
+Real Flow
+Request --> Check Redis --> Found? Return Fast --> Else MongoDB
 
 Redis Practically
+
 [+] level2
 
 + docker-compose.yml
@@ -156,15 +166,144 @@ app.get('/get', async (req, res) => {
   return res.json(users, { message: 'users fetched successfully' });
 });
 
+app.get('/get-with-redis', async (req, res) => {
+  const cached = redis.get('user:all');
+
+  if (cached) {
+    const users = JSON.parse(cached);
+    return res.json(users, {
+      message: 'users fetched successfully from cache',
+    });
+  }
+
+  const users = await User.find({});
+  await redis.set('user:all', JSON.stringify(users), 'EX', 10); // expire in 10 seconds
+
+  return res.json(JSON.parse(users));
+});
+
 app.listen(port, () => {
   connectDb();
   console.log(`server started ${port}`);
 });
 
++ get-post.rest
+### Response Check
+GET http://localhost:8000/
+
+### Get With Redis
+GET http://localhost:8000/get-with-redis
+
 ### Get Users   
 GET http://localhost:8000/get
 
-It takes ( 22ms ) 
+### POST User
+POST http://localhost:8000/create HTTP/1.1
+Content-Type: application/json; charset=utf-8
+
+{
+  "name": "umesh",
+  "email": "querty101026@gmail.com",
+  "password": "iloveNode@User#2"
+}
+
+Response Time
+### Get Users   
+GET http://localhost:8000/get
+It takes ( 68ms ) 
 
 Now install ioredis
 Terminal : npm i ioredis
+
+updated code with app.get('/get-with-redis', async (req, res) => {})
+
+At this moment, if we create a new user with
+  POST http:localhost:8000/create  >>  Ayush 
+    and try to get data back using
+  GET http://localhost:8000/get
+    it will reflect the newly created user (Ayush) as well.
+
+  Now if we try to get data with
+  GET http://localhost:8000/get-with-redis
+    it only gives old user, where as (Ayush) is not returned in the response.
+
+>> So we will delete cache data when we create new user.
+
+  Now again if we create a new user (Amol)
+    and fetch data wit /get-with-redis 
+  it returns all the data properly (58ms)
+    again fetching same data reduces the respons time to (3ms)
+
+Hence, we have covered API caching with Redis useCase
+Use Case		          Example
+API Caching           products/users
+
+
+------------------------------------------
+Use Case		             Example
+2. OTP Storage  	       temporary OTP
+------------------------------------------
+
+Rather than storing OTP in database, 
+we will be storuing the OTP in redis
+ 
+OTP Storage 
+
+Real Flow
+Generate OTP --> Save in Redis --> Auto Delete
+
+[M] index.js
+app.post("/send-otp", async (req, res) => {});
+app.post('/verify-otp', async (req, res) => {});
+
+### Send OTP
+POST http://localhost:8000/send-otp
+{
+    "email": "rupesh@gmail.com"
+}
+
+### Verify OTP
+POST http://localhost:8000/verify-otp
+{
+    "email": "rupesh@gmail.com",
+    "otp": "123456"
+}
+
+
+------------------------------------------
+Use Case		             Example
+3. Sessions  	           login
+------------------------------------------
+
+Login Flow
+Login --> Generate JWT --> Store Session In Redis --> Cookie Send
+
+Example:
+const token = jwt.sign({ userId: user.id }, secret)
+await redis.set(`session:${user.id}`, token, "EX", 86400)
+res.cookies("token", token)
+
+
+------------------------------------------
+Use Case		              Example
+4. Rate limiting		      API protection
+------------------------------------------
+
+Rate Limiting
+  ek time me limited requests allow karo
+
+Attack          Meaning
+--------------------------------
+Brute Force     password guess
+
+Spam            API Spam
+
+DDoS            server overload
+
+Bot Abuse       fake traffic
+
+Result 
+  server slow/crash
+
+Solution 
+Rate Limiting

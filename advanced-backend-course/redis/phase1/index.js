@@ -33,7 +33,7 @@ app.post('/create', async (req, res) => {
   return res.status(200).json(user, { message: 'user created successfully' });
 });
 
-app.get('/get', async (req, res) => {
+app.get('/get', rateLimitter, async (req, res) => {
   const users = await User.find({});
   return res.json(users, { message: 'users fetched successfully' });
 });

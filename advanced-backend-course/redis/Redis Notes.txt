@@ -306,4 +306,155 @@ Result
   server slow/crash
 
 Solution 
-Rate Limiting
+  Rate Limiting
+
+Real Flow
+  Request --> Count Requests --> Limit Cross? --> Block
+
+Redis Commands Used
+
+Command       Work
+----------------------------
+INCR          count increase
+EXPIRE        auto reset
+
+Suppose IP:
+1.2.3.4   request bhej raha hai
+
+Redis               After Limit
+1.2.3.4  -> 1       BLOCK
+next request
+1.2.3.4  -> 2
+next 
+1.2.3.4  -> 3
+
+[+] middleware > + ratelimit.js
+
+const rateLimiter = async (req, res, next) => {}
+
+apply rateLimiter in index.js,
+app.get('/get', rateLimitter, async (req, res) => {});
+
+When get request is triggered more than 5 in a minute, 
+it will be saying 'Too many requests'
+
+Applications :
+Search bar/API
+Login API
+
+------------------------------------------
+Use Case		         Example
+5. Queues		         emails/jobs
+------------------------------------------
+
+Queues :
+Queues ek waiting line hoti hai jisme backend tasks store hote hain
+taaki unhe background me process kiya ja sake 
+bina user ko wait karvaye 
+
+Suppose :
+signup API hai
+
+SignUp ke baad:
+> welcome email
+> notification
+> analytics
+karna hai
+
+Normal Flow : ...aka aam zindagi
+signup API :- name, email, password --> create user in db
+  --> send signup email --> signup successfully
+
+Queues Flow : ...aka mentos zindagi
+signup API :- name, email, password --> create user in db
+  --> { send signup email (queue) } --> signup successfully
+
+Without Queue
+-------------
+
+app.post("/signup", async (req, res) => {
+  await sendEmail()
+  res.json({message: "Signup Success"})
+})
+
+Problem :
+Agar 
+email send = 5 sec 
+API bhi
+5 sec baad response
+degi
+
+User Experience :
+loading...
+loading...
+loading...
+
+With Queue
+----------
+
+app.post("/signup", async (req, res) => {
+  await emailQueue.add(
+    "send-email",
+    { email: "yuraj@gmail.com" }
+  )
+  res.json({message: "Signup Success"})
+})
+
+email abhi send nahi hua
+Bas
+  email task queue me gaya
+API Immediately Response
+  SignUp Success
+Then Worker
+Background me:
+  email bhejega
+
+
+BullMQ :
+BullMQ ek Redis-based queue management library hai jo background jobs 
+handle karti hai
+
+Component       Work
+---------------------------
+Queue           jobs store
+Job             task
+Worker          job process
+
+signup API :- 
+
+name, email, password                worker
+        |                             |--------> job ko background 
+        v                             |          me run karta hai
+create user in db      job        |-------------------|
+        |               --------->| ( )               |
+        v               |         |-------------------|
+|---------------------------|
+| send signup email (queue) | 
+|---------------------------|
+        |
+        v
+signup successfully
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			          
+
+
+------------------------------------------
+Use Case		         Example
+6. AI Memory		     chatbot history
+------------------------------------------

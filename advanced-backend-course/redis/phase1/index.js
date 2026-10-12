@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import connectDb from './config/db.js';
 import User from './model/user.model.js';
 import Redis from 'ioredis';
+import rateLimitter from './middleware/ratelimit.js';
+import sendEmail from './lib/sendEmail.js';
+import emailQueue from './queue.js';
 
 dotenv.config();
 
@@ -26,10 +29,12 @@ app.post('/create', async (req, res) => {
     email,
     password,
   });
-  // name, email, password,
-  // name: 'umesh',
   // email: 'qwerty' + Date.now() + '@gmail.com',
   // password: 'try123*()',
+
+  // await sendEmail();
+  await emailQueue.add('send-email', { email });
+
   return res.status(200).json(user, { message: 'user created successfully' });
 });
 
@@ -87,5 +92,8 @@ app.listen(port, () => {
   console.log(`server started ${port}`);
 });
 
-// without redis  --- 64ms
-// with redis --- 3ms
+// GET : ('/get') without redis  --- 64ms
+// GET : ('/get-with-redis') with redis --- 3ms
+
+// POST ('/create') : without queue  --- 5.08sec
+// POST ('/create') : with queue --- 76-56ms

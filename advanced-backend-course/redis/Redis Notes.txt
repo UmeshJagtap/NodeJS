@@ -435,7 +435,13 @@ create user in db      job        |-------------------|
         v
 signup successfully
 
+BullMQ Practically
+>> bullmq.io
+Background jobs that scale  --- Get Started ---
 
+[+] lib > sendEmail
+
+6:06:00
 
 
 

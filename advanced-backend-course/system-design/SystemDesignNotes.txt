@@ -1,0 +1,89 @@
+System Design
+---------------
+
+System Design is the process of designing scalable, reliable, fast, and
+production-ready software architectures.
+
+Technology          Purpose
+-------------------------------
+Node js             backend
+Redis               cache
+Docker              containers
+Nginx               load balancer
+MongoDB             database
+
+Ref: 
+1. sd.tldr
+2. app.eraser.io, -- https://app.eraser.io/workspace/PT00D9arSpytCVU2xIHq
+
+
+Scaling Concepts :-
+Scaling means increasing system capacity 
+to handle more users and traffic.
+
+   (* v *)          No Issues       [   ]  |-|
+  /       \      ---------------->  [   ]  |=|
+  100 users
+
+
+   (*v*)   (*v*)       Server crashed       [   ]  |-|
+  /     \  /   \   ---------------------->  [   ]  |=|
+     1M users          Scaling Needed          Server
+
+
+                            Scaling
+                                /\
+                    /--------- /  \---------\
+            Vertical Scaling      Horizontal Scaling
+
+Before Scaling   [   ] |=|               [   ] |=|
+                 [   ] |-|               [   ] |-|
+                 CPU2, RAM 8GB         CPU2, RAM 8GB
+
+After Scaling    [   ] |=|          [ ]|=|    [ ]|=|    [ ]|=|    [ ]|=|
+                 [   ] |-|          CPU 2     CPU 2     CPU 2     CPU 2
+                 CPU8, RAM 64GB     RAM 8GB   RAM 8GB   RAM 8GB   RAM 8GB
+
+                 x expensive               THIS IS:
+                 x hardware limit          Real Modern Scaling
+
+
+                                        /---------> [ ] Server1
+  ('') ('')            /----------\    /
+    ('')       ----->  | Load     | --------------> [ ] Server2
+                       | Balancer |    \
+   Users               \----------/     \---------> [ ] Server3
+
+
+Load Balancer
+Load Balancer distributes incoming traffic across multiple backend servers.
+
+Example :
+ Request 1 -> Server1
+ Request 2 -> Server2
+ Request 3 -> Server3
+
+Why Needed?
+One server overload na ho.
+
+Real Load Balancers
+Technology          Types
+---------------------------------
+Nginx               software
+AWS ELB             cloud service
+
+
+Nginx :
+Nginx is a reverse proxy and load balancer used to manage traffic
+between users and backend servers.
+
+Flow :
+Users ---> Nginx ---> Backend1 / Backend2
+
+NGINX FEATURES
+> reverse proxy
+> load balancing
+> SSL
+> routing
+
+7:00:00 --

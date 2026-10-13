@@ -440,8 +440,61 @@ BullMQ Practically
 Background jobs that scale  --- Get Started ---
 
 [+] lib > sendEmail
+const sendEmail = async (email) => {
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 5000); // deley of 5 seconds to simulate email sending
+  });
 
-6:06:00
+  console.log('Task completed :- Email sent successfully');
+};
+export default sendEmail;
+
+[+] queue.js
+import { Queue } from 'bullmq';
+import Redis from 'ioredis';
+
+const connection = new Redis(
+  process.env.REDIS_URL || 'redis://localhost:6379',
+  {
+    maxRetriesPerRequest: null,
+    // enableReadyCheck: false,
+  }
+);
+
+const emailQueue = new Queue('emailQueue', {
+  connection,
+});
+
+export default emailQueue;
+
+[+] worker.js
+import { Queue, Worker } from 'bullmq';
+import Redis from 'ioredis';
+import sendEmail from './lib/sendEmail.js';
+
+const connection = new Redis(
+  process.env.REDIS_URL || 'redis://localhost:6379',
+  {
+    maxRetriesPerRequest: null,
+  }
+);
+
+const worker = new Worker(
+  'emailQueue',
+  async (job) => {
+    console.log('Job started for email:', email);
+    const email = job.data.email;
+    await sendEmail(email);
+    console.log('Job completed for email:', email);
+  },
+  { connection }
+);
+
+export default worker;
+
+6:10:00
 
 
 

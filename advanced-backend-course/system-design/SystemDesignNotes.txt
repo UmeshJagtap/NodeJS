@@ -55,7 +55,7 @@ After Scaling    [   ] |=|          [ ]|=|    [ ]|=|    [ ]|=|    [ ]|=|
    Users               \----------/     \---------> [ ] Server3
 
 
-Load Balancer
+Load Balancer :-
 Load Balancer distributes incoming traffic across multiple backend servers.
 
 Example :
@@ -73,7 +73,7 @@ Nginx               software
 AWS ELB             cloud service
 
 
-Nginx :
+Nginx :-
 Nginx is a reverse proxy and load balancer used to manage traffic
 between users and backend servers.
 
@@ -86,4 +86,67 @@ NGINX FEATURES
 > SSL
 > routing
 
-7:00:00 --
+Nginx Practically
+
++ docker-compose.yml
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    posts:
+      - '8000:80'
+#
+# CMD > advanced-backend-course/system-design
+# docker compose up
+- Image nginx Pulling
+
+https://localhost:8000
+Welcome to nginx!
+If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.
+
+   (* v *)    localhost:8000/       /------------\    --/ [ S1 ]
+  /       \  ------------------>   |    NGINX     |-K
+     user                           \------------/    --\ [ s2 ]                       
+                                        8000
+
+Here NGINX will share the properties of the underlying server S1/S2
+CMD > docker exec -it nginx-1 bash
+root@d51781:# ls
+bin   docker-entrypoit.d    home  main  proc  sbin  tmp
+boot  docker-entrypoint.sh  lib   mnt   root  srv   usr
+dev   etc                   lib64 opt   run   sys   var
+root@d51781:# cd etc
+root@d51781:/etc# ls
+alternatives       init.d     rc0.d
+apt                issue      rc1.d
+bash.bashrc        issue.net  rc2.d
+root@d51781:/etc# cd nginx
+root@d51781:/etc/nginx# ls
+conf.d          mime.types  nginx.conf   uwsgi_params  
+fastcgi_params  modules     scgi_params 
+root@d51781:/etc/nginx# cat nginx.conf
+
+Here we can sync the data between local:container through docker volumes
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
+#
+# CMD > advanced-backend-course\system-design> docker compose up --build
+nginx-1 | /docker-entrypoint.sh Configuration complete; ready for start
+
+https://localhost:8000
+hello from nginx
+
+CMD > docker exec -it nginx-1 bash
+root@1cb926:# cd etc/nginx
+root@1cb926:#/etc/nginx# ls
+conf.d          mime.types  nginx.conf   uwsgi_params  
+fastcgi_params  modules     scgi_params 
+root@d51781:/etc/nginx# cat nginx.conf
+
+Here it will reflect the same code as from the local nginx.conf file.
+Note* : It will do the sync in the real-time
+
+7:30:00

@@ -132,12 +132,38 @@ Here we can sync the data between local:container through docker volumes
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
+[edit] docker-compose.yml
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    posts:
+      - '8000:80'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
+[+] advanced-backend-course/system-design/nginx/nginx.conf
+events {
+}
+http {
+    server {
+        listen 80;
+        location / {
+            return 200 "hello from nginx";
+        }       
+    }
+}
+
 #
-# CMD > advanced-backend-course\system-design> docker compose up --build
-nginx-1 | /docker-entrypoint.sh Configuration complete; ready for start
+# CMD > advanced-backend-course/system-design
+# docker compose up
 
 https://localhost:8000
 hello from nginx
+
+#
+# CMD > advanced-backend-course\system-design> docker compose up --build
+nginx-1 | /docker-entrypoint.sh Configuration complete; ready for start
 
 CMD > docker exec -it nginx-1 bash
 root@1cb926:# cd etc/nginx
@@ -149,4 +175,7 @@ root@d51781:/etc/nginx# cat nginx.conf
 Here it will reflect the same code as from the local nginx.conf file.
 Note* : It will do the sync in the real-time
 
+root@1cb926:#/etc/nginx# nginx -s reload
+https://localhost:8000
+hello from aysuh
 7:30:00

@@ -9,3 +9,8 @@ services:
 #
 # CMD > advanced-backend-course/system-design
 # docker compose up
+
+server:
+  build: ./server
+  ports:
+    - 5000:7000

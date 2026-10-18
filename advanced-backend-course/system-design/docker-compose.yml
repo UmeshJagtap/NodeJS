@@ -2,15 +2,18 @@ services:
   nginx:
     image: nginx
     container_name: nginx
-    posts:
+    ports:
       - '8000:80'
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-#
-# CMD > advanced-backend-course/system-design
-# docker compose up
 
-server:
-  build: ./server
-  ports:
-    - 5000:7000
+  server:
+    build: ./server
+    env_file:
+      - ./server/.env
+    ports:
+      - 5000:7000
+
+  #
+  # CMD > advanced-backend-course/system-design
+  # docker compose up --build

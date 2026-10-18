@@ -32,8 +32,8 @@ app.post('/create', async (req, res) => {
   // email: 'qwerty' + Date.now() + '@gmail.com',
   // password: 'try123*()',
 
-  // await sendEmail();
-  await emailQueue.add('send-email', { email });
+  await sendEmail();
+  // await emailQueue.add('send-email', { email });
 
   return res.status(200).json(user, { message: 'user created successfully' });
 });

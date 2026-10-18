@@ -302,7 +302,7 @@ Creating New Project
 Terminal : npm init
 package.json > "type": "module"
 + index.js ...copy from previos code file  
-{message:hello from docker phase 2"}
+{message:"hello from docker phase 2"}
 npm i express dotenv 
 + Dockerfile ...copy from previos code file
 + .dockerignore 

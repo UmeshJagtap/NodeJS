@@ -7,6 +7,10 @@ https://www.youtube.com/watch?v=_itqpLVS660
 Advanced Backend + AI Full Course 🚀 | Part 2 | LangChain, LangGraph, RAG, Vector DB, AWS & CI/CD
 https://www.youtube.com/watch?v=lweDf3_q-sk
 
+
+Complete Agentic AI Course From Scratch 🔥 | JavaScript, LLMs, LangChain, LangGraph, RAG & MCP
+https://www.youtube.com/watch?v=eynUbHweaQM
+
 🐳 Docker
 • Images & Containers
 • Dockerizing Node.js Applications
@@ -63,7 +67,7 @@ docker rm kind_perlman
 	Error response from daemon : Cannot remove container
 docker stop kind_perlman
 docker rm kind_perlman
-
+      
 How docker works
 1. User command deta hai
 2. Docker CLI command receive karta hai
@@ -86,28 +90,28 @@ Terminal -> cd level1
 npm init 
 package.json is created
 
-npm i express  >> node_modules are installed
+npm i express dotenv >> node_modules are installed
 In package.json -> "type": "module",
 
 Create .env file
 
 -------------------------------------vv
 index.js
-import express from "express"
-import dotenv from 'dotenv"
-dotenv.config()
+import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
 
-const app = express()
+const app = express();
 
-app.get("/", (req, res) => {
-    return res.status(200).json({message: "hello from docker 2026"
-})
+app.get('/', (req, res) => {
+  return res.status(200).json({ message: 'hello from docker 2026' });
+});
 
 app.listen(port, () => {
-    console.log(`server started ${port}`)
-)}
+  console.log(`server started ${port}`);
+});
 -------------------------------------AA
 
 Terminal -> node index.js
@@ -193,7 +197,7 @@ db.js  index.js  models  node_modules  package-lock.json  package.json  socket.j
 
 cat index.js  #We can see our code
 
-Browser >> localhost:5000
+Browser >> http://localhost:5000
 This site can't be reached
 
 vsCode >> THUNDER CLIENT 
@@ -216,7 +220,7 @@ Port Mapping ka use:
 	container ke andar chal rahi application ko
 	outside/browser se access karne ke liye hota hai
 
-docker run -it -p 8000:5000    .. aka local-port : container-port
+docker run -it -p 8000:5000 test-image  .. aka local-port : container-port
 
 https://localhost:8000  >> -- Output -- { "message":"hello from docker 26" }
 

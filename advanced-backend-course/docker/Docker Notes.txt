@@ -352,11 +352,11 @@ redis-1    | 1:M 03 Jun 2026 06:36:51.602 * Server initialized
 frontend-1 | Vite v8.0.16 reday in 232 ms 
 
 Docker Desktop
-  Name		 ContainerID	Image	      Ports
+  Name		       ContainerID	Image	      Ports
 o phase2
-o   redis-1	 66345		redis         6379:6379
-o   backend-1    55440          phase2-back.. 8000:5000
-o   frontend-1   a5957          phase2-front. 5173:5173
+o   redis-1	     66345		    redis         6379:6379
+o   backend-1    55440        phase2-back.. 8000:5000
+o   frontend-1   a5957        phase2-front. 5173:5173
 
 https://localhost:5173
 Getting started
@@ -406,9 +406,9 @@ Bash
 docker network ls 
 
 CMD : docker network ls
-NETWORK ID    NAME	DRIVER	  SCOPE
+NETWORK ID    NAME	    DRIVER	  SCOPE
 0d0fbe	      bridge    bridge    local
-ac65d2	      host	host	  local
+ac65d2	      host	    host	    local
 5854a6	      none      null      local
 here default n/w of container in bridge
 
@@ -472,10 +472,10 @@ This site can't be reached
 CMD : docker network create ayush 
 880e88
 CMD : docker network ls
-NETWORK ID    NAME	DRIVER	  SCOPE
+NETWORK ID    NAME	    DRIVER	  SCOPE
 6880e8        ayush     bridge    local
 0d0fbe	      bridge    bridge    local
-ac65d2	      host	host	  local
+ac65d2	      host	    host	    local
 5854a6	      none      null      local
 
 CMD : docker run -it -e PORT=8000 --network ayush virtualcode27/test-image
@@ -497,7 +497,7 @@ CMD: docker run -it -e PORT=7000 --network ayush virtualcode2/test-image
 ^ injected env (0) from .env
 server started 7000
 
-CMD2: docker ecec -it tender_cohen bash
+CMD2: docker exec -it tender_cohen bash
 root@c87ba6:/app# curl http://strange_solomon:8000
 {"message":"hello from docker 27"}
 
@@ -505,11 +505,11 @@ root@c87ba6:/app# curl http://strange_solomon:8000
 Docker Networking -------------------- in short
 Most Important Network Types
 
-Type		Purpose
+Type		        Purpose
 -------------   ---------------------
-bridge     	default local network
-host       	host machine network
-none       	no network
+bridge     	    default local network
+host          	host machine network
+none           	no network
 custom bridge   custom communication
 
 Docker Networking Commands

@@ -9,6 +9,9 @@ Build & Deploy Full Stack Employee Management System in React js | MERN Stack Pr
 
 https://superprofile.bio/in?referralCode=jJDMNG&referralType=creatorReferral
 
+___ delete node_modules ___
+  $ rimraf ./node_modules/
+
 (*) abc
     -fpe1
     -fpe2

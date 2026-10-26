@@ -1,10 +1,10 @@
-### Response Check
+### Response Check ( "message": "hello from redis-- 2026" )
 GET http://localhost:8000/
 
-### Get With Redis
+### Get With Redis ( quick users json )
 GET http://localhost:8000/get-with-redis
 
-### Get Users   
+### Get Users   ( users json )
 GET http://localhost:8000/get
 
 ### POST User

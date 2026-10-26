@@ -13,6 +13,7 @@ const port = process.env.PORT || 5000;
 
 const app = express();
 const redis = new Redis(process.env.REDIS_URL);
+export default redis;
 
 app.use(express.json());
 
@@ -44,7 +45,7 @@ app.get('/get', rateLimitter, async (req, res) => {
 });
 
 app.get('/get-with-redis', async (req, res) => {
-  const cached = redis.get('user:all');
+  const cached = await redis.get('user:all');
 
   if (cached) {
     const users = JSON.parse(cached);
@@ -56,7 +57,7 @@ app.get('/get-with-redis', async (req, res) => {
   const users = await User.find({});
   await redis.set('user:all', JSON.stringify(users), 'EX', 10); // expire in 10 seconds
 
-  return res.json(JSON.parse(users));
+  return res.json(users);
 });
 
 app.post('/send-otp', async (req, res) => {

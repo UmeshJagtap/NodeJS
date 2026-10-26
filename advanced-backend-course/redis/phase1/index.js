@@ -45,6 +45,7 @@ app.get('/get', rateLimitter, async (req, res) => {
 });
 
 app.get('/get-with-redis', async (req, res) => {
+  // # Response Time: 18 ms
   const cached = await redis.get('user:all');
 
   if (cached) {

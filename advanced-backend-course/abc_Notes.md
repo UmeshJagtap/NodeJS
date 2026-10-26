@@ -27,5 +27,10 @@ docker run -it -v "D:\docker volumes:/app/models" virtualcode27/test-image (Bind
 docker run -it -v "ayush:/app/models" virtualcode27/test-image (Named Volume)
 
 === redis ===
+import Redis from 'ioredis';
+const redis = new Redis(process.env.REDIS_URL);
+await redis.get('user:all');
+await redis.set('user:all', JSON.stringify(users), 'EX', 10);
+await redis.del('user-all');
 
 === system-design ===

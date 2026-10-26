@@ -1,0 +1,13 @@
+
+Remove Node Modules
+___ delete node_modules ___
+  $ rimraf ./node_modules/
+
+MongoDB 
+___ IP Access List ___
+cloud.mongodb.com > Database & Network 
+  > NETWORK ACCESS > IP Access List
+
+___ REST JSON GET/POST ___
+vsCode Extensions : REST Client  
+  >> [+] get-post.rest 

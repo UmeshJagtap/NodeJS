@@ -33,4 +33,8 @@ await redis.get('user:all');
 await redis.set('user:all', JSON.stringify(users), 'EX', 10);
 await redis.del('user-all');
 
+await redis.set(`otp:${email}`, otp, 'EX', 300); // expire in 5 minutes
+await redis.get(`otp:${email}`);
+await redis.del(`otp:${email}`);
+
 === system-design ===

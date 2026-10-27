@@ -23,7 +23,7 @@ const worker = new Worker(
 export default worker;
 
 // Note* : Run this file seperately :
-// advsnced-backend-course/redis/phase1$ node worker.js
+// advanced-backend-course/redis/phase1$ node worker.js
 
 // Queues :-
 // Notification queue

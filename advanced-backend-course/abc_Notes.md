@@ -36,6 +36,13 @@ await redis.get('user:all');
 await redis.set('user:all', JSON.stringify(users), 'EX', 10);
 await redis.del('user-all');
 
+## Rate Limiting
+
+const key = `rate_limit:${ip}`;
+await redis.incr(key);
+await redis.expire(key, 60);
+await redis.ttl(key);
+
 ## Create / Verify OTP
 
 await redis.set(`otp:${email}`, otp, 'EX', 300); // expire in 5 minutes

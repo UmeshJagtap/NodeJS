@@ -493,27 +493,16 @@ const worker = new Worker(
 );
 
 export default worker;
-
-6:10:00
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			          
-
+      
 
 ------------------------------------------
 Use Case		         Example
 6. AI Memory		     chatbot history
 ------------------------------------------
+
+
+### <<<<<<-------- START / RUN --------- ( redis/phase1 RUN INSTRUCTIONS )
+
+terminal1 $ docker compose up
+terminal1 $ npm run dev
+terminal1 $ node worker.js

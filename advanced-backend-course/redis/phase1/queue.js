@@ -1,5 +1,6 @@
 import { Queue } from 'bullmq';
 import Redis from 'ioredis';
+// import { redis } from './index.js';  // conn can be reused from index.js
 
 const connection = new Redis(
   process.env.REDIS_URL || 'redis://localhost:6379',

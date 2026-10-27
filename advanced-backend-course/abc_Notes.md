@@ -36,6 +36,12 @@ await redis.get('user:all');
 await redis.set('user:all', JSON.stringify(users), 'EX', 10);
 await redis.del('user-all');
 
+## Create / Verify OTP
+
+await redis.set(`otp:${email}`, otp, 'EX', 300); // expire in 5 minutes
+await redis.get(`otp:${email}`);
+await redis.del(`otp:${email}`);
+
 ## Rate Limiting
 
 const key = `rate_limit:${ip}`;
@@ -43,10 +49,13 @@ await redis.incr(key);
 await redis.expire(key, 60);
 await redis.ttl(key);
 
-## Create / Verify OTP
+## Sessions
 
-await redis.set(`otp:${email}`, otp, 'EX', 300); // expire in 5 minutes
-await redis.get(`otp:${email}`);
-await redis.del(`otp:${email}`);
+const token = jwt.sign({ userId: user.id }, secret)
+await redis.set(`session:${user.id}`, token, "EX", 86400)
+
+## Queues !!!!!
+
+await emailQueue.add('send-email', { email });
 
 === system-design ===

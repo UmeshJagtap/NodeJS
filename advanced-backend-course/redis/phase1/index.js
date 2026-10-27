@@ -4,7 +4,7 @@ import connectDb from './config/db.js';
 import User from './model/user.model.js';
 import Redis from 'ioredis';
 import rateLimitter from './middleware/ratelimit.js';
-import sendEmail from './lib/sendEmail.js';
+// import sendEmail from './lib/sendEmail.js';
 import emailQueue from './queue.js';
 
 dotenv.config();
@@ -12,8 +12,8 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 
 const app = express();
-const redis = new Redis(process.env.REDIS_URL);
-export default redis;
+
+export const redis = new Redis(process.env.REDIS_URL);
 
 app.use(express.json());
 

@@ -8,6 +8,11 @@ const connection = new Redis(
     maxRetriesPerRequest: null,
   }
 );
+console.log(
+  `Redis connection established successfully for worker.js, ${JSON.stringify(
+    connection
+  )} `
+);
 
 const worker = new Worker(
   'emailQueue',

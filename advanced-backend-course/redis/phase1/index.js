@@ -4,7 +4,7 @@ import connectDb from './config/db.js';
 import User from './model/user.model.js';
 import Redis from 'ioredis';
 import rateLimitter from './middleware/ratelimit.js';
-import sendEmail from './lib/sendEmail.js';
+// import sendEmail from './lib/sendEmail.js';
 import emailQueue from './queue.js';
 
 dotenv.config();
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 app.post('/create', async (req, res) => {
   const { name, email, password } = req.body;
-  console.log('req.body', req.body);
+  // console.log('req.body', req.body);
   await redis.del('user-all'); // delete the cache for user:all key, so that next time when
   const user = await User.create({
     name,
@@ -35,12 +35,12 @@ app.post('/create', async (req, res) => {
   // await sendEmail();
   await emailQueue.add('send-email', { email });
 
-  return res.status(200).json(user, { message: 'user created successfully' });
+  return res.status(200).json({ message: 'user created successfully', user });
 });
 
 app.get('/get', rateLimitter, async (req, res) => {
   const users = await User.find({});
-  return res.json(users, { message: 'users fetched successfully' });
+  return res.json({ message: 'users fetched successfully', users });
 });
 
 app.get('/get-with-redis', async (req, res) => {
@@ -49,8 +49,9 @@ app.get('/get-with-redis', async (req, res) => {
 
   if (cached) {
     const users = JSON.parse(cached);
-    return res.json(users, {
+    return res.json({
       message: 'users fetched successfully from cache',
+      users,
     });
   }
 

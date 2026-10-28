@@ -506,3 +506,6 @@ Use Case		         Example
 terminal1 $ docker compose up
 terminal1 $ npm run dev
 terminal1 $ npm run queue
+
+Valkey is an open source (BSD) high-performance key/value datastore
+https://valkey.io/

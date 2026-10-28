@@ -6,6 +6,7 @@ import Redis from 'ioredis';
 import rateLimitter from './middleware/ratelimit.js';
 // import sendEmail from './lib/sendEmail.js';
 import emailQueue from './queue.js';
+import paintQueue from './myqueue.ts';
 
 dotenv.config();
 
@@ -16,7 +17,8 @@ export const redis = new Redis(process.env.REDIS_URL);
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+  await paintQueue.add('paint-cars', { color: 'red' }, { delay: 3000 }); // delay = 1000 → approximately 1 second
   return res.status(200).json({ message: 'hello from redis-- 2026' });
 });
 
@@ -32,6 +34,9 @@ app.post('/create', async (req, res) => {
   // Sample User Data : email: 'qwerty' + Date.now() + '@gmail.com', password: 'try123*()',
 
   // await sendEmail();
+
+  // const sample_email = 'qwerty' + Date.now() + '@gmail.com';
+  // await emailQueue.add('send-email', { sample_email });
   await emailQueue.add('send-email', { email });
 
   return res.status(200).json({ message: 'user created successfully', user });

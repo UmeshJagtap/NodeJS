@@ -29,8 +29,7 @@ app.post('/create', async (req, res) => {
     email,
     password,
   });
-  // email: 'qwerty' + Date.now() + '@gmail.com',
-  // password: 'try123*()',
+  // Sample User Data : email: 'qwerty' + Date.now() + '@gmail.com', password: 'try123*()',
 
   // await sendEmail();
   await emailQueue.add('send-email', { email });

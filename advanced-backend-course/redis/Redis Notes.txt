@@ -505,4 +505,4 @@ Use Case		         Example
 
 terminal1 $ docker compose up
 terminal1 $ npm run dev
-terminal1 $ node worker.js
+terminal1 $ npm run queue

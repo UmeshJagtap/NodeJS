@@ -17,8 +17,8 @@ console.log(
 const worker = new Worker(
   'emailQueue',
   async (job) => {
-    console.log('Job started for email:', email);
     const email = job.data.email;
+    console.log('Job started for email:', email);
     await sendEmail(email);
     console.log('Job completed for email:', email);
   },

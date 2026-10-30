@@ -56,6 +56,16 @@ await redis.set(`session:${user.id}`, token, "EX", 86400)
 
 ## Queues !!!!!
 
-await emailQueue.add('send-email', { email });
+await emailQueue.add('send-email', { email }); |
+
+const emailQueue = new Queue('emailQueue', {
+connection,
+}); |
+
+const worker = new Worker(
+'emailQueue',
+async (job) => { const email = job.data.email; await sendEmail(email); },
+{ connection }
+);
 
 === system-design ===

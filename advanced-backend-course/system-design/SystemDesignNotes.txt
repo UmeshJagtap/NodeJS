@@ -237,6 +237,10 @@ http {
 
 >> docker compose up --build
 
+>> server1-1  | Error connecting to MongoDB: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster.
+   -- Check wheather the IP is whitelisted [ Dataase > Clusters > Connect > Drivers and Client Libraries ]
+
+
 
 // Load testing for servers 
 C:\Users\ZUK>npm i autocannon
@@ -266,14 +270,99 @@ npx autocannon -c 100 -d 10 local http://localhost:8000
 9k requests in 10.13s, 2.61 MB read    --on zuk machine (without redis)
 96 errors (83 timeouts)
 
+Below on ZUK machine  ------- * --------
+Running 10s test @ http://local,http://localhost:8000
+100 connections. . . . . . . . . . . : 192.168.137.1
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+running [==================  ] 90%(node:15216) TimeoutNegativeWarning: -1 is a negative number.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+┌─────────┬──────┬──────┬───────┬──────┬─────────┬───────────┬─────────┐
+│ Stat    │ 2.5% │ 50%  │ 97.5% │ 99%  │ Avg     │ Stdev     │ Max     │7:6fad
+├─────────┼──────┼──────┼───────┼──────┼─────────┼───────────┼─────────┤9:302a
+│ Latency │ 0 ms │ 2 ms │ 5 ms  │ 6 ms │ 8.53 ms │ 202.97 ms │ 9085 ms │
+└─────────┴──────┴──────┴───────┴──────┴─────────┴───────────┴─────────┘
+┌───────────┬─────┬──────┬───────┬────────┬────────┬────────┬───────┐
+│ Stat      │ 1%  │ 2.5% │ 50%   │ 97.5%  │ Avg    │ Stdev  │ Min   │
+├───────────┼─────┼──────┼───────┼────────┼────────┼────────┼───────┤
+│ Req/Sec   │ 0   │ 0    │ 2     │ 2,627  │ 868.2  │ 957.53 │ 1     │
+├───────────┼─────┼──────┼───────┼────────┼────────┼────────┼───────┤
+│ Bytes/Sec │ 0 B │ 0 B  │ 578 B │ 759 kB │ 251 kB │ 277 kB │ 289 B │
+└───────────┴─────┴──────┴───────┴────────┴────────┴────────┴───────┘
+
+Req/Bytes counts sampled once per second.
+# of samples: 10
+
+9k requests in 10.08s, 2.51 MB read
+93 errors (83 timeouts)
+
+Running 10s test @ http://local,http://localhost:8000
+100 connections
+
+running [==================  ] 90%(node:9052) TimeoutNegativeWarning: -3 is a negative number.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+┌─────────┬──────┬──────┬───────┬──────┬─────────┬───────────┬─────────┐
+│ Stat    │ 2.5% │ 50%  │ 97.5% │ 99%  │ Avg     │ Stdev     │ Max     │
+├─────────┼──────┼──────┼───────┼──────┼─────────┼───────────┼─────────┤
+│ Latency │ 0 ms │ 1 ms │ 3 ms  │ 4 ms │ 6.91 ms │ 195.37 ms │ 9116 ms │
+└─────────┴──────┴──────┴───────┴──────┴─────────┴───────────┴─────────┘
+┌───────────┬─────┬──────┬────────┬────────┬────────┬────────┬───────┐
+│ Stat      │ 1%  │ 2.5% │ 50%    │ 97.5%  │ Avg    │ Stdev  │ Min   │
+├───────────┼─────┼──────┼────────┼────────┼────────┼────────┼───────┤
+│ Req/Sec   │ 0   │ 0    │ 843    │ 1,569  │ 839.3  │ 627.55 │ 2     │
+├───────────┼─────┼──────┼────────┼────────┼────────┼────────┼───────┤
+│ Bytes/Sec │ 0 B │ 0 B  │ 244 kB │ 454 kB │ 243 kB │ 182 kB │ 578 B │
+└───────────┴─────┴──────┴────────┴────────┴────────┴────────┴───────┘
+
+Req/Bytes counts sampled once per second.
+# of samples: 10
+
+9k requests in 10.06s, 2.43 MB read
+95 errors (83 timeouts)
+
+Running 10s test @ http://local,http://localhost:8000
+100 connections
+
+running [==================  ] 90%(node:6832) TimeoutNegativeWarning: -2 is a negative number.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+┌─────────┬──────┬──────┬───────┬──────┬─────────┬───────────┬─────────┐
+│ Stat    │ 2.5% │ 50%  │ 97.5% │ 99%  │ Avg     │ Stdev     │ Max     │
+├─────────┼──────┼──────┼───────┼──────┼─────────┼───────────┼─────────┤
+│ Latency │ 1 ms │ 1 ms │ 2 ms  │ 2 ms │ 6.51 ms │ 192.77 ms │ 9091 ms │
+└─────────┴──────┴──────┴───────┴──────┴─────────┴───────────┴─────────┘
+┌───────────┬─────────┬─────────┬────────┬────────┬────────┬────────┬─────────┐
+│ Stat      │ 1%      │ 2.5%    │ 50%    │ 97.5%  │ Avg    │ Stdev  │ Min     │
+├───────────┼─────────┼─────────┼────────┼────────┼────────┼────────┼─────────┤
+│ Req/Sec   │ 294     │ 294     │ 664    │ 1,418  │ 831.2  │ 409.17 │ 294     │
+├───────────┼─────────┼─────────┼────────┼────────┼────────┼────────┼─────────┤
+│ Bytes/Sec │ 85.2 kB │ 85.2 kB │ 192 kB │ 411 kB │ 241 kB │ 119 kB │ 85.2 kB │
+└───────────┴─────────┴─────────┴────────┴────────┴────────┴────────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+# of samples: 10
+
+9k requests in 10.06s, 2.41 MB read
+93 errors (83 timeouts)
+
+-------------------------------------------------------------------------------
+
+!!!!!!! Debug why below issue with redis
+server1-1  | [ioredis] Unhandled error event: Error: connect ECONNREFUSED 127.0.0.1:6379
+server1-1  |     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+
 8:04:49
 
-After BIOS reset :-
+After BIOS reset :-  
 Virtualization is disabled in firmware
 Windows reports that its hypervisor is not running and 
 that hardware virtualization is turned off in this computer's UEFI or BIOS firmware.
 
-https://app.eraser.io/workspace/PT00D9arSpytCVU2xIHq
+https://app.eraser.io/workspace/PT00D9arSpytCVU2xIHq  >>  Architecture Diagram
 
 API Gateway
 Microservices
@@ -295,3 +384,9 @@ Horizontal Scaling
 
 Implementing Practically :
 8:22:00
+
+START >>>>>
+After BIOS reset :-  !!!!!!!!!!!
+Virtualization is disabled in firmware
+Windows reports that its hypervisor is not running and 
+that hardware virtualization is turned off in this computer's UEFI or BIOS firmware. 

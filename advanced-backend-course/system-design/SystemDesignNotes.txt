@@ -267,3 +267,31 @@ npx autocannon -c 100 -d 10 local http://localhost:8000
 96 errors (83 timeouts)
 
 8:04:49
+
+After BIOS reset :-
+Virtualization is disabled in firmware
+Windows reports that its hypervisor is not running and 
+that hardware virtualization is turned off in this computer's UEFI or BIOS firmware.
+
+https://app.eraser.io/workspace/PT00D9arSpytCVU2xIHq
+
+API Gateway
+Microservices
+
+2. Monolith and Microservices
+
+Monolith --Ek single large application architecture.
+   Frontend  -->  One ackend  -->  One database
+   Sab modules ek hi proect me.
+
+Microservices
+   Frontend  --> API Gateway  --> Auth Service | Product Service | Order Service
+
+Horizontal Scaling
+  User
+  Loadbalancer
+    API Gateway  ( Auth Service | Product Service | Order Service)
+    API Gateway  ( Auth Service | Product Service | Order Service)
+
+Implementing Practically :
+8:22:00

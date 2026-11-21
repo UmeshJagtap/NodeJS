@@ -69,3 +69,8 @@ async (job) => { const email = job.data.email; await sendEmail(email); },
 );
 
 === system-design ===
+
+7:30:00
+
+Dockerfile will make a image for server,
+and that image will be used.
